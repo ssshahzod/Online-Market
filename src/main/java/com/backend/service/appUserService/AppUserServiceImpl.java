@@ -4,6 +4,8 @@ import com.backend.appuser.AppUser;
 import com.backend.appuser.AppUserRole;
 import com.backend.dao.AppUserRepository;
 import com.backend.dto.AppUserDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -22,6 +24,7 @@ public class AppUserServiceImpl implements AppUserService {
     private final AppUserRepository appUserRepository;
     private final PasswordEncoder passwordEncoder;
 
+    Logger logger = LoggerFactory.getLogger(AppUserServiceImpl.class);
 
     public AppUserServiceImpl(AppUserRepository appUserRepository, PasswordEncoder passwordEncoder) {
         this.appUserRepository = appUserRepository;
@@ -40,6 +43,7 @@ public class AppUserServiceImpl implements AppUserService {
                 .appUserRole(AppUserRole.USER)
                 .build();
         appUserRepository.save(appUser);
+        logger.info("Write user " + appUser.getUsername() + " to database, Id: " + appUser.getId());
         return true;
     }
 

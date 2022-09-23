@@ -19,8 +19,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import javax.persistence.Basic;
 
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private AppUserService appUserService;
 

@@ -1,6 +1,5 @@
 package com.backend.product;
 
-import com.backend.product.category.Category;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,5 +30,5 @@ public class Product {
     @JoinTable(name = "product_categories",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private List<Category> categories;
+    private List<ProductCategory> categories;
 }

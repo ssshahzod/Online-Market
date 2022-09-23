@@ -1,4 +1,4 @@
-package com.backend.product.category;
+package com.backend.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name = "categories")
-public class Category {
+public class ProductCategory {
     private final String SEQ_NAME = "category_seq";
 
     @Id
