@@ -8,5 +8,3 @@ spring:
     url: jdbc:postgresql://localhost:5432/spring_registr
     username: postgres
     password: pswd
-  flyway:
-    baseline-on-migrate: true
