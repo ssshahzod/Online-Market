@@ -1,6 +1,7 @@
 package com.backend.dto;
 
 
+import com.backend.appuser.AppUserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,10 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AppUserDTO {
-    private String username;
-    private String password;
-    private String matchingPassword;
+public class AppUserDTO implements DTO{
+    private String firstName;
+    private String secondName;
     private String email;
+    private String password;
+    private AppUserRole appUserRole;
+    private boolean isArchived;
 
 }

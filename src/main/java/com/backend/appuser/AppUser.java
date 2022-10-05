@@ -22,16 +22,16 @@ public class AppUser implements UserDetails {
     private static final String SEQ_NAME = "user_seq";
 
     @Id
-    @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1
-    )
+    @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME,
+            allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
-
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
     private boolean archive;
+    //@Transient TODO: move users password to the other table
+    private String password;
 
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
