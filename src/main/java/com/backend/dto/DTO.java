@@ -1,5 +1,3 @@
 package com.backend.dto;
 
-public interface DTO {
-
-}
+public interface DTO {}

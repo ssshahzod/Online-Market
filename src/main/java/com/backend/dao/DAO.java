@@ -4,7 +4,7 @@ import com.backend.dto.DTO;
 
 public interface DAO {
 
-    public DTO get();
+    public DTO getById(Long id);
 
     public void insert(DTO dto);
 
