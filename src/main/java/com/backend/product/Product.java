@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+/*@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "products")
+@Table(name = "products")*/
 public class Product {
     private static final String SEQ_NAME = "product_seq";
 
@@ -29,6 +29,7 @@ public class Product {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "categories",
+            joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<ProductCategory> categories;
 }

@@ -13,12 +13,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
-@Data
+/*@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "orders")
+@Table(name = "orders")*/
 public class Order {
     private final String SEQ_NAME = "order_seq";
 

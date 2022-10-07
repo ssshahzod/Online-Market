@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Data
+/*@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "order_details")
+@Table(name = "order_details")*/
 public class OrderDetails {
     private final String SEQ_NAME = "order_details_seq";
 

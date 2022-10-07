@@ -1,6 +1,5 @@
 package com.backend.appuser;
 
-import com.backend.bucket.Bucket;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,6 +17,7 @@ import java.util.Objects;
 @Builder
 @Entity
 @Table(name = "users")
+@SecondaryTable(name = "buckets")
 public class AppUser implements UserDetails {
     private static final String SEQ_NAME = "user_seq";
 
@@ -28,27 +28,29 @@ public class AppUser implements UserDetails {
     @Column(name = "user_id")
     private Long id;
     private String firstName;
-    private String lastName;
+    private String secondName;
     private String email;
     private boolean archive;
     //@Transient TODO: move users password to the other table
     private String password;
 
+    @Column(name = "app_user_role")
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
     private Boolean locked = false;
     private Boolean enabled = false;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
-    private Bucket bucket;
+    /*@OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "bucket_id")
+    private Bucket bucket;*/
 
     public AppUser(String name,
-                   String lastName,
+                   String secondName,
                    String email,
                    String password,
                    AppUserRole appUserRole) {
         this.firstName = name;
-        this.lastName = lastName;
+        this.secondName = secondName;
         this.email = email;
         this.password = password;
         this.appUserRole = appUserRole;
@@ -65,8 +67,8 @@ public class AppUser implements UserDetails {
         return password;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSecondName() {
+        return secondName;
     }
 
     public String getFirstName() {

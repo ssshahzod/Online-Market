@@ -7,16 +7,18 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Tables;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+/*@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "buckets")
+@SecondaryTable(name = "users")*/
 public class Bucket {
     private static final String SEQ_NAME = "bucket_seq";
 
