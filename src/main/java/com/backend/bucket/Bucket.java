@@ -23,6 +23,7 @@ public class Bucket {
     @Id
     @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
+    @Column(name = "bucket_id")
     private Long id;
 
     @OneToOne
@@ -30,7 +31,7 @@ public class Bucket {
     private AppUser appUser;
 
     @ManyToMany
-    @JoinTable(name = "bucket_products",
+    @JoinTable(name = "products",
             joinColumns = @JoinColumn(name = "bucket_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> product;

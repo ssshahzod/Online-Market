@@ -29,3 +29,8 @@ CREATE TABLE IF NOT EXISTS categories(
     category_id BIGINT NOT NULL PRIMARY KEY ,
     categoryName VARCHAR(20)
 );
+
+CREATE TABLE IF NOT EXISTS buckets(
+    bucket_id BIGINT NOT NULL PRIMARY KEY
+
+);
