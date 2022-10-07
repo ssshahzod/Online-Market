@@ -25,6 +25,7 @@ public class Order {
     @Id
     @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
+    @Column(name = "order_id")
     private Long id;
 
     @CreationTimestamp
@@ -33,7 +34,9 @@ public class Order {
     private LocalDateTime updated;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    //@JoinColumn(name = "user_id")
+    @JoinTable(name = "users",
+            joinColumns = @JoinColumn(name = "user_id"))
     private AppUser appUser;
     private int sum;
     private String address;

@@ -20,6 +20,7 @@ public class Product {
     @Id
     @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
+    @Column(name = "product_id")
     private Long id;
 
     private String title;
@@ -27,8 +28,7 @@ public class Product {
     private float price;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "product_categories",
-            joinColumns = @JoinColumn(name = "product_id"),
+    @JoinTable(name = "categories",
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<ProductCategory> categories;
 }
