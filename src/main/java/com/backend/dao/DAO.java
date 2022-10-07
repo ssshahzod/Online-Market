@@ -4,7 +4,7 @@ import com.backend.dto.DTO;
 
 public interface DAO {
 
-    public DTO getById(Long id);
+    public DTO getByEmail(String email);
 
     public void insert(DTO dto);
 
