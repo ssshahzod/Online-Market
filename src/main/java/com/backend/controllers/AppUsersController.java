@@ -18,10 +18,15 @@ public class AppUsersController {
         this.appUserDAO = appUserDAO;
     }
 
+    @GetMapping("/new")
+    public String signPage(){
+        return "/users/signUp";
+    }
 
     @PostMapping("/new")
     public String newUser(){
-        return null;
+        //write user to db
+        return "/users/login";
     }
 
     // get users page
@@ -29,7 +34,7 @@ public class AppUsersController {
      public String getUserById(@PathVariable("id") long id, Model model){
            DTO appUser = appUserDAO.getById(id);
            model.addAttribute(appUser);
-           return "user";
+           return "/users/user";
      }
 
 

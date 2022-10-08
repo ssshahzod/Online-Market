@@ -6,7 +6,7 @@ public interface DAO {
 
     public DTO getByEmail(String email);
 
-    public void insert(DTO dto);
+    //public void insert(DTO dto);
 
     public void update(DTO dto);
 

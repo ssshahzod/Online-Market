@@ -15,6 +15,10 @@ public class AppUserDAO implements DAO{
     private JdbcTemplate jdbcTemplate;
     private PreparedStatementCreator getByIdStatement;
 
+    public DTO getById(Long Id){
+        return null;
+    }
+
 
     @Override
     public DTO getByEmail(String email) {
@@ -23,14 +27,14 @@ public class AppUserDAO implements DAO{
         return null;
     }
 
-    @Override
-    public void insert(DTO dto) {
+    /*@Override
+    public void insert(AppUserDTO dto) {
         Long id = dto.getFirstName();
         jdbcTemplate.update("INSERT INTO " +
                 "users (user_id, first_name, second_name, email, archive, password, app_user_role, locked, enabled) " +
                 "VALUES ()");
 
-    }
+    }*/
 
     @Override
     public void update(DTO dto) {
