@@ -25,8 +25,8 @@ public class AppUsersController {
     String prefix;
     @Value("${spring.mvc.view.suffix}")
     String suffix;
-    final Logger logger = LoggerFactory.getLogger(AppUsersController.class);
 
+    final Logger logger = LoggerFactory.getLogger(AppUsersController.class);
 
     private final AppUserDAO appUserDAO;
 
@@ -40,7 +40,6 @@ public class AppUsersController {
         logger.info("New user sign request.");
         return "users/signUp";
     }
-
 
     // get users page
      @GetMapping("/{id}")
