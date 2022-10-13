@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,12 +32,12 @@ public class AppUsersController {
     private final AppUserDAO appUserDAO;
 
     public AppUsersController(AppUserDAO appUserDAO) {
-        logger.warn("/users controller initialized with prefix:{} and suffix:{}", prefix, suffix);
         this.appUserDAO = appUserDAO;
     }
 
     @GetMapping("/new")
     public String signPage(){
+        logger.warn("/users controller initialized with prefix:{} and suffix:{}", prefix, suffix);
         logger.info("New user sign request.");
         return "users/signUp";
     }

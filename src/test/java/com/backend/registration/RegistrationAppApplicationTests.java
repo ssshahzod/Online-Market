@@ -14,10 +14,11 @@ class RegistrationAppApplicationTests {
     @Value("${spring.mvc.view.prefix}")
     private String prefix;
 
+
     @Test
     void parseYmlProperties() {
         Assertions.assertEquals(".html", suffix);
-        Assertions.assertEquals("template/", prefix);
+        Assertions.assertEquals("templates/", prefix);
     }
 
 }
