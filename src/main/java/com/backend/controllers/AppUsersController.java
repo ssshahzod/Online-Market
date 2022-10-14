@@ -14,14 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping(value = "/users", method = RequestMethod.GET)
 public class AppUsersController {
-    //@Autowired
-    //private Config config;
-
     @Value("${spring.mvc.view.prefix}")
     String prefix;
     @Value("${spring.mvc.view.suffix}")
@@ -37,9 +35,9 @@ public class AppUsersController {
 
     @GetMapping("/new")
     public String signPage(){
-        logger.warn("/users controller initialized with prefix:{} and suffix:{}", prefix, suffix);
-        logger.info("New user sign request.");
-        return "users/signUp";
+        logger.info("/users controller initialized with prefix:{} and suffix:{}", prefix, suffix);
+        //return "users/signUp";
+        return "index";
     }
 
     // get users page

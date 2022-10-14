@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableConfigurationProperties
-//@ConfigurationProperties("spring.mvc.view")
+@ConfigurationProperties("spring.mvc.view")
 public class Config {
     private String prefix;
     private String suffix;
