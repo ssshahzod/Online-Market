@@ -10,5 +10,5 @@ spring:
     password: pswd
   mvc:
     view:
-      prefix: templates/
+      #prefix: templates/
       suffix: .html

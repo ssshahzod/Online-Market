@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.backend</groupId>
-    <artifactId>RegistrationApp</artifactId>
+    <artifactId>OnlineMarket</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>RegistrationApp</name>
-    <description>RegistrationApp</description>
+    <name>Online Market</name>
+    <description>Online Market</description>
     <properties>
         <java.version>11</java.version>
     </properties>
