@@ -1,10 +1,11 @@
 package com.backend.dao;
 
+import com.backend.dto.AppUserDTO;
 import com.backend.dto.DTO;
 
 public interface DAO {
 
-    public DTO getByEmail(String email);
+    public <T extends DTO> T getByEmail(String email);
 
     //public void insert(DTO dto);
 

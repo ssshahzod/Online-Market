@@ -3,9 +3,7 @@ package com.backend.dao;
 import com.backend.dto.AppUserDTO;
 import com.backend.dto.DTO;
 import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 //database insertion v1.0
@@ -21,10 +19,10 @@ public class AppUserDAO implements DAO{
 
 
     @Override
-    public DTO getByEmail(String email) {
-        DTO appUserDTO = new AppUserDTO();
+    public AppUserDTO getByEmail(String email) {
+        AppUserDTO appUserDTO = new AppUserDTO();
         jdbcTemplate.execute("");
-        return null;
+        return appUserDTO;
     }
 
     /*@Override

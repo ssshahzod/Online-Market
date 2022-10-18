@@ -26,13 +26,6 @@ public class AppUsersController {
         return "signUp";
     }
 
-    // get users page
-/*     @GetMapping("/{id}")
-     public String getUserById(@PathVariable("id") long id, Model model){
-           DTO appUser = appUserDAO.getById(id);
-           model.addAttribute(appUser);
-           return "users/user";
-     }*/
 
 
 }
