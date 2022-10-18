@@ -34,19 +34,17 @@ public class AppUser{
     @Column(name = "app_user_role")
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
-    private Boolean locked = false;
-    private Boolean enabled = false;
 
     /*@OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "bucket_id")
     private Bucket bucket;*/
 
-    public AppUser(String name,
+    public AppUser(String firstName,
                    String secondName,
                    String email,
                    String password,
                    AppUserRole appUserRole) {
-        this.firstName = name;
+        this.firstName = firstName;
         this.secondName = secondName;
         this.email = email;
         this.password = password;
@@ -72,22 +70,6 @@ public class AppUser{
 
     public String getRole(){
         return appUserRole.toString();
-    }
-
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    public boolean isAccountNonLocked() {
-        return !locked;
-    }
-
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
     }
 
     @Override

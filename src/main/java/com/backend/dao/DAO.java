@@ -3,14 +3,14 @@ package com.backend.dao;
 import com.backend.dto.AppUserDTO;
 import com.backend.dto.DTO;
 
-public interface DAO {
+public interface DAO <T extends DTO>{
 
-    public <T extends DTO> T getByEmail(String email);
+    public T getByEmail(String email);
 
-    //public void insert(DTO dto);
+    public void insert(AppUserDTO dto);
 
-    public void update(DTO dto);
+    public void update(T dto);
 
-    public void delete(DTO dto);
+    public void delete(T dto);
 
 }

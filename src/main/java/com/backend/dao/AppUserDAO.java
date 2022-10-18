@@ -2,18 +2,24 @@ package com.backend.dao;
 
 import com.backend.dto.AppUserDTO;
 import com.backend.dto.DTO;
-import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 //database insertion v1.0
 @Component
-public class AppUserDAO implements DAO{
-    private final String SQL_INSERT = "INSERT INTO users ()";
-    private JdbcTemplate jdbcTemplate;
-    private PreparedStatementCreator getByIdStatement;
+public class AppUserDAO implements DAO<AppUserDTO>{
+    final Logger AppUserDAOLogger = LoggerFactory.getLogger(AppUserDAO.class);
+
+    private final JdbcTemplate jdbcTemplate = new JdbcTemplate();
+    private static long lastId = 0;
+
 
     public DTO getById(Long Id){
+        AppUserDTO appUserDTO = new AppUserDTO();
+        jdbcTemplate.execute("SELECT FROM users WHERE user_id = " + Id);
+
         return null;
     }
 
@@ -25,22 +31,25 @@ public class AppUserDAO implements DAO{
         return appUserDTO;
     }
 
-    /*@Override
+    @Override
     public void insert(AppUserDTO dto) {
-        Long id = dto.getFirstName();
-        jdbcTemplate.update("INSERT INTO " +
-                "users (user_id, first_name, second_name, email, archive, password, app_user_role, locked, enabled) " +
-                "VALUES ()");
-
-    }*/
+        AppUserDAOLogger.info("Insert user with Id: {}", lastId);
+        //will value return?
+        lastId = jdbcTemplate.update("INSERT INTO " +
+                "users (user_id, first_name, second_name, email, archive, password, app_user_role) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING user_id;",
+            lastId, dto.getFirstName(), dto.getSecondName(), dto.getEmail(), dto.isArchived(),
+            dto.getPassword(), dto.getAppUserRole());
+        AppUserDAOLogger.info("New lastId after insertion: {}", lastId);
+    }
 
     @Override
-    public void update(DTO dto) {
+    public void update(AppUserDTO dto) {
 
     }
 
     @Override
-    public void delete(DTO dto) {
+    public void delete(AppUserDTO dto) {
 
     }
 }

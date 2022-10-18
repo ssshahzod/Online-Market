@@ -5,23 +5,28 @@
     <title>Sign Up</title>
 </head>
 <body>
-<form th:action="@{/user/new}" th:object="${user}" method="post">
+<p></p>
+<form th:action="users/new" th:object="${user}" method="post">
     <table border="1">
         <tr>
-            <td>Name</td>
-            <td><input type="text" th:field="*{username}"></td>
+            <td>First name</td>
+            <td><input type="text" th:field="firstname"></td>
+        </tr>
+        <tr>
+            <td>Second name</td>
+            <td><input type="text" th:field="secondname"></td>
         </tr>
         <tr>
             <td>Password</td>
-            <td><input type="password" th:field="*{password}"></td>
+            <td><input type="password" th:field="password"></td>
         </tr>
         <tr>
             <td>MatchingPassword</td>
-            <td><input type="password" th:field="*{matchingPassword}"></td>
+            <td><input type="password" th:field="matchingPassword"></td>
         </tr>
         <tr>
             <td>Email</td>
-            <td><input type="email" th:field="*{email}"></td>
+            <td><input type="email" th:field="email"></td>
         </tr>
     </table>
     <button type="submit">Save</button>
