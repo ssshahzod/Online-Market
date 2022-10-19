@@ -16,10 +16,10 @@ public class SingleUserController {
       this.appUserDAO = appUserDAO;
     }
 
-    @GetMapping("/{id}")
+    /*@GetMapping("/{id}")
     public String getUserById(@PathVariable("id") long id, Model model){
       DTO appUser = appUserDAO.getById(id);
       model.addAttribute(appUser);
       return "/users/user";
-    }
+    }*/
 }

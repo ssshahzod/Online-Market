@@ -2,6 +2,7 @@ package com.backend.controllers;
 
 import com.backend.dao.AppUserDAO;
 import com.backend.dto.AppUserDTO;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
