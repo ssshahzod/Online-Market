@@ -8,6 +8,8 @@ CREATE TABLE IF NOT EXISTS users(
     app_user_role VARCHAR(255)
 );
 
+INSERT INTO users VALUES (100, 'Alex', 'Bl', 'email@mail.com', 'false', 'asd', 'user');
+
 CREATE SEQUENCE IF NOT EXISTS user_seq
 AS BIGINT
 START WITH 100;

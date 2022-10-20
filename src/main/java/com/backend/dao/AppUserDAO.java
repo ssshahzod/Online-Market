@@ -13,7 +13,7 @@ public class AppUserDAO implements DAO<AppUserDTO>{
     final Logger AppUserDAOLogger = LoggerFactory.getLogger(AppUserDAO.class);
 
     private JdbcTemplate jdbcTemplate;
-    private static long lastId = 0;
+    private static long lastId = 1;
 
 
     public DTO getById(Long Id){
@@ -37,7 +37,7 @@ public class AppUserDAO implements DAO<AppUserDTO>{
         //will value return?
         lastId =
                 jdbcTemplate.update("INSERT INTO " +
-                "users (user_id, first_name, second_name, email, archive, password, app_user_role) " +
+                "users " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?);",
             lastId, dto.getFirstName(), dto.getSecondName(), dto.getEmail(), dto.isArchived(),
             dto.getPassword(), dto.getAppUserRole());
@@ -46,7 +46,7 @@ public class AppUserDAO implements DAO<AppUserDTO>{
 
     @Override
     public void update(AppUserDTO dto) {
-
+        
     }
 
     @Override
