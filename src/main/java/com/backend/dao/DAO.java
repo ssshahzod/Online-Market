@@ -1,6 +1,6 @@
 package com.backend.dao;
 
-import com.backend.dto.AppUserDTO;
+import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.dto.DTO;
 
 public interface DAO <T extends DTO>{

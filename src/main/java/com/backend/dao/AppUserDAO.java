@@ -1,6 +1,6 @@
 package com.backend.dao;
 
-import com.backend.dto.AppUserDTO;
+import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.dto.DTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class AppUserDAO implements DAO<AppUserDTO>{
     final Logger AppUserDAOLogger = LoggerFactory.getLogger(AppUserDAO.class);
 
-    private final JdbcTemplate jdbcTemplate = new JdbcTemplate();
+    private JdbcTemplate jdbcTemplate;
     private static long lastId = 0;
 
 
@@ -35,9 +35,10 @@ public class AppUserDAO implements DAO<AppUserDTO>{
     public void insert(AppUserDTO dto) {
         AppUserDAOLogger.info("Insert user with Id: {}", lastId);
         //will value return?
-        lastId = jdbcTemplate.update("INSERT INTO " +
+        lastId =
+                jdbcTemplate.update("INSERT INTO " +
                 "users (user_id, first_name, second_name, email, archive, password, app_user_role) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING user_id;",
+                "VALUES (?, ?, ?, ?, ?, ?, ?);",
             lastId, dto.getFirstName(), dto.getSecondName(), dto.getEmail(), dto.isArchived(),
             dto.getPassword(), dto.getAppUserRole());
         AppUserDAOLogger.info("New lastId after insertion: {}", lastId);

@@ -6,7 +6,7 @@
 </head>
 <body>
 <p></p>
-<form th:action="users/new" th:object="${user}" method="post">
+<form method="post" action="/users">
     <table border="1">
         <tr>
             <td>First name</td>
@@ -21,7 +21,7 @@
             <td><input type="password" th:field="password"></td>
         </tr>
         <tr>
-            <td>MatchingPassword</td>
+            <td>Matching password</td>
             <td><input type="password" th:field="matchingPassword"></td>
         </tr>
         <tr>

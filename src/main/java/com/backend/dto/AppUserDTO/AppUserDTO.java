@@ -1,7 +1,8 @@
-package com.backend.dto;
+package com.backend.dto.AppUserDTO;
 
 
 import com.backend.appuser.AppUserRole;
+import com.backend.dto.DTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AppUserDTO implements DTO{
+public class AppUserDTO implements DTO {
     private String firstName;
     private String secondName;
     private String email;
