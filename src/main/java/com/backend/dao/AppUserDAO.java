@@ -12,9 +12,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class AppUserDAO implements DAO<AppUserDTO>{
     final Logger AppUserDAOLogger = LoggerFactory.getLogger(AppUserDAO.class);
 
-    private JdbcTemplate jdbcTemplate;
-    private static long lastId = 1;
+    private final JdbcTemplate jdbcTemplate;
+    private static long lastId = 100;
 
+    public AppUserDAO(JdbcTemplate jdbcTemplate){
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public DTO getById(Long Id){
         AppUserDTO appUserDTO = new AppUserDTO();
@@ -22,7 +25,6 @@ public class AppUserDAO implements DAO<AppUserDTO>{
 
         return null;
     }
-
 
     @Override
     public AppUserDTO getByEmail(String email) {
@@ -36,11 +38,11 @@ public class AppUserDAO implements DAO<AppUserDTO>{
         AppUserDAOLogger.info("Insert user with Id: {}", lastId);
         //will value return?
         lastId =
-                jdbcTemplate.update("INSERT INTO " +
-                "users " +
+        jdbcTemplate.update("INSERT INTO " +
+                "users (user_id, first_name, second_name, email, archive, password, app_user_role)" +
                 "VALUES (?, ?, ?, ?, ?, ?, ?);",
             lastId, dto.getFirstName(), dto.getSecondName(), dto.getEmail(), dto.isArchived(),
-            dto.getPassword(), dto.getAppUserRole());
+            dto.getPassword(), dto.getAppUserRole().name());
         AppUserDAOLogger.info("New lastId after insertion: {}", lastId);
     }
 

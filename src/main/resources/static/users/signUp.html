@@ -6,19 +6,19 @@
 </head>
 <body>
 <p></p>
-<form method="post" action="/users">
+<form th:method="POST" th:action="@{/users/newUser}" th:object="${appuserdto}">
     <table border="1">
         <tr>
             <td>First name</td>
-            <td><input type="text" th:field="firstname"></td>
+            <td><input type="text" th:field="*{firstName}"></td>
         </tr>
         <tr>
             <td>Second name</td>
-            <td><input type="text" th:field="secondname"></td>
+            <td><input type="text" th:field="*{secondName}"></td>
         </tr>
         <tr>
             <td>Password</td>
-            <td><input type="password" th:field="password"></td>
+            <td><input type="password" th:field="*{password}"></td>
         </tr>
         <tr>
             <td>Matching password</td>
@@ -26,7 +26,7 @@
         </tr>
         <tr>
             <td>Email</td>
-            <td><input type="email" th:field="email"></td>
+            <td><input type="email" th:field="*{email}"></td>
         </tr>
     </table>
     <button type="submit">Save</button>

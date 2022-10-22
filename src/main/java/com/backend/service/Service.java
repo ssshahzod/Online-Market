@@ -1,5 +1,7 @@
 package com.backend.service;
 
-public interface Service {
+import com.backend.dto.AppUserDTO.AppUserDTO;
 
+public interface Service {
+    public void createUser(AppUserDTO appUserDTO);
 }

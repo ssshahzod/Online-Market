@@ -26,8 +26,8 @@ class RegistrationAppApplicationTests {
     }
 
     @Test
-    void usersControllerReturnCheck(){
-        String res = "users/signUp";
+    void databaseInsert(){
+
 
     }
 

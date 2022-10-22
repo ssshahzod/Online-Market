@@ -1,5 +1,6 @@
 package com.backend.controllers;
 
+import com.backend.appuser.AppUserRole;
 import com.backend.dao.AppUserDAO;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import org.slf4j.Logger;
@@ -21,34 +22,31 @@ public class AppUsersController {
     }
 
     @GetMapping("/sign")
-    public String signPage(){
-        AppUserDTO appUserDTO = new AppUserDTO();
-        appUserDTO.setFirstName("Alex");
-        appUserDTO.setSecondName("Blac");
-        appUserDTO.setPassword("asd");
-        appUserDTO.setEmail("asd@mail.com");
+    public String signPage(Model model){
+/*        AppUserDTO appUserDTO = new AppUserDTO("Alex", "Blac", "asd@mail.com",
+                "asd", AppUserRole.USER, false);
         appUserDAO.insert(appUserDTO);
-        logger.info("New user is signed!");
-        //logger.info("New sign request from the user.\n");
+        logger.info("New user is signed!");*/
 
+        //logger.info("New sign request from the user.\n");
+        model.addAttribute("appuserdto", new AppUserDTO());
         return "signUp";
     }
 
-    @PostMapping()
-    public String createUser(@ModelAttribute AppUserDTO appUserDTO, Model model){
+    @PostMapping("/newUser")
+    public String createUser(@ModelAttribute("appuserdto") AppUserDTO appUserDTO, Model model){
 
-            model.addAttribute("firstname", appUserDTO.getFirstName());
-            model.addAttribute("secondname", appUserDTO.getSecondName());
-            //AppUserDTO appUserDTO = new AppUserDTO();
-            //appUserDTO.setFirstName(firstName);
-            //appUserDTO.setSecondName(secondName);
-            //appUserDTO.setPassword(password);
-            //appUserDTO.setEmail(email);
             appUserDAO.insert(appUserDTO);
             logger.info("New user is signed!");
 
             //TODO: add username setting for registered users
+            model.addAttribute("newuser", appUserDTO);
             return "user";
+    }
+
+    @ModelAttribute("welcomeMsg")
+    public String welcomeMsg(){
+        return "Welcome to our website!";
     }
 
 

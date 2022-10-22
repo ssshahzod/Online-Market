@@ -4,8 +4,8 @@ spring:
       ddl-auto: validate
     show-sql: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/spring_shop
-    #url: jdbc:postgresql://192.168.0.107/spring_db
+    #url: jdbc:postgresql://localhost:5432/spring_shop
+    url: jdbc:postgresql://192.168.0.107/spring_db
     username: postgres
     password: pswd
     #driver-class-name: org.postgresql.Driver
