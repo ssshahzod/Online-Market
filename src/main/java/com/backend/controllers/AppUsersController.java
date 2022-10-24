@@ -23,12 +23,7 @@ public class AppUsersController {
 
     @GetMapping("/sign")
     public String signPage(Model model){
-/*        AppUserDTO appUserDTO = new AppUserDTO("Alex", "Blac", "asd@mail.com",
-                "asd", AppUserRole.USER, false);
-        appUserDAO.insert(appUserDTO);
-        logger.info("New user is signed!");*/
-
-        //logger.info("New sign request from the user.\n");
+        logger.info("New sign request from the user.\n");
         model.addAttribute("appuserdto", new AppUserDTO());
         return "signUp";
     }

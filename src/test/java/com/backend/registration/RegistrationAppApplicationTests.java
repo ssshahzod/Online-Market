@@ -13,8 +13,6 @@ class RegistrationAppApplicationTests {
 
     @Value("${spring.mvc.view.suffix}")
     private String suffix;
-    @Value("${spring.mvc.view.prefix}")
-    private String prefix;
 
     @Autowired
     private AppUsersController appUsersController;
@@ -22,13 +20,7 @@ class RegistrationAppApplicationTests {
     @Test
     void parseYmlProperties() {
         Assertions.assertEquals(".html", suffix);
-        Assertions.assertEquals("templates/", prefix);
     }
 
-    @Test
-    void databaseInsert(){
-
-
-    }
 
 }
