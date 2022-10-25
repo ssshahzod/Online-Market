@@ -17,7 +17,7 @@ public class AppUserService implements com.backend.service.Service {
 
     @Override
     public void createUser(AppUserDTO appUserDTO){
-        appUserDAO.insert(appUserDTO);
+        appUserDAO.insertOrUpdate(appUserDTO);
     }
 
 }

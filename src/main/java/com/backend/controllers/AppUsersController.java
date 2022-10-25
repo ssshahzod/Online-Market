@@ -31,7 +31,7 @@ public class AppUsersController {
     @PostMapping("/newUser")
     public String createUser(@ModelAttribute("appuserdto") AppUserDTO appUserDTO, Model model){
 
-            appUserDAO.insert(appUserDTO);
+            appUserDAO.insertOrUpdate(appUserDTO);
             logger.info("New user is signed!");
 
             //TODO: add username setting for registered users

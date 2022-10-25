@@ -9,7 +9,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-//database insertion v1.0
 @Component
 public class AppUserDAO implements DAO<AppUserDTO>{
     final Logger AppUserDAOLogger = LoggerFactory.getLogger(AppUserDAO.class);
@@ -42,7 +41,7 @@ public class AppUserDAO implements DAO<AppUserDTO>{
     }
 
     @Override
-    public void insert(@NotNull AppUserDTO dto) {
+    public void insertOrUpdate(@NotNull AppUserDTO dto) {
         AppUserDAOLogger.info("Insert user with Id: {}", lastId);
         lastId = jdbcTemplate.update("INSERT INTO " +
                 "users (user_id, first_name, second_name, email, archive, password, app_user_role)" +
@@ -50,11 +49,6 @@ public class AppUserDAO implements DAO<AppUserDTO>{
             lastId, dto.getFirstName(), dto.getSecondName(), dto.getEmail(), dto.isArchived(),
             dto.getPassword(), dto.getAppUserRole().name());
         AppUserDAOLogger.info("New Id: {}", lastId);
-    }
-
-    @Override
-    public void update(AppUserDTO dto) {
-        
     }
 
     @Override
