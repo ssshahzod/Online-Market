@@ -20,7 +20,7 @@ public class AppUserDAO implements DAO<AppUserDTO>{
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public DTO getById(Long Id){
+    public AppUserDTO getByIdOrNull(Long Id){
         AppUserDTO appUserDTO;
         String str = "SELECT * FROM users WHERE user_id = " + Id;
         try{
@@ -34,10 +34,17 @@ public class AppUserDAO implements DAO<AppUserDTO>{
     }
 
     @Override
-    public AppUserDTO getByEmail(String email) {
-        AppUserDTO appUserDTO = new AppUserDTO();
-        jdbcTemplate.execute("");
-        return appUserDTO;
+    public AppUserDTO getByEmailOrNull(String email) {
+        AppUserDTO appUserDTO;
+        String sql = "SELECT * FROM users WHERE email =" + email;
+        try {
+            appUserDTO = jdbcTemplate.queryForObject(sql, AppUserDTO.class);
+            return appUserDTO;
+        }
+        catch(EmptyResultDataAccessException e){
+            AppUserDAOLogger.debug(e.toString());
+        }
+        return null;
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.backend.controllers;
 
-import com.backend.appuser.AppUserRole;
 import com.backend.dao.AppUserDAO;
 import com.backend.dto.AppUserDTO.AppUserDTO;
+import com.backend.service.AppUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/users")
 public class AppUsersController {
     final Logger logger = LoggerFactory.getLogger(AppUsersController.class);
-
+    private final AppUserService appUserService;
     private final AppUserDAO appUserDAO;
 
-    public AppUsersController(AppUserDAO appUserDAO) {
+    public AppUsersController(AppUserDAO appUserDAO, final AppUserService appUserService) {
         this.appUserDAO = appUserDAO;
+        this.appUserService = appUserService;
     }
 
     @GetMapping("/sign")

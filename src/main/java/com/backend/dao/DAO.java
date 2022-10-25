@@ -5,7 +5,7 @@ import com.backend.dto.DTO;
 
 public interface DAO <T extends DTO>{
 
-    public T getByEmail(String email);
+    public T getByEmailOrNull(String email);
 
     public void insertOrUpdate(AppUserDTO dto);
 

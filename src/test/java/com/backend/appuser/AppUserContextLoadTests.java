@@ -1,4 +1,4 @@
-package com.backend.registration;
+package com.backend.appuser;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
