@@ -1,6 +1,7 @@
 package com.backend.dto.AppUserDTO;
 
 
+import com.backend.appuser.AppUser;
 import com.backend.appuser.AppUserRole;
 import com.backend.dto.DTO;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,5 @@
 package com.backend.controllers;
 
-import com.backend.dao.AppUserDAO;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.service.AppUserService;
 import org.slf4j.Logger;
@@ -15,10 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class AppUsersController {
     final Logger logger = LoggerFactory.getLogger(AppUsersController.class);
     private final AppUserService appUserService;
-    private final AppUserDAO appUserDAO;
 
-    public AppUsersController(AppUserDAO appUserDAO, final AppUserService appUserService) {
-        this.appUserDAO = appUserDAO;
+    public AppUsersController(AppUserService appUserService) {
         this.appUserService = appUserService;
     }
 
@@ -31,10 +28,8 @@ public class AppUsersController {
 
     @PostMapping("/newUser")
     public String createUser(@ModelAttribute("appuserdto") AppUserDTO appUserDTO, Model model){
-
-            appUserDAO.insertOrUpdate(appUserDTO);
+            appUserService.create(appUserDTO);
             logger.info("New user is signed!");
-
             //TODO: add username setting for registered users
             model.addAttribute("newuser", appUserDTO);
             return "user";

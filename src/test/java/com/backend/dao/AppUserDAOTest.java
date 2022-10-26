@@ -7,27 +7,27 @@ import com.backend.dto.AppUserDTO.AppUserDTO;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ContextConfiguration;
 
+@ContextConfiguration(locations = {"classpath:application.yml"})
 class AppUserDAOTest {
 
-    @Mock
+    @Autowired
     private AppUserDAO appUserDAO;
-    private AutoCloseable autoCloseable;
+
     private final String mail = "mail@mail.com";
     private AppUserDTO appUserDTO;
-    private final AppUserDTO underTest = new AppUserDTO("Alise", "LL", mail,
+    private final AppUserDTO underTest = new AppUserDTO("Alise", "Lise", mail,
             "asd", AppUserRole.USER, false);
 
     @BeforeEach
     void setUp(){
-        autoCloseable = MockitoAnnotations.openMocks(this);
     }
 
     @AfterEach
-    void tearDown() throws Exception{
-        autoCloseable.close();
+    void tearDown(){
     }
 
     @Test

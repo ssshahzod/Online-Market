@@ -15,20 +15,5 @@ public class Config {
 
     Logger logger = LoggerFactory.getLogger(Config.class);
 
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    public void setSuffix(String suffix) {
-        this.suffix = suffix;
-    }
-
-    public String getPrefix(){
-        logger.warn("Returning prefix value: {}", prefix);
-        return prefix;
-    }
-
-    public String getSuffix(){
-        return suffix;
-    }
+    //TODO: move application.yml properties here
 }
