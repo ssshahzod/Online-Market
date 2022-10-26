@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="/css/login.css" />
 </head>
 <body>
-<p></p>
 <form th:method="POST" th:action="@{/users/newUser}" th:object="${appuserdto}">
-    <table border="1">
+    <table border="1" align="center">
         <tr>
             <td>First name</td>
             <td><input type="text" th:field="*{firstName}"></td>
