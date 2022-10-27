@@ -1,11 +1,11 @@
 package com.backend.dao;
 
 import com.backend.dto.AppUserDTO.AppUserDTO;
-import com.backend.dto.DTO;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -24,7 +24,7 @@ public class AppUserDAO implements DAO<AppUserDTO>{
         AppUserDTO appUserDTO;
         String str = "SELECT * FROM users WHERE user_id = " + Id;
         try{
-            appUserDTO = jdbcTemplate.queryForObject(str, AppUserDTO.class);
+            appUserDTO = jdbcTemplate.queryForObject(str, new BeanPropertyRowMapper<AppUserDTO>(AppUserDTO.class));
             return appUserDTO;
         }
         catch(EmptyResultDataAccessException e){
@@ -38,7 +38,7 @@ public class AppUserDAO implements DAO<AppUserDTO>{
         AppUserDTO appUserDTO;
         String sql = "SELECT * FROM users WHERE email='" + email + "'";
         try {
-            appUserDTO = jdbcTemplate.queryForObject(sql, AppUserDTO.class);
+            appUserDTO = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<AppUserDTO>(AppUserDTO.class));
             return appUserDTO;
         }
         catch(EmptyResultDataAccessException e){
@@ -60,7 +60,10 @@ public class AppUserDAO implements DAO<AppUserDTO>{
     }
 
     @Override
-    public void delete(AppUserDTO dto) {
-
+    public void delete(@NotNull AppUserDTO dto) {
+        AppUserDAOLogger.info("Deleting user with firstname: {} and mail: {}", dto.getFirstName(), dto.getEmail());
+        String sql = "DELETE FROM users WHERE first_name='" + dto.getFirstName() + "'" + "AND second_name="
+                + "'" + dto.getSecondName() + "'" + "AND email=" + "'" + dto.getEmail() + "'";
+        jdbcTemplate.execute(sql);
     }
 }
