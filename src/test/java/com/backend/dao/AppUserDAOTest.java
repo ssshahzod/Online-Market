@@ -8,10 +8,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 
-@ContextConfiguration(locations = {"classpath:application.yml"})
+@SpringBootTest
+@ComponentScan("com.backend")
 class AppUserDAOTest {
 
     @Autowired
@@ -36,13 +39,13 @@ class AppUserDAOTest {
     }
 
     @Test
-    void getByEmailOrNull() {
+    void getByEmail() {
         appUserDTO = appUserDAO.getByEmailOrNull(mail);
         assertThat(appUserDTO).isEqualTo(underTest);
     }
 
     @Test
-    void getByIdOrNull() {
+    void getByIdNull() {
         long id = 105;
         appUserDTO = appUserDAO.getByIdOrNull(id);
         assertThat(appUserDTO).isNull();

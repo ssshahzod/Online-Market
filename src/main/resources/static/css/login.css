@@ -6,8 +6,7 @@ body {
     background-color: wheat;
 }
 
-tr {
-    background-color: aqua;
-    font-size: 16px;
-    
+label {
+    font-size: 20px;
+
 }

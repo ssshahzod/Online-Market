@@ -36,7 +36,7 @@ public class AppUserDAO implements DAO<AppUserDTO>{
     @Override
     public AppUserDTO getByEmailOrNull(String email) {
         AppUserDTO appUserDTO;
-        String sql = "SELECT * FROM users WHERE email =" + email;
+        String sql = "SELECT * FROM users WHERE email='" + email + "'";
         try {
             appUserDTO = jdbcTemplate.queryForObject(sql, AppUserDTO.class);
             return appUserDTO;
@@ -50,11 +50,12 @@ public class AppUserDAO implements DAO<AppUserDTO>{
     @Override
     public void insertOrUpdate(@NotNull AppUserDTO dto) {
         AppUserDAOLogger.info("Insert user with Id: {}", lastId);
-        lastId = jdbcTemplate.update("INSERT INTO " +
+        jdbcTemplate.update("INSERT INTO " +
                 "users (user_id, first_name, second_name, email, archive, password, app_user_role)" +
-                "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING user_id;",
+                "VALUES (?, ?, ?, ?, ?, ?, ?);",
             lastId, dto.getFirstName(), dto.getSecondName(), dto.getEmail(), dto.isArchived(),
             dto.getPassword(), dto.getAppUserRole().name());
+        lastId++;
         AppUserDAOLogger.info("New Id: {}", lastId);
     }
 

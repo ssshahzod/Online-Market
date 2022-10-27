@@ -1,5 +1,6 @@
 package com.backend.controllers;
 
+import com.backend.appuser.AppUserRole;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.service.AppUserService;
 import org.slf4j.Logger;
@@ -26,7 +27,7 @@ public class AppUsersController {
         return "signUp";
     }
 
-    @PostMapping("/newUser")
+    @PostMapping("/new")
     public String createUser(@ModelAttribute("appuserdto") AppUserDTO appUserDTO, Model model){
             appUserService.create(appUserDTO);
             logger.info("New user is signed!");

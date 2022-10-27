@@ -1,28 +1,24 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link rel="stylesheet" type="text/css" href="/css/login.css" />
 </head>
 <body>
-<form th:method="POST" th:action="@{/users/newUser}" th:object="${appuserdto}">
+<form th:method="POST" th:action="@{/users/new}" th:object="${appuserdto}">
     <table border="1" align="center">
         <tr>
             <td>First name</td>
-            <td><input type="text" th:field="*{firstName}"></td>
+            <td><input type="text" th:field="*{firstName}" id="firstName"></td>
         </tr>
         <tr>
             <td>Second name</td>
-            <td><input type="text" th:field="*{secondName}"></td>
+            <td><input type="text" th:field="*{secondName}" id="secondName"></td>
         </tr>
         <tr>
             <td>Password</td>
             <td><input type="password" th:field="*{password}"></td>
-        </tr>
-        <tr>
-            <td>Matching password</td>
-            <td><input type="password" th:field="matchingPassword"></td>
         </tr>
         <tr>
             <td>Email</td>
