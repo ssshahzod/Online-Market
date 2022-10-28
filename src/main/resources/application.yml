@@ -12,3 +12,6 @@ spring:
   mvc:
     view:
       suffix: .html
+  thymeleaf:
+    prefix: classpath:/static
+    suffix: .html

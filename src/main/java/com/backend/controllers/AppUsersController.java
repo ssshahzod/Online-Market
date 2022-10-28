@@ -23,7 +23,8 @@ public class AppUsersController {
     @GetMapping("/sign")
     public String signPage(Model model){
         logger.info("New sign request from the user.\n");
-        model.addAttribute("appuserdto", new AppUserDTO());
+        AppUserDTO appUserDTO = new AppUserDTO();
+        model.addAttribute("appuserdto", appUserDTO);
         return "signUp";
     }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" >
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
@@ -10,7 +10,7 @@
     <table border="1" align="center">
         <tr>
             <td>First name</td>
-            <td><input type="text" th:field="*{firstName}" id="firstName"></td>
+            <td><label for="firstName"></label><input type="text" th:field="*{firstName}" id="firstName"></td>
         </tr>
         <tr>
             <td>Second name</td>
