@@ -23,11 +23,11 @@ class AppUserDAOTest {
 
     @Test
     void insertOrUpdate(){
-        appUserDTO = appUserDAO.getByEmailOrNull(underTest.getEmail());
+        appUserDTO = appUserDAO.getByValueOrNull(underTest.getEmail());
         assertThat(appUserDTO).isNull();
 
         appUserDAO.insertOrUpdate(underTest);
-        appUserDTO = appUserDAO.getByEmailOrNull(underTest.getEmail());
+        appUserDTO = appUserDAO.getByValueOrNull(underTest.getEmail());
         assertThat(appUserDTO).isEqualTo(underTest);
 
         appUserDAO.delete(underTest);
@@ -36,21 +36,8 @@ class AppUserDAOTest {
     @Test
     void getByEmail() {
         appUserDAO.insertOrUpdate(underTest);
-        appUserDTO = appUserDAO.getByEmailOrNull(mail);
+        appUserDTO = appUserDAO.getByValueOrNull(mail);
         assertThat(appUserDTO).isEqualTo(underTest);
-        appUserDAO.delete(underTest);
-    }
-
-    @Test
-    void getById(){
-        long id = 100;
-        appUserDTO = appUserDAO.getByIdOrNull(id);
-        assertThat(appUserDTO).isNull();
-
-        appUserDAO.insertOrUpdate(underTest);
-        appUserDTO = appUserDAO.getByIdOrNull(id);
-        assertThat(appUserDTO).isEqualTo(underTest);
-
         appUserDAO.delete(underTest);
     }
 
@@ -59,16 +46,16 @@ class AppUserDAOTest {
         AppUserDTO tmp = new AppUserDTO("Mark", "Two", "yandex@mail",
                 "asd", AppUserRole.USER, false);
         appUserDAO.insertOrUpdate(tmp);
-        appUserDTO = appUserDAO.getByEmailOrNull(tmp.getEmail());
+        appUserDTO = appUserDAO.getByValueOrNull(tmp.getEmail());
         assertThat(appUserDTO).isEqualTo(tmp);
         appUserDAO.delete(tmp);
-        appUserDTO = appUserDAO.getByEmailOrNull(tmp.getEmail());
+        appUserDTO = appUserDAO.getByValueOrNull(tmp.getEmail());
         assertThat(appUserDTO).isNull();
 
     }
 
     @Test
-    void getByIdAndEmailNull() {
+    void getByIdNull() {
         long id = 105;
         appUserDTO = appUserDAO.getByIdOrNull(id);
         assertThat(appUserDTO).isNull();
@@ -76,7 +63,7 @@ class AppUserDAOTest {
 
     @Test
     void getByEmailNull(){
-        appUserDTO = appUserDAO.getByEmailOrNull(mail + "tmp");
+        appUserDTO = appUserDAO.getByValueOrNull(mail + "tmp");
         assertThat(appUserDTO).isEqualTo(null);
     }
 

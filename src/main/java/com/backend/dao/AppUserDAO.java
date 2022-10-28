@@ -34,7 +34,7 @@ public class AppUserDAO implements DAO<AppUserDTO>{
     }
 
     @Override
-    public AppUserDTO getByEmailOrNull(String email) {
+    public AppUserDTO getByValueOrNull(String email) {
         AppUserDTO appUserDTO;
         String sql = "SELECT * FROM users WHERE email='" + email + "'";
         try {
@@ -50,9 +50,15 @@ public class AppUserDAO implements DAO<AppUserDTO>{
     @Override
     public void insertOrUpdate(@NotNull AppUserDTO dto) {
         AppUserDAOLogger.info("Insert user with Id: {}", lastId);
-        jdbcTemplate.update("INSERT INTO " +
+        String getLastId = "SELECT max(user_id) FROM users;";
+        Long value = jdbcTemplate.queryForObject(getLastId, Long.class);
+        if(value != null){
+            lastId = value + 1;
+        }
+
+        jdbcTemplate.update("INSERT  INTO " +
                 "users (user_id, first_name, second_name, email, archive, password, app_user_role)" +
-                "VALUES (?, ?, ?, ?, ?, ?, ?);",
+                "VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT (email) DO UPDATE SET password = EXCLUDED.password;",
             lastId, dto.getFirstName(), dto.getSecondName(), dto.getEmail(), dto.isArchived(),
             dto.getPassword(), dto.getAppUserRole().name());
         lastId++;

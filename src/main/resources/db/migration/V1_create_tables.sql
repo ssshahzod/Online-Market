@@ -5,7 +5,8 @@ CREATE TABLE IF NOT EXISTS users(
     email VARCHAR(20) NOT NULL,
     archive BOOLEAN,
     password VARCHAR(20) NOT NULL,
-    app_user_role VARCHAR(255)
+    app_user_role VARCHAR(255),
+    UNIQUE (email)
 );
 
 CREATE SEQUENCE IF NOT EXISTS user_seq
