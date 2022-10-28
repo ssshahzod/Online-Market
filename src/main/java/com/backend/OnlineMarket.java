@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RegistrationAppApplication {
+public class OnlineMarket {
 
     public static void main(String[] args) {
-        SpringApplication.run(RegistrationAppApplication.class, args);
+        SpringApplication.run(OnlineMarket.class, args);
     }
 
 }

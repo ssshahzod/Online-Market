@@ -18,7 +18,7 @@ public class AppUserDTO implements DTO {
     private String secondName;
     private String email;
     private String password;
-    private AppUserRole appUserRole;
-    private boolean isArchived;
+    private AppUserRole appUserRole = AppUserRole.USER;
+    private boolean isArchived = false;
     //TODO: add default values, to be able to create new usersessions for guests
 }

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
-    <link rel="stylesheet" type="text/css" href="/css/login.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css" />
 </head>
 <body>
-<form th:method="POST" th:action="@{/users/new}" th:object="${appuserdto}">
+<form th:method="POST" th:action="@{/n}" th:object="${appuserdto}">
     <table border="1" align="center">
         <tr>
             <td>First name</td>

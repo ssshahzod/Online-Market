@@ -24,18 +24,20 @@ public class AppUsersController {
     public String signPage(Model model){
         logger.info("New sign request from the user.\n");
         AppUserDTO appUserDTO = new AppUserDTO();
+        appUserDTO.setAppUserRole(AppUserRole.USER);
+        appUserDTO.setArchived(false);
         model.addAttribute("appuserdto", appUserDTO);
-        return "signUp";
+        return "users/signUp";
     }
 
-    @PostMapping("/new")
+    /*@PostMapping("/new")
     public String createUser(@ModelAttribute("appuserdto") AppUserDTO appUserDTO, Model model){
             appUserService.create(appUserDTO);
             logger.info("New user is signed!");
             //TODO: add username setting for registered users
             model.addAttribute("newuser", appUserDTO);
             return "user";
-    }
+    }*/
 
     @ModelAttribute("welcomeMsg")
     public String welcomeMsg(){
