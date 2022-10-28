@@ -30,14 +30,14 @@ public class AppUsersController {
         return "users/signUp";
     }
 
-    /*@PostMapping("/new")
+    @PostMapping("/new")
     public String createUser(@ModelAttribute("appuserdto") AppUserDTO appUserDTO, Model model){
             appUserService.create(appUserDTO);
             logger.info("New user is signed!");
             //TODO: add username setting for registered users
             model.addAttribute("newuser", appUserDTO);
-            return "user";
-    }*/
+            return "users/user";
+    }
 
     @ModelAttribute("welcomeMsg")
     public String welcomeMsg(){
