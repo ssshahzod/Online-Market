@@ -6,7 +6,9 @@
     <link rel="stylesheet" type="text/css" href="/static/css/login.css" />
 </head>
 <body>
+<p class="welcomeMsg"><span>Welcome!</span></p>
 <form th:method="POST" th:action="@{/users/new}" th:object="${appuserdto}">
+    <div class="tableWrapper">
     <table border="1" align="center">
         <tr>
             <td>First name</td>
@@ -25,7 +27,11 @@
             <td><input type="email" th:field="*{email}"></td>
         </tr>
     </table>
-    <button type="submit">Save</button>
+    </div>
+    <div class="wrapper">
+        <button th:href="/">Return</button>
+        <button type="submit">Sign Up</button>
+    </div>
 </form>
 </body>
 </html>
