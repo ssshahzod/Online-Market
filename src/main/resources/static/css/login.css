@@ -10,14 +10,10 @@ p.welcomeMsg{
 
 p span{
     display: inline-block;
-    background-color: white;
-    border-radius: 10px;
-    padding: 10px;
-
-}
-
-.welcomeMsg:hover{
     background-color: lavender;
+    border-radius: 10px;
+    border: solid white 3px;
+    padding: 10px;
 }
 
 button{
@@ -40,9 +36,9 @@ button:hover{
 table {
     border-spacing: 0;
     border-collapse: separate;
-    border: solid black 0px;
+    border: solid white 3px;
     border-radius: 10px;
-    background-color: white;
+    background-color: lavender;
     overflow: hidden;
     padding: 20px;
     font-size: 25px;
