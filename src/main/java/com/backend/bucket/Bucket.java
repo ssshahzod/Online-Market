@@ -12,13 +12,13 @@ import org.hibernate.annotations.Tables;
 import javax.persistence.*;
 import java.util.List;
 
-/*@Data
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "buckets")
-@SecondaryTable(name = "users")*/
+@SecondaryTable(name = "users")
 public class Bucket {
     private static final String SEQ_NAME = "bucket_seq";
 
@@ -32,11 +32,11 @@ public class Bucket {
     @JoinColumn(name = "user_id")
     private AppUser appUser;
 
-    @ManyToMany
+    /*@ManyToMany
     @JoinTable(name = "products",
             joinColumns = @JoinColumn(name = "bucket_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> product;
+    private List<Product> product;*/
 
 
 }

@@ -1,5 +1,6 @@
 package com.backend.dao;
 
+import com.backend.appuser.AppUser;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ public class AppUserDAO implements DAO<AppUserDTO>{
     final Logger AppUserDAOLogger = LoggerFactory.getLogger(AppUserDAO.class);
 
     private final JdbcTemplate jdbcTemplate;
+    private AppUser appUser;
     private static long lastId = 100;
 
     public AppUserDAO(JdbcTemplate jdbcTemplate){

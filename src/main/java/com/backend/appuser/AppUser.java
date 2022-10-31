@@ -1,11 +1,11 @@
 package com.backend.appuser;
 
+import com.backend.dto.AppUserDTO.AppUserDTO;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Objects;
 
 @Data
@@ -27,7 +27,7 @@ public class AppUser{
     private String firstName;
     private String secondName;
     private String email;
-    private boolean archive;
+    private boolean archive = false;
     //@Transient TODO: move users password to the other table
     private String password;
 
@@ -70,6 +70,15 @@ public class AppUser{
 
     public String getRole(){
         return appUserRole.toString();
+    }
+
+    public AppUser(AppUserDTO appUserDTO){
+        this.firstName = appUserDTO.getFirstName();
+        this.secondName = appUserDTO.getSecondName();
+        this.email = appUserDTO.getEmail();
+        this.password = appUserDTO.getPassword();
+        this.appUserRole = appUserDTO.getAppUserRole();
+        this.archive = appUserDTO.isArchived();
     }
 
     @Override
