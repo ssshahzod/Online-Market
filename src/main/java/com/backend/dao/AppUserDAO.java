@@ -7,10 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.stereotype.Component;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 public class AppUserDAO implements DAO<AppUserDTO>{
     final Logger AppUserDAOLogger = LoggerFactory.getLogger(AppUserDAO.class);
 
