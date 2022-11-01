@@ -1,5 +1,4 @@
 services:
-
     postgresql:
         container_name: user_credentials
         image: postgres:alpine
@@ -7,13 +6,8 @@ services:
             - 5432:5432
         environment:
             - POSTGRES_UESR="postgres"
-            - POSTGRES_PASSWORD="pswd"
-            - POSTGRES_DB="spring_db"
-        healthcheck:
-            - test: ["CMD-SHELL", "pg_isready -U postgres -d spring_db"]
-            - timeout: 15s
-            - retries: 5
-            
+            - POSTGRES_PASSWORD=pswd
+            - POSTGRES_DB="spring_shop"            
     mongodb:
         container_name: buckets_products
         image: mongo-express
