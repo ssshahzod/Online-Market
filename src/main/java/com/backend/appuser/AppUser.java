@@ -28,7 +28,8 @@ public class AppUser{
     private String secondName;
     private String email;
     private boolean archive = false;
-    //@Transient TODO: move users password to the other table
+
+    @Transient
     private String password;
 
     @Column(name = "app_user_role")

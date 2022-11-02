@@ -20,6 +20,25 @@ public class AppUsersController {
         this.appUserService = appUserService;
     }
 
+    @GetMapping("/login")
+    public String loginPage(Model model){
+        logger.info("New login request. \n");
+        //AppUserDTO appUserDTO = new AppUserDTO();
+        String email = "";
+        String password = "";
+        model.addAttribute("email", email);
+        model.addAttribute("password", password);
+        return "users/login";
+    }
+
+    @PostMapping("")
+    public String loginUser(@ModelAttribute("email") String email,
+                            @ModelAttribute("password") String password,
+                            Model model){
+        
+        return null;
+    }
+
     @GetMapping("/sign")
     public String signPage(Model model){
         logger.info("New sign request from the user.\n");

@@ -1,12 +1,12 @@
 services:
     postgresql:
-        container_name: user_credentials
+        container_name: database
         image: postgres:alpine
         ports: 
             - 5432:5432
         environment:
             - POSTGRES_UESR="postgres"
-            - POSTGRES_PASSWORD=pswd
+            - POSTGRES_PASSWORD="pswd"
             - POSTGRES_DB="spring_shop"            
     mongodb:
         container_name: buckets_products

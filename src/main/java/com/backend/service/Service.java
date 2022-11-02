@@ -5,4 +5,6 @@ import com.backend.dto.DTO;
 
 public interface Service <T extends DTO>{
     public void create(T DTO);
+
+    //public T get();
 }
