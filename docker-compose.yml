@@ -10,7 +10,7 @@ services:
             - POSTGRES_DB="spring_shop"            
     mongodb:
         container_name: buckets_products
-        image: mongo-express
+        image: mongo:4
         ports:
             - 8081:8081
         environment:
