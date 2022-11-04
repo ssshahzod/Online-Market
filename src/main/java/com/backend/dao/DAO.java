@@ -8,7 +8,7 @@ public interface DAO <T extends DTO>{
 
     public void insert(T dto);
 
-    public void update(T dto);
+    public void update(T newDto);
 
     public void delete(T dto);
 

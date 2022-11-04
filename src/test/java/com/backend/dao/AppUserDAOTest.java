@@ -22,7 +22,7 @@ class AppUserDAOTest {
             "asd", AppUserRole.USER, false);
 
     @Test
-    void insertOrUpdate(){
+    void insert(){
         appUserDTO = appUserDAO.getByValueOrNull(underTest.getEmail());
         assertThat(appUserDTO).isNull();
 
@@ -31,6 +31,19 @@ class AppUserDAOTest {
         assertThat(appUserDTO).isEqualTo(underTest);
 
         appUserDAO.delete(underTest);
+    }
+
+    @Test
+    void update(){
+        appUserDAO.insert(underTest);
+        appUserDTO = appUserDAO.getByValueOrNull(underTest.getEmail());
+        assertThat(appUserDTO).isEqualTo(underTest);
+
+        String tmpMail = "yandex@mail.mail";
+        AppUserDTO tmp = new AppUserDTO("A", "B", tmpMail, "asd", AppUserRole.USER, false);
+        appUserDAO.update(tmp);
+        appUserDTO = appUserDAO.getByValueOrNull(tmpMail);
+        assertThat(appUserDTO).isEqualTo(tmp);
     }
 
     @Test
