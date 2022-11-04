@@ -50,7 +50,7 @@ public class AppUserDAO implements DAO<AppUserDTO>{
     }
 
     @Override
-    public void insertOrUpdate(@NotNull AppUserDTO dto) {
+    public void insert(@NotNull AppUserDTO dto) {
         AppUserDAOLogger.info("Insert user with Id: {}", lastId);
         String getLastId = "SELECT max(user_id) FROM users;";
         Long value = jdbcTemplate.queryForObject(getLastId, Long.class);
@@ -60,11 +60,21 @@ public class AppUserDAO implements DAO<AppUserDTO>{
 
         jdbcTemplate.update("INSERT  INTO " +
                 "users (user_id, first_name, second_name, email, archive, password, app_user_role)" +
-                "VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT (email) DO UPDATE SET password = EXCLUDED.password;",
+                "VALUES (?, ?, ?, ?, ?, ?, ?);",
             lastId, dto.getFirstName(), dto.getSecondName(), dto.getEmail(), dto.isArchived(),
             dto.getPassword(), dto.getAppUserRole().name());
         lastId++;
         AppUserDAOLogger.info("New Id: {}", lastId);
+    }
+
+    @Override
+    public void update(@NotNull AppUserDTO dto) {
+        AppUserDAOLogger.info("Update user details.\n");
+        jdbcTemplate.update("UPDATE " +
+                        "users SET first_name = ?, second_name = ?, email = ?, archive = ?,"
+                        + "password = ?, app_user_role = ?;",
+                lastId, dto.getFirstName(), dto.getSecondName(), dto.getEmail(), dto.isArchived(),
+                dto.getPassword(), dto.getAppUserRole().name());
     }
 
     @Override
