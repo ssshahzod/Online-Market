@@ -70,13 +70,10 @@ public class AppUserDAO implements DAO<AppUserDTO>{
     @Override
     public void update(@NotNull AppUserDTO dto) {
         AppUserDAOLogger.info("Update user details.\n");
-        jdbcTemplate.update("INSERT  INTO " +
-                        "users (user_id, first_name, second_name, email, archive, password, app_user_role)" +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT (first_name, second_name, email, password) "
-                        + "DO UPDATE SET first_name = ?, second_name = ?, email = ?, password = ?, app_user_role = ?;",
-                lastId, dto.getFirstName(), dto.getSecondName(), dto.getEmail(), dto.isArchived(),
-                dto.getPassword(), dto.getAppUserRole().name(), dto.getFirstName(),
-                dto.getSecondName(), dto.getEmail(), dto.getPassword(), dto.getAppUserRole());
+        jdbcTemplate.update("UPDATE users SET first_name=?, second_name=?, email=?, password=?,"
+                        + "archive=? ,app_user_role=? ;",
+                lastId, dto.getFirstName(), dto.getSecondName(), dto.getEmail(), dto.getPassword(),
+                dto.isArchived(), dto.getAppUserRole().name());
     }
 
     @Override
