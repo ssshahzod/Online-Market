@@ -7,6 +7,7 @@
 </head>
 <body>
 <form th:method="POST" th:action="@{/users/in}" th:object="${appUser}">
+    <p class="loginError"><span></span></p> <!--add little circle above the input table-->
     <div class="tableWrapper">
         <table border="1" align="center">
             <tr>
@@ -19,6 +20,7 @@
             </tr>
         </table>
     </div>
+    <p class="loginError"><span th:text="${error?}"></span></p>
     <div class="wrapper">
         <!--<button th:href="/">Return</button> -->
         <button type="submit">Log In</button>

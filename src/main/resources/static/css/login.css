@@ -8,13 +8,18 @@ p.welcomeMsg{
     margin-top: 10%;
 }
 
-p span{
+p.loginError{
+    text-align: center;
+}
+
+p span, span{
     display: inline-block;
     background-color: lavender;
     border-radius: 10px;
     border: solid white 3px;
     padding: 10px;
 }
+
 
 button{
     background-color: lavender;

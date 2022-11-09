@@ -20,4 +20,9 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
         AppUserServiceLogger.info("Insert user with email: {}", appUserDTO.getEmail());
         appUserDAO.insert(appUserDTO);
     }
+
+    @Override
+    public AppUserDTO get(final String value) {
+        return appUserDAO.getByValueOrNull(value);
+    }
 }

@@ -31,8 +31,16 @@ public class AppUsersController {
     @PostMapping("/in")
     public String loginUser(@ModelAttribute("appUser") AppUserDTO loginCredentials,
                             Model model){
-        
-        return null;
+        AppUserDTO appUserDTO = appUserService.get(loginCredentials.getEmail());
+        if(appUserDTO == null){
+            model.addAttribute("error", "No user found with provided email.");
+            return "users/login";
+        }
+        else if(appUserDTO.getPassword().equals(loginCredentials.getPassword())){
+            return "index";
+        }
+        model.addAttribute("error", "Incorrect password!");
+        return "users/login";
     }
 
     @GetMapping("/sign")
