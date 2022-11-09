@@ -5,22 +5,22 @@
   <title>Log In</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/users/new}" th:text="${email}">
+<form th:method="POST" th:action="@{/users/in}" th:object="${appUser}">
     <div class="tableWrapper">
         <table border="1" align="center">
             <tr>
                 <td>Email</td>
-                <td><input type="text" th:field="" id="firstName"></td>
+                <td><input type="text" th:field="appUser.email" id="email"></td>
             </tr>
             <tr>
                 <td>Password</td>
-                <td><input type="password" th:field=""></td>
+                <td><input type="password" th:field="appUser.password" id="password"> </td>
             </tr>
         </table>
     </div>
     <div class="wrapper">
-        <button th:href="/">Return</button>
-        <button type="submit">Sign Up</button>
+        <!--<button th:href="/">Return</button> -->
+        <button type="submit">Log In</button>
     </div>
 </form>
 </body>

@@ -31,9 +31,8 @@ public class AppUsersController {
         return "users/login";
     }
 
-    @PostMapping("")
-    public String loginUser(@ModelAttribute("email") String email,
-                            @ModelAttribute("password") String password,
+    @PostMapping("/in")
+    public String loginUser(@ModelAttribute("appUser") AppUserDTO loginCredentials,
                             Model model){
         
         return null;
