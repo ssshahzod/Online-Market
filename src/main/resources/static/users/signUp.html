@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/login.css" />
+    <link rel="stylesheet" type="text/css" href="/css/login.css" />
 </head>
 <body>
 <p class="welcomeMsg"><span>Welcome!</span></p>
@@ -29,9 +29,13 @@
     </table>
     </div>
     <div class="wrapper">
-        <!-- <button th:href="/index">Return</button> -->
+
         <button type="submit">Sign Up</button>
     </div>
 </form>
+<div class="wrapper">
+    <p class="signUpWelcome"><span>Or log in if you already have account.</span></p>
+    <a href="/users/login">Log In</a>
+</div>
 </body>
 </html>

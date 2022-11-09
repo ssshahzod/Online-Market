@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Log In</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/login.css" />
+    <link rel="stylesheet" type="text/css" href="/css/login.css" />
 </head>
 <body>
 <form th:method="POST" th:action="@{/users/in}" th:object="${appUser}">
@@ -20,11 +20,17 @@
             </tr>
         </table>
     </div>
-    <p class="loginError"><span th:text="${error?}"></span></p>
+    <p class="loginError"><span th:text="${error}"></span></p>
     <div class="wrapper">
         <!--<button th:href="/">Return</button> -->
         <button type="submit">Log In</button>
     </div>
 </form>
+
+<div class="wrapper">
+    <p class="signUpWelcome"><span>Or sign up if you dont have account.</span></p>
+    <a href="/users/sign">Sign Up</a>
+</div>
+
 </body>
 </html>
