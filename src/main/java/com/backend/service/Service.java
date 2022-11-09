@@ -7,4 +7,6 @@ public interface Service <T extends DTO>{
     public void create(T DTO);
 
     public T get(String value);
+
+    public Long getId(String value);
 }

@@ -37,6 +37,7 @@ public class AppUsersController {
             return "users/login";
         }
         else if(appUserDTO.getPassword().equals(loginCredentials.getPassword())){
+            logger.info("User with id: {} successfully logged in ", appUserService.getId(loginCredentials.getEmail()));
             return "index";
         }
         model.addAttribute("error", "Incorrect password!");

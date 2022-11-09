@@ -35,6 +35,21 @@ public class AppUserDAO implements DAO<AppUserDTO>{
         return null;
     }
 
+    public long getId(String email){
+        Long id;
+        String str = "SELECT user_id FROM users WHERE email='" + email + "'";
+        try{
+            id = jdbcTemplate.queryForObject(str, Long.class);
+            if(id != null){
+                return id;
+            }
+        }
+        catch (EmptyResultDataAccessException e){
+            AppUserDAOLogger.debug(e.toString());
+        }
+        return 0;
+    }
+
     @Override
     public AppUserDTO getByValueOrNull(String email) {
         AppUserDTO appUserDTO;
@@ -60,7 +75,7 @@ public class AppUserDAO implements DAO<AppUserDTO>{
 
         jdbcTemplate.update("INSERT  INTO " +
                 "users (user_id, first_name, second_name, email, archive, password, app_user_role)" +
-                "VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT (email) DO NOTHING ;",
+                "VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT (email) DO NOTHING;",
             lastId, dto.getFirstName(), dto.getSecondName(), dto.getEmail(), dto.isArchived(),
             dto.getPassword(), dto.getAppUserRole().name());
         lastId++;

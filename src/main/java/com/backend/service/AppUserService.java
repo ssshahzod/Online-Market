@@ -25,4 +25,9 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
     public AppUserDTO get(final String value) {
         return appUserDAO.getByValueOrNull(value);
     }
+
+    @Override
+    public Long getId(String value){
+        return appUserDAO.getId(value);
+    }
 }
