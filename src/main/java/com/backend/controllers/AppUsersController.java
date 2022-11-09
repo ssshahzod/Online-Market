@@ -23,11 +23,8 @@ public class AppUsersController {
     @GetMapping("/login")
     public String loginPage(Model model){
         logger.info("New login request. \n");
-        //AppUserDTO appUserDTO = new AppUserDTO();
-        String email = "";
-        String password = "";
-        model.addAttribute("email", email);
-        model.addAttribute("password", password);
+        AppUserDTO appUserDTO = new AppUserDTO();
+        model.addAttribute("appUser", appUserDTO);
         return "users/login";
     }
 
