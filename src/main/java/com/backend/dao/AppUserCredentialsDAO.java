@@ -11,14 +11,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class AppUserDAO implements DAO<AppUserDTO>{
-    final Logger AppUserDAOLogger = LoggerFactory.getLogger(AppUserDAO.class);
+public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
+    final Logger AppUserDAOLogger = LoggerFactory.getLogger(AppUserCredentialsDAO.class);
 
     private final JdbcTemplate jdbcTemplate;
     private AppUser appUser;
     private static long lastId = 100;
 
-    public AppUserDAO(JdbcTemplate jdbcTemplate){
+    public AppUserCredentialsDAO(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
 

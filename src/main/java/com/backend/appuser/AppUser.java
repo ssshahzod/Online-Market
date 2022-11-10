@@ -1,5 +1,6 @@
 package com.backend.appuser;
 
+import com.backend.bucket.Bucket;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -36,9 +37,9 @@ public class AppUser{
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
 
-    /*@OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "bucket_id")
-    private Bucket bucket;*/
+    private Bucket bucket;
 
     public AppUser(String firstName,
                    String secondName,

@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS users(
+CREATE TABLE IF NOT EXISTS users_cred(
     user_id  BIGINT NOT NULL PRIMARY KEY,
     first_name VARCHAR(20) NOT NULL,
     second_name VARCHAR(20) NOT NULL,

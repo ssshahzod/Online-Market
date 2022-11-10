@@ -11,10 +11,10 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootTest
 @ComponentScan("com.backend")
-class AppUserDAOTest {
+class AppUserCredentialsDAOTest {
 
     @Autowired
-    private AppUserDAO appUserDAO;
+    private AppUserCredentialsDAO appUserCredentialsDAO;
 
     private final String mail = "mail@mail.com";
     private AppUserDTO appUserDTO;
@@ -23,46 +23,46 @@ class AppUserDAOTest {
 
     @Test
     void insert(){
-        appUserDTO = appUserDAO.getByValueOrNull(underTest.getEmail());
+        appUserDTO = appUserCredentialsDAO.getByValueOrNull(underTest.getEmail());
         assertThat(appUserDTO).isNull();
 
-        appUserDAO.insert(underTest);
-        appUserDTO = appUserDAO.getByValueOrNull(underTest.getEmail());
+        appUserCredentialsDAO.insert(underTest);
+        appUserDTO = appUserCredentialsDAO.getByValueOrNull(underTest.getEmail());
         assertThat(appUserDTO).isEqualTo(underTest);
 
-        appUserDAO.delete(underTest);
+        appUserCredentialsDAO.delete(underTest);
     }
 
     @Test
     void update(){
-        appUserDAO.insert(underTest);
-        appUserDTO = appUserDAO.getByValueOrNull(underTest.getEmail());
+        appUserCredentialsDAO.insert(underTest);
+        appUserDTO = appUserCredentialsDAO.getByValueOrNull(underTest.getEmail());
         assertThat(appUserDTO).isEqualTo(underTest);
 
         String tmpMail = "yandex@mail.mail";
         AppUserDTO tmp = new AppUserDTO("A", "B", tmpMail, "asd", AppUserRole.USER, false);
-        appUserDAO.update(tmp);
-        appUserDTO = appUserDAO.getByValueOrNull(tmpMail);
+        appUserCredentialsDAO.update(tmp);
+        appUserDTO = appUserCredentialsDAO.getByValueOrNull(tmpMail);
         assertThat(appUserDTO).isEqualTo(tmp);
     }
 
     @Test
     void getByEmail() {
-        appUserDAO.insert(underTest);
-        appUserDTO = appUserDAO.getByValueOrNull(mail);
+        appUserCredentialsDAO.insert(underTest);
+        appUserDTO = appUserCredentialsDAO.getByValueOrNull(mail);
         assertThat(appUserDTO).isEqualTo(underTest);
-        appUserDAO.delete(underTest);
+        appUserCredentialsDAO.delete(underTest);
     }
 
     @Test
     void delete(){
         AppUserDTO tmp = new AppUserDTO("Mark", "Two", "yandex@mail",
                 "asd", AppUserRole.USER, false);
-        appUserDAO.insert(tmp);
-        appUserDTO = appUserDAO.getByValueOrNull(tmp.getEmail());
+        appUserCredentialsDAO.insert(tmp);
+        appUserDTO = appUserCredentialsDAO.getByValueOrNull(tmp.getEmail());
         assertThat(appUserDTO).isEqualTo(tmp);
-        appUserDAO.delete(tmp);
-        appUserDTO = appUserDAO.getByValueOrNull(tmp.getEmail());
+        appUserCredentialsDAO.delete(tmp);
+        appUserDTO = appUserCredentialsDAO.getByValueOrNull(tmp.getEmail());
         assertThat(appUserDTO).isNull();
 
     }
@@ -75,13 +75,13 @@ class AppUserDAOTest {
     @Test
     void getByIdNull() {
         long id = 105;
-        appUserDTO = appUserDAO.getByIdOrNull(id);
+        appUserDTO = appUserCredentialsDAO.getByIdOrNull(id);
         assertThat(appUserDTO).isNull();
     }
 
     @Test
     void getByEmailNull(){
-        appUserDTO = appUserDAO.getByValueOrNull(mail + "tmp");
+        appUserDTO = appUserCredentialsDAO.getByValueOrNull(mail + "tmp");
         assertThat(appUserDTO).isEqualTo(null);
     }
 
