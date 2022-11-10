@@ -24,7 +24,7 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
 
     public AppUserDTO getByIdOrNull(Long Id){
         AppUserDTO appUserDTO;
-        String str = "SELECT * FROM users WHERE user_id = " + Id;
+        String str = "SELECT * FROM users_cred WHERE user_id = " + Id;
         try{
             appUserDTO = jdbcTemplate.queryForObject(str, new BeanPropertyRowMapper<AppUserDTO>(AppUserDTO.class));
             return appUserDTO;
@@ -37,7 +37,7 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
 
     public long getId(String email){
         Long id;
-        String str = "SELECT user_id FROM users WHERE email='" + email + "'";
+        String str = "SELECT user_id FROM users_cred WHERE email='" + email + "'";
         try{
             id = jdbcTemplate.queryForObject(str, Long.class);
             if(id != null){
@@ -53,7 +53,7 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
     @Override
     public AppUserDTO getByValueOrNull(String email) {
         AppUserDTO appUserDTO;
-        String sql = "SELECT * FROM users WHERE email='" + email + "'";
+        String sql = "SELECT * FROM users_cred WHERE email='" + email + "'";
         try {
             appUserDTO = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<AppUserDTO>(AppUserDTO.class));
             return appUserDTO;
@@ -67,14 +67,14 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
     @Override
     public void insert(@NotNull AppUserDTO dto) {
         AppUserDAOLogger.info("Insert user with Id: {}", lastId);
-        String getLastId = "SELECT max(user_id) FROM users;";
+        String getLastId = "SELECT max(user_id) FROM users_cred;";
         Long value = jdbcTemplate.queryForObject(getLastId, Long.class);
         if(value != null){
             lastId = value + 1;
         }
 
         jdbcTemplate.update("INSERT  INTO " +
-                "users (user_id, first_name, second_name, email, archive, password, app_user_role)" +
+                "users_cred (user_id, first_name, second_name, email, archive, password, app_user_role)" +
                 "VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT (email) DO NOTHING;",
             lastId, dto.getFirstName(), dto.getSecondName(), dto.getEmail(), dto.isArchived(),
             dto.getPassword(), dto.getAppUserRole().name());
@@ -96,7 +96,7 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
     @Override
     public void delete(@NotNull AppUserDTO dto) {
         AppUserDAOLogger.info("Deleting user with firstname: {} and mail: {}", dto.getFirstName(), dto.getEmail());
-        String sql = "DELETE FROM users WHERE first_name='" + dto.getFirstName() + "'" + "AND second_name="
+        String sql = "DELETE FROM users_cred WHERE first_name='" + dto.getFirstName() + "'" + "AND second_name="
                 + "'" + dto.getSecondName() + "'" + "AND email=" + "'" + dto.getEmail() + "'";
         jdbcTemplate.execute(sql);
     }

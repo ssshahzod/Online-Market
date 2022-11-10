@@ -28,10 +28,6 @@ public class AppUser{
     private String firstName;
     private String secondName;
     private String email;
-    private boolean archive = false;
-
-    @Transient
-    private String password;
 
     @Column(name = "app_user_role")
     @Enumerated(EnumType.STRING)
@@ -49,14 +45,9 @@ public class AppUser{
         this.firstName = firstName;
         this.secondName = secondName;
         this.email = email;
-        this.password = password;
         this.appUserRole = appUserRole;
     }
 
-
-    public String getPassword() {
-        return password;
-    }
 
     public String getSecondName() {
         return secondName;

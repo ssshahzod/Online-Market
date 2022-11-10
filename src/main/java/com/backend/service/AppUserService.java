@@ -17,7 +17,7 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
 
     @Override
     public void create(AppUserDTO appUserDTO) {
-        AppUserServiceLogger.info("Insert user with email: {}", appUserDTO.getEmail());
+        AppUserServiceLogger.info("Create user with email: {}", appUserDTO.getEmail());
         appUserCredentialsDAO.insert(appUserDTO);
     }
 
