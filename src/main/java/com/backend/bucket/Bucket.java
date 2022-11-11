@@ -18,7 +18,6 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "buckets")
-@SecondaryTable(name = "users")
 public class Bucket {
     private static final String SEQ_NAME = "bucket_seq";
 
@@ -29,7 +28,6 @@ public class Bucket {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
     private AppUser appUser;
 
     /*@ManyToMany

@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS users(
     second_name VARCHAR(20) NOT NULL,
     email VARCHAR(20) NOT NULL,
     app_user_role VARCHAR(255),
+    bucket_id BIGINT NOT NULL,
     UNIQUE (email)
 );
 

@@ -27,8 +27,6 @@ public class AppUserDTO implements DTO {
         this.firstName = appUser.getFirstName();
         this.secondName = appUser.getSecondName();
         this.email = appUser.getEmail();
-        this.password = appUser.getPassword();
         this.appUserRole = appUser.getAppUserRole();
-        this.isArchived = appUser.isArchive();
     }
 }

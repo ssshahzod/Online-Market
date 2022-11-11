@@ -2,9 +2,11 @@ package com.backend.dao;
 
 import com.backend.appuser.AppUser;
 import com.backend.dto.AppUserDTO.AppUserDTO;
+import com.backend.repository.AppUserRepository;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,9 +17,11 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
     final Logger AppUserDAOLogger = LoggerFactory.getLogger(AppUserCredentialsDAO.class);
 
     private final JdbcTemplate jdbcTemplate;
+
     private AppUser appUser;
     private static long lastId = 100;
 
+    @Autowired
     public AppUserCredentialsDAO(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -80,6 +84,8 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
             dto.getPassword(), dto.getAppUserRole().name());
         lastId++;
         AppUserDAOLogger.info("New Id: {}", lastId);
+
+        AppUser appUser = new AppUser(dto);
     }
 
     @Override

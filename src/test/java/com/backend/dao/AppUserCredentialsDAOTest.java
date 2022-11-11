@@ -68,11 +68,6 @@ class AppUserCredentialsDAOTest {
     }
 
     @Test
-    void getId(){
-        //TODO: test getId method
-    }
-
-    @Test
     void getByIdNull() {
         long id = 105;
         appUserDTO = appUserCredentialsDAO.getByIdOrNull(id);

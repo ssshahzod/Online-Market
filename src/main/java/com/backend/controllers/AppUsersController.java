@@ -38,7 +38,7 @@ public class AppUsersController {
         }
         else if(appUserDTO.getPassword().equals(loginCredentials.getPassword())){
             logger.info("User with id: {} successfully logged in ", appUserService.getId(loginCredentials.getEmail()));
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("error", "Incorrect password!");
         return "users/login";
@@ -60,7 +60,7 @@ public class AppUsersController {
             logger.info("New user is signed!");
             //TODO: add username setting for registered users
             model.addAttribute("newuser", appUserDTO);
-            return "users/user";
+            return "redirect:/";
     }
 
     @ModelAttribute("welcomeMsg")

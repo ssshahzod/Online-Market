@@ -15,7 +15,6 @@ import java.util.Objects;
 @Builder
 @Entity
 @Table(name = "users")
-@SecondaryTable(name = "buckets")
 public class AppUser{
     private static final String SEQ_NAME = "user_seq";
 
@@ -34,20 +33,8 @@ public class AppUser{
     private AppUserRole appUserRole;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "bucket_id")
+    @JoinColumn(name = "bucket_id", referencedColumnName = "bucket_id")
     private Bucket bucket;
-
-    public AppUser(String firstName,
-                   String secondName,
-                   String email,
-                   String password,
-                   AppUserRole appUserRole) {
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.email = email;
-        this.appUserRole = appUserRole;
-    }
-
 
     public String getSecondName() {
         return secondName;
@@ -62,16 +49,14 @@ public class AppUser{
     }
 
     public String getRole(){
-        return appUserRole.toString();
+        return appUserRole.name();
     }
 
     public AppUser(AppUserDTO appUserDTO){
         this.firstName = appUserDTO.getFirstName();
         this.secondName = appUserDTO.getSecondName();
         this.email = appUserDTO.getEmail();
-        this.password = appUserDTO.getPassword();
         this.appUserRole = appUserDTO.getAppUserRole();
-        this.archive = appUserDTO.isArchived();
     }
 
     @Override
