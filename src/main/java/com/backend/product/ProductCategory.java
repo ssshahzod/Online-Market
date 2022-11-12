@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-/*@Data
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "categories")*/
+@Table(name = "categories")
 public class ProductCategory {
     private final String SEQ_NAME = "category_seq";
 

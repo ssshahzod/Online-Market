@@ -60,10 +60,8 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
         //TODO: implement method
         AppUserDAOLogger.info("Update user details.\n");
 
-        /*jdbcTemplate.update("UPDATE users SET first_name=?, second_name=?, email=?, password=?,"
-                        + "archive=? ,app_user_role=? ;",
-                lastId, dto.getFirstName(), dto.getSecondName(), dto.getEmail(), dto.getPassword(),
-                dto.isArchived(), dto.getAppUserRole().name());*/
+        /*jdbcTemplate.update("UPDATE users SET password=?;",
+                dto.getPassword());*/
     }
 
     @Override

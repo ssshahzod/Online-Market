@@ -23,9 +23,7 @@ class AppUserCredentialsDAOTest {
 
     @Test
     void getByIdNull() {
-        long id = 105;
-        appUserDTO = appUserCredentialsDAO.getByIdOrNull(id);
-        assertThat(appUserDTO).isNull();
+
     }
 
 

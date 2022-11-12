@@ -60,7 +60,7 @@ public class AppUsersController {
             logger.info("New user is signed!");
             //TODO: add username setting for registered users
             model.addAttribute("newuser", appUserDTO);
-            return "redirect:/";
+            return "user";
     }
 
     @ModelAttribute("welcomeMsg")

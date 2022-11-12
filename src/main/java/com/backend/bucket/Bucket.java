@@ -30,11 +30,8 @@ public class Bucket {
     @OneToOne
     private AppUser appUser;
 
-    /*@ManyToMany
-    @JoinTable(name = "products",
-            joinColumns = @JoinColumn(name = "bucket_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> product;*/
+    @ManyToMany
+    private List<Product> product;
 
 
 }

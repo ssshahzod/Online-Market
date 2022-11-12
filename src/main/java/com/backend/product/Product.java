@@ -1,5 +1,6 @@
 package com.backend.product;
 
+import com.backend.bucket.Bucket;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,12 +9,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
-/*@Data
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "products")*/
+@Table(name = "products")
 public class Product {
     private static final String SEQ_NAME = "product_seq";
 
@@ -26,6 +27,9 @@ public class Product {
     private String title;
     private String description;
     private float price;
+
+    @ManyToMany
+    private List<Bucket> bucket;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "categories",

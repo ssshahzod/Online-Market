@@ -10,5 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 
+    @Query(value = "SELECT user_id FROM users WHERE email=?1;", nativeQuery = true)
+    public Long getIdByEmail(String email);
 
 }

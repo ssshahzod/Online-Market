@@ -4,6 +4,7 @@ import com.backend.appuser.AppUser;
 import com.backend.dao.AppUserCredentialsDAO;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.repository.AppUserRepository;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -22,16 +23,17 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
     @Override
     public void create(AppUserDTO appUserDTO) {
         AppUserServiceLogger.info("Create user with email: {}", appUserDTO.getEmail());
-        //store in dto only ids and passwords
         appUserCredentialsDAO.insert(appUserDTO);
-
+        appUserDTO.setPassword("");
         AppUser appUser = new AppUser(appUserDTO);
         appUserRepository.save(appUser);
     }
 
     @Override
     public AppUserDTO get(final String value) {
-        return null;
+        long id = appUserRepository.getIdByEmail(value);
+        Optional<AppUserDTO> pass = Optional.ofNullable(appUserCredentialsDAO.getByIdOrNull(id));
+        return pass.orElse(null);
     }
 
     @Override
