@@ -4,12 +4,10 @@ import com.backend.dto.DTO;
 
 public interface DAO <T extends DTO>{
 
-    public T getByValueOrNull(String value);
-
     public void insert(T dto);
 
     public void update(T newDto);
 
-    public void delete(T dto);
+    public void delete(Long id);
 
 }

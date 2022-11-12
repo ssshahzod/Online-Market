@@ -31,11 +31,11 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
 
     @Override
     public AppUserDTO get(final String value) {
-        return appUserCredentialsDAO.getByValueOrNull(value);
+        return null;
     }
 
     @Override
     public Long getId(String value){
-        return appUserCredentialsDAO.getId(value);
+        return null;
     }
 }

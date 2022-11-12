@@ -19,8 +19,6 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
     final Logger AppUserDAOLogger = LoggerFactory.getLogger(AppUserCredentialsDAO.class);
 
     private final JdbcTemplate jdbcTemplate;
-
-    private AppUser appUser;
     private static long lastId = 100;
 
     @Autowired
@@ -41,50 +39,20 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
         return null;
     }
 
-    public long getId(String email){
-        String str = "SELECT user_id FROM users_cred WHERE email='" + email + "'";
-        try{
-            Optional<Long> id = Optional.ofNullable(jdbcTemplate.queryForObject(str, Long.class));
-            return id.orElse(0L);
-        }
-        catch (EmptyResultDataAccessException e){
-            AppUserDAOLogger.debug(e.toString());
-        }
-        return 0;
-    }
-
-    @Override
-    public AppUserDTO getByValueOrNull(String email) {
-        AppUserDTO appUserDTO;
-        String sql = "SELECT * FROM users_cred WHERE email='" + email + "'";
-        try {
-            appUserDTO = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<AppUserDTO>(AppUserDTO.class));
-            return appUserDTO;
-        }
-        catch(EmptyResultDataAccessException e){
-            AppUserDAOLogger.debug(e.toString());
-        }
-        return null;
-    }
-
     @Override
     public void insert(@NotNull AppUserDTO dto) {
         AppUserDAOLogger.info("Insert user with Id: {}", lastId);
         String getLastId = "SELECT max(user_id) FROM users_cred;";
 
-        Optional<Long> val = Optional.empty();
-        val = Optional.ofNullable(jdbcTemplate.queryForObject(getLastId, Long.class));
-        Long value = val.orElse(100L);
+        Optional<Long> val = Optional.ofNullable(jdbcTemplate.queryForObject(getLastId, Long.class));
+        lastId = val.orElse(100L);
 
         jdbcTemplate.update("INSERT  INTO " +
-                "users_cred (user_id, first_name, second_name, email, archive, password, app_user_role)" +
-                "VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT (email) DO NOTHING;",
-            lastId, dto.getFirstName(), dto.getSecondName(), dto.getEmail(), dto.isArchived(),
-            dto.getPassword(), dto.getAppUserRole().name());
+                "users_cred (user_id, password)" +
+                "VALUES (?, ?);",
+            lastId, dto.getPassword());
         lastId++;
         AppUserDAOLogger.info("New Id: {}", lastId);
-
-        AppUser appUser = new AppUser(dto);
     }
 
     @Override
@@ -99,10 +67,9 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
     }
 
     @Override
-    public void delete(@NotNull AppUserDTO dto) {
-        AppUserDAOLogger.info("Deleting user with firstname: {} and mail: {}", dto.getFirstName(), dto.getEmail());
-        String sql = "DELETE FROM users_cred WHERE first_name='" + dto.getFirstName() + "'" + "AND second_name="
-                + "'" + dto.getSecondName() + "'" + "AND email=" + "'" + dto.getEmail() + "'";
+    public void delete(Long id) {
+        AppUserDAOLogger.info("Deleting user with id: {}", id);
+        String sql = "DELETE FROM users_cred WHERE user_id=" + id;
         jdbcTemplate.execute(sql);
     }
 }

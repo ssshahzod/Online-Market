@@ -22,62 +22,11 @@ class AppUserCredentialsDAOTest {
             "asd", AppUserRole.USER, false);
 
     @Test
-    void insert(){
-        appUserDTO = appUserCredentialsDAO.getByValueOrNull(underTest.getEmail());
-        assertThat(appUserDTO).isNull();
-
-        appUserCredentialsDAO.insert(underTest);
-        appUserDTO = appUserCredentialsDAO.getByValueOrNull(underTest.getEmail());
-        assertThat(appUserDTO).isEqualTo(underTest);
-
-        appUserCredentialsDAO.delete(underTest);
-    }
-
-    @Test
-    void update(){
-        appUserCredentialsDAO.insert(underTest);
-        appUserDTO = appUserCredentialsDAO.getByValueOrNull(underTest.getEmail());
-        assertThat(appUserDTO).isEqualTo(underTest);
-
-        String tmpMail = "yandex@mail.mail";
-        AppUserDTO tmp = new AppUserDTO("A", "B", tmpMail, "asd", AppUserRole.USER, false);
-        appUserCredentialsDAO.update(tmp);
-        appUserDTO = appUserCredentialsDAO.getByValueOrNull(tmpMail);
-        assertThat(appUserDTO).isEqualTo(tmp);
-    }
-
-    @Test
-    void getByEmail() {
-        appUserCredentialsDAO.insert(underTest);
-        appUserDTO = appUserCredentialsDAO.getByValueOrNull(mail);
-        assertThat(appUserDTO).isEqualTo(underTest);
-        appUserCredentialsDAO.delete(underTest);
-    }
-
-    @Test
-    void delete(){
-        AppUserDTO tmp = new AppUserDTO("Mark", "Two", "yandex@mail",
-                "asd", AppUserRole.USER, false);
-        appUserCredentialsDAO.insert(tmp);
-        appUserDTO = appUserCredentialsDAO.getByValueOrNull(tmp.getEmail());
-        assertThat(appUserDTO).isEqualTo(tmp);
-        appUserCredentialsDAO.delete(tmp);
-        appUserDTO = appUserCredentialsDAO.getByValueOrNull(tmp.getEmail());
-        assertThat(appUserDTO).isNull();
-
-    }
-
-    @Test
     void getByIdNull() {
         long id = 105;
         appUserDTO = appUserCredentialsDAO.getByIdOrNull(id);
         assertThat(appUserDTO).isNull();
     }
 
-    @Test
-    void getByEmailNull(){
-        appUserDTO = appUserCredentialsDAO.getByValueOrNull(mail + "tmp");
-        assertThat(appUserDTO).isEqualTo(null);
-    }
 
 }
