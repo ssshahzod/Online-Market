@@ -3,11 +3,13 @@ package com.backend.dao;
 import com.backend.appuser.AppUser;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.repository.AppUserRepository;
+import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.expression.spel.ast.OpInc;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -40,13 +42,10 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
     }
 
     public long getId(String email){
-        Long id;
         String str = "SELECT user_id FROM users_cred WHERE email='" + email + "'";
         try{
-            id = jdbcTemplate.queryForObject(str, Long.class);
-            if(id != null){
-                return id;
-            }
+            Optional<Long> id = Optional.ofNullable(jdbcTemplate.queryForObject(str, Long.class));
+            return id.orElse(0L);
         }
         catch (EmptyResultDataAccessException e){
             AppUserDAOLogger.debug(e.toString());
@@ -72,10 +71,10 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
     public void insert(@NotNull AppUserDTO dto) {
         AppUserDAOLogger.info("Insert user with Id: {}", lastId);
         String getLastId = "SELECT max(user_id) FROM users_cred;";
-        Long value = jdbcTemplate.queryForObject(getLastId, Long.class);
-        if(value != null){
-            lastId = value + 1;
-        }
+
+        Optional<Long> val = Optional.empty();
+        val = Optional.ofNullable(jdbcTemplate.queryForObject(getLastId, Long.class));
+        Long value = val.orElse(100L);
 
         jdbcTemplate.update("INSERT  INTO " +
                 "users_cred (user_id, first_name, second_name, email, archive, password, app_user_role)" +
