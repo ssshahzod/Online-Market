@@ -1,6 +1,7 @@
 package com.backend.service;
 
 import com.backend.appuser.AppUser;
+import com.backend.bucket.Bucket;
 import com.backend.dao.AppUserCredentialsDAO;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.repository.AppUserRepository;
@@ -26,6 +27,8 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
         appUserCredentialsDAO.insert(appUserDTO);
         appUserDTO.setPassword("");
         AppUser appUser = new AppUser(appUserDTO);
+        Bucket bucket = new Bucket();
+        appUser.setBucket(bucket);
         appUserRepository.save(appUser);
     }
 
