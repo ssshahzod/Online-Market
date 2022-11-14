@@ -21,13 +21,13 @@ import java.util.List;
 public class Bucket {
     private static final String SEQ_NAME = "bucket_seq";
 
+    //using a shared primary key
     @Id
-    @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
-    @Column(name = "bucket_id")
+    @Column(name = "user_id")
     private Long id;
 
-    @OneToOne
+    @OneToOne(mappedBy = "bucket", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private AppUser appUser;
 
     @ManyToMany

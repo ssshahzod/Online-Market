@@ -32,8 +32,9 @@ public class AppUser{
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "bucket_id", referencedColumnName = "bucket_id")
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "bucket_id")
     private Bucket bucket;
 
     public String getSecondName() {

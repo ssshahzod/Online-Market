@@ -54,7 +54,7 @@ CREATE SEQUENCE IF NOT EXISTS category_seq
 CREATE TABLE IF NOT EXISTS buckets(
     bucket_id BIGINT NOT NULL PRIMARY KEY,
     user_id  BIGINT NOT NULL,
-    products anyarray
+    products INTEGER[][]
 );
 
 CREATE SEQUENCE IF NOT EXISTS bucket_seq

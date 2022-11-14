@@ -5,6 +5,8 @@ import com.backend.bucket.Bucket;
 import com.backend.dao.AppUserCredentialsDAO;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.repository.AppUserRepository;
+import com.backend.repository.BucketRepository;
+import java.util.ArrayList;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,21 +17,24 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
     private final AppUserCredentialsDAO appUserCredentialsDAO;
     private final Logger AppUserServiceLogger = LoggerFactory.getLogger(AppUserService.class);
     private final AppUserRepository appUserRepository;
+    private final BucketRepository bucketRepository;
 
-    public AppUserService(AppUserCredentialsDAO appUserCredentialsDAO, AppUserRepository appUserRepository){
+    public AppUserService(AppUserCredentialsDAO appUserCredentialsDAO,
+                          AppUserRepository appUserRepository, BucketRepository bucketRepository){
         this.appUserCredentialsDAO = appUserCredentialsDAO;
         this.appUserRepository = appUserRepository;
+        this.bucketRepository = bucketRepository;
     }
 
     @Override
     public void create(AppUserDTO appUserDTO) {
         AppUserServiceLogger.info("Create user with email: {}", appUserDTO.getEmail());
-        appUserCredentialsDAO.insert(appUserDTO);
-        appUserDTO.setPassword("");
         AppUser appUser = new AppUser(appUserDTO);
-        Bucket bucket = new Bucket();
+        Bucket bucket = new Bucket(appUser.getId(), appUser, new ArrayList<>(0));
+        bucketRepository.save(bucket);
         appUser.setBucket(bucket);
         appUserRepository.save(appUser);
+        appUserCredentialsDAO.insert(appUserDTO);
     }
 
     @Override
