@@ -28,11 +28,12 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
 
     @Override
     public void create(AppUserDTO appUserDTO) {
-        AppUserServiceLogger.info("Create user with email: {}", appUserDTO.getEmail());
         AppUser appUser = new AppUser(appUserDTO);
-        Bucket bucket = new Bucket(appUser.getId(), appUser, new ArrayList<>(0));
-        bucketRepository.save(bucket);
+        //Bucket bucket = new Bucket(appUser.getId(), appUser, new ArrayList<>(0));
+        Bucket bucket = new Bucket();
+        bucket.setAppUser(appUser);
         appUser.setBucket(bucket);
+        AppUserServiceLogger.info("Create user with email: {}, Id: {}", appUser.getEmail(), appUser.getId());
         appUserRepository.save(appUser);
         appUserCredentialsDAO.insert(appUserDTO);
     }

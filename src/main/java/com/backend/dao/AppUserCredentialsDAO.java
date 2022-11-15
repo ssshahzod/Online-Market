@@ -42,11 +42,11 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
     @Override
     public void insert(@NotNull AppUserDTO dto) {
         AppUserDAOLogger.info("Insert user with Id: {}", lastId);
-        String getLastId = "SELECT max(user_id) FROM users_cred;";
+        String getLastId = "SELECT nextval('user_seq');";
 
         Optional<Long> val = Optional.ofNullable(jdbcTemplate.queryForObject(getLastId, Long.class));
         lastId = val.orElse(100L);
-
+        lastId--;
         jdbcTemplate.update("INSERT  INTO " +
                 "users_cred (user_id, password)" +
                 "VALUES (?, ?);",

@@ -4,16 +4,14 @@ CREATE TABLE IF NOT EXISTS users_cred(
 );
 
 CREATE TABLE IF NOT EXISTS users(
-    user_id  BIGINT NOT NULL PRIMARY KEY,
+    id  BIGINT NOT NULL PRIMARY KEY,
     first_name VARCHAR(20) NOT NULL,
     second_name VARCHAR(20) NOT NULL,
     email VARCHAR(20) NOT NULL,
     app_user_role VARCHAR(255),
-    bucket_id BIGINT NOT NULL,
+    bucket_id BIGINT,
     UNIQUE (email)
 );
-
-
 
 CREATE SEQUENCE IF NOT EXISTS user_seq
 AS BIGINT

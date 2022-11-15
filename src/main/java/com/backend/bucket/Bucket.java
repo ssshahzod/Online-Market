@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Tables;
 
 import javax.persistence.*;
 import java.util.List;
@@ -23,15 +22,17 @@ public class Bucket {
 
     //using a shared primary key
     @Id
-    @Column(name = "user_id")
+    @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME,
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "bucket_id")
     private Long id;
 
     @OneToOne(mappedBy = "bucket", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
     private AppUser appUser;
 
-    @ManyToMany
-    private List<Product> product;
+/*    @ManyToMany
+    private List<Product> product;*/
 
 
 }
