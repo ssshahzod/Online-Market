@@ -33,6 +33,7 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
         Bucket bucket = new Bucket();
         bucket.setAppUser(appUser);
         appUser.setBucket(bucket);
+        //user Id is null
         AppUserServiceLogger.info("Create user with email: {}, Id: {}", appUser.getEmail(), appUser.getId());
         appUserRepository.save(appUser);
         appUserCredentialsDAO.insert(appUserDTO);
