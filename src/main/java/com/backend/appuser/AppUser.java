@@ -31,9 +31,7 @@ public class AppUser{
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
 
-    @OneToOne
-    @JoinColumn(name = "bucket_id")
-    @MapsId
+    @OneToOne(mappedBy = "appUser", cascade = CascadeType.ALL)
     private Bucket bucket;
 
     public String getSecondName() {

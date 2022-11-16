@@ -28,7 +28,9 @@ public class Bucket {
     @Column(name = "bucket_id")
     private Long id;
 
-    @OneToOne(mappedBy = "bucket", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    @MapsId
     private AppUser appUser;
 
 /*    @ManyToMany
