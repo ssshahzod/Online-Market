@@ -32,6 +32,7 @@ public class AppUser{
     private AppUserRole appUserRole;
 
     @OneToOne(mappedBy = "appUser", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private Bucket bucket;
 
     public String getSecondName() {

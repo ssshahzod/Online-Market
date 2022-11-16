@@ -50,7 +50,6 @@ CREATE SEQUENCE IF NOT EXISTS category_seq
     START WITH 100;
 
 CREATE TABLE IF NOT EXISTS buckets(
-    bucket_id BIGINT NOT NULL PRIMARY KEY,
     user_id  BIGINT NOT NULL,
     products INTEGER[][]
 );

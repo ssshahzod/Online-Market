@@ -21,14 +21,15 @@ public class Bucket {
     private static final String SEQ_NAME = "bucket_seq";
 
     //using a shared primary key
-    @Id
+    /*@Id
     @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME,
             allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "bucket_id")
+    @Column(name = "bucket_id")*/
+    @Id
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "user_id")
     @MapsId
     private AppUser appUser;

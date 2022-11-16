@@ -1,15 +1,12 @@
 package com.backend.dao;
 
-import com.backend.appuser.AppUser;
 import com.backend.dto.AppUserDTO.AppUserDTO;
-import com.backend.repository.AppUserRepository;
 import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.expression.spel.ast.OpInc;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
