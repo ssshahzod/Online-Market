@@ -4,6 +4,7 @@ import com.backend.appuser.AppUser;
 import com.backend.bucket.Bucket;
 import com.backend.dao.AppUserCredentialsDAO;
 import com.backend.dto.AppUserDTO.AppUserDTO;
+import com.backend.product.Product;
 import com.backend.repository.AppUserRepository;
 import com.backend.repository.BucketRepository;
 import java.util.ArrayList;
@@ -29,11 +30,10 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
     @Override
     public void create(AppUserDTO appUserDTO) {
         AppUser appUser = new AppUser(appUserDTO);
-        //Bucket bucket = new Bucket(appUser.getId(), appUser, new ArrayList<>(0));
+        //Bucket bucket = new Bucket(appUser, new ArrayList<Product>(0));
         Bucket bucket = new Bucket();
         bucket.setAppUser(appUser);
         appUser.setBucket(bucket);
-        //user Id is null
         AppUserServiceLogger.info("Create user with Id: {}", appUser.getId());
         appUserRepository.save(appUser);
         appUserCredentialsDAO.insert(appUserDTO);

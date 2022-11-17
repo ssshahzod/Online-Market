@@ -6,7 +6,7 @@ public interface DAO <T extends DTO>{
 
     public void insert(T dto);
 
-    public void update(T newDto);
+    public void update(Long id, T newDto);
 
     public void delete(Long id);
 

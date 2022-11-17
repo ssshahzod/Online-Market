@@ -16,7 +16,7 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
     final Logger AppUserDAOLogger = LoggerFactory.getLogger(AppUserCredentialsDAO.class);
 
     private final JdbcTemplate jdbcTemplate;
-    private static long lastId = 100;
+    private static long lastId;
 
     @Autowired
     public AppUserCredentialsDAO(JdbcTemplate jdbcTemplate){
@@ -38,13 +38,13 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
 
     @Override
     public void insert(@NotNull AppUserDTO dto) {
-        AppUserDAOLogger.info("Insert user with Id: {}", lastId);
+        AppUserDAOLogger.info("Insert user credentials for (id): {}", lastId);
         String getLastId = "SELECT nextval('user_seq');";
 
         Optional<Long> val = Optional.ofNullable(jdbcTemplate.queryForObject(getLastId, Long.class));
         lastId = val.orElse(100L);
         lastId--;
-        jdbcTemplate.update("INSERT  INTO " +
+        jdbcTemplate.update("INSERT INTO " +
                 "users_cred (user_id, password)" +
                 "VALUES (?, ?);",
             lastId, dto.getPassword());
@@ -53,18 +53,18 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
     }
 
     @Override
-    public void update(@NotNull AppUserDTO dto) {
+    public void update(Long id, @NotNull AppUserDTO dto) {
         //TODO: implement method
         AppUserDAOLogger.info("Update user details.\n");
 
-        /*jdbcTemplate.update("UPDATE users SET password=?;",
-                dto.getPassword());*/
+        jdbcTemplate.update("UPDATE users_cred SET password=? WHERE spring_shop.public.users_cred.user_id=?;",
+                dto.getPassword(), id);
     }
 
     @Override
     public void delete(Long id) {
-        AppUserDAOLogger.info("Deleting user with id: {}", id);
         String sql = "DELETE FROM users_cred WHERE user_id=" + id;
         jdbcTemplate.execute(sql);
+        AppUserDAOLogger.info("Deleting user with id: {}", id);
     }
 }

@@ -21,11 +21,6 @@ public class Bucket {
     private static final String SEQ_NAME = "bucket_seq";
 
     //using a shared primary key
-    /*@Id
-    @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME,
-            allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "bucket_id")*/
     @Id
     private Long id;
 
@@ -35,7 +30,12 @@ public class Bucket {
     private AppUser appUser;
 
 /*    @ManyToMany
-    private List<Product> product;*/
+    private List<Product> product;
+
+    public Bucket(AppUser appUser, List<Product> products){
+        this.appUser = appUser;
+        this.product = products;
+    }*/
 
 
 }
