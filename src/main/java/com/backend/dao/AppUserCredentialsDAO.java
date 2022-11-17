@@ -54,9 +54,7 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
 
     @Override
     public void update(Long id, @NotNull AppUserDTO dto) {
-        //TODO: implement method
         AppUserDAOLogger.info("Update user details.\n");
-
         jdbcTemplate.update("UPDATE users_cred SET password=? WHERE spring_shop.public.users_cred.user_id=?;",
                 dto.getPassword(), id);
     }
