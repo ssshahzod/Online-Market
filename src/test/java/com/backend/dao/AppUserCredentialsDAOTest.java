@@ -34,13 +34,15 @@ class AppUserCredentialsDAOTest {
 
     @Test
     void insert(){
+        AppUserDTO appUserDTO;
         String getId = "SELECT nextval('user_seq');";
         Optional<Long> val = Optional.ofNullable(jdbcTemplate.queryForObject(getId, Long.class));
         Long id = val.orElse(100L);
 
         assertThat(appUserCredentialsDAO.getByIdOrNull(id)).isNull();
         appUserCredentialsDAO.insert(underTest);
-        assertThat(appUserCredentialsDAO.getByIdOrNull(id)).isEqualTo(underTest);
+        appUserDTO = appUserCredentialsDAO.getByIdOrNull(id);
+        assertThat(appUserDTO.getPassword()).isEqualTo(underTest.getPassword());
         appUserCredentialsDAO.delete(id);
     }
 
@@ -57,7 +59,7 @@ class AppUserCredentialsDAOTest {
         assertThat(appUserCredentialsDAO.getByIdOrNull(id)).isNull();
 
         appUserCredentialsDAO.insert(underTest);
-        assertThat(appUserCredentialsDAO.getByIdOrNull(id)).isEqualTo(underTest);
+        assertThat(appUserCredentialsDAO.getByIdOrNull(id).getPassword()).isEqualTo(underTest.getPassword());
 
         appUserCredentialsDAO.delete(id);
         assertThat(appUserCredentialsDAO.getByIdOrNull(id)).isNull();
