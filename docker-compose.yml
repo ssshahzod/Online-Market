@@ -19,7 +19,7 @@ services:
 
     shop:
         container_name: app
-        image: eclipse-temurin:11
-        build:
-            dockerfile: Dockerfile
+        build: .
+        ports: 
+            - "8080:8080"
         
