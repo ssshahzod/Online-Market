@@ -20,6 +20,7 @@ services:
     shop:
         container_name: app
         build: .
-        ports: 
+        ports:
             - "8080:8080"
+        network_mode: host
         
