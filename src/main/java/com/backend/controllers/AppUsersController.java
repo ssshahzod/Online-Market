@@ -36,7 +36,7 @@ public class AppUsersController {
             model.addAttribute("error", "No user found with provided email.");
             return "users/login";
         }
-        else if(appUserDTO.getPassword().equals(loginCredentials.getPassword())){
+        else if(appUserService.get(loginCredentials.getEmail()).getPassword().equals(appUserDTO.getPassword())) {
             logger.info("User with id: {} successfully logged in ", appUserService.getId(loginCredentials.getEmail()));
             return "redirect:/";
         }
