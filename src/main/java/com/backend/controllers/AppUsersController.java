@@ -3,6 +3,7 @@ package com.backend.controllers;
 import com.backend.appuser.AppUserRole;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.service.AppUserService;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -37,8 +38,12 @@ public class AppUsersController {
             return "users/login";
         }
         else if(appUserService.get(loginCredentials.getEmail()).getPassword().equals(appUserDTO.getPassword())) {
-            logger.info("User with id: {} successfully logged in ", appUserService.getId(loginCredentials.getEmail()));
-            return "redirect:/";
+            logger.info("User with email: {} successfully logged in ", loginCredentials.getEmail());
+            model.addAttribute("Role", appUserDTO.getAppUserRole().name());
+            model.addAttribute("userName", appUserDTO.getFirstName() + " "
+                                                                        + appUserDTO.getSecondName());
+
+            return "redirect:/home";
         }
         model.addAttribute("error", "Incorrect password!");
         return "users/login";
