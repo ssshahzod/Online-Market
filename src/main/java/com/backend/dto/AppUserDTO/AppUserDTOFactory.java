@@ -1,7 +1,7 @@
 package com.backend.dto.AppUserDTO;
 
 
-import com.backend.appuser.AppUserRole;
+import com.backend.appuser.AppUserRoles;
 
 @Deprecated
 public class AppUserDTOFactory {
@@ -12,7 +12,7 @@ public class AppUserDTOFactory {
     }
 
     static public AppUserDTO newAppUser(String firstName, String secondName, String email,
-                                 String password, AppUserRole appUserRole, boolean isArchived){
+                                        String password, AppUserRoles appUserRole, boolean isArchived){
 
         return null;
     }

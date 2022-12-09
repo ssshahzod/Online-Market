@@ -2,12 +2,16 @@ package com.backend.appuser;
 
 import com.backend.bucket.Bucket;
 import com.backend.dto.AppUserDTO.AppUserDTO;
+import java.util.Set;
 import lombok.*;
 import org.hibernate.Hibernate;
+import com.backend.appuser.Role;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
 @NoArgsConstructor
@@ -15,7 +19,7 @@ import java.util.Objects;
 @Builder
 @Entity
 @Table(name = "users")
-public class AppUser{
+public class AppUser implements UserDetails {
     private static final String SEQ_NAME = "user_seq";
 
     @Id
@@ -26,10 +30,14 @@ public class AppUser{
     private String firstName;
     private String secondName;
     private String email;
+    private String password;
+    @Transient
+    private String passwordConfirm;
+
 
     @Column(name = "app_user_role")
-    @Enumerated(EnumType.STRING)
-    private AppUserRole appUserRole;
+    @OneToMany
+    private Role role;
 
     @OneToOne(mappedBy = "appUser", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
@@ -43,19 +51,49 @@ public class AppUser{
         return firstName;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
     public String getUsername(){
         return email;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public String getRole(){
-        return appUserRole.name();
+        return this.role.getName();
     }
 
     public AppUser(AppUserDTO appUserDTO){
         this.firstName = appUserDTO.getFirstName();
         this.secondName = appUserDTO.getSecondName();
         this.email = appUserDTO.getEmail();
-        this.appUserRole = appUserDTO.getAppUserRole();
+        this.role = appUserDTO.getAppUserRole();
     }
 
     @Override

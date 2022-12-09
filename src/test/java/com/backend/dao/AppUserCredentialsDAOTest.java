@@ -2,10 +2,9 @@ package com.backend.dao;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.backend.appuser.AppUserRole;
+import com.backend.appuser.AppUserRoles;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import java.util.Optional;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +21,7 @@ class AppUserCredentialsDAOTest {
 
     private final String mail = "mail@mail.com";
     private final AppUserDTO underTest = new AppUserDTO("Alise", "Lise", mail,
-            "asd", AppUserRole.USER, false);
+            "asd", AppUserRoles.USER, false);
 
     @Test
     void getByIdNull() {

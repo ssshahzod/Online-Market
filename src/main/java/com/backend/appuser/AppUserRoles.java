@@ -1,6 +1,6 @@
 package com.backend.appuser;
 
-public enum AppUserRole {
+public enum AppUserRoles {
     USER,
     SELLER, 
     ADMIN,
