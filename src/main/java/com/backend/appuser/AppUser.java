@@ -35,8 +35,8 @@ public class AppUser implements UserDetails {
     private String passwordConfirm;
 
 
+    @ManyToOne
     @Column(name = "app_user_role")
-    @OneToMany
     private Role role;
 
     @OneToOne(mappedBy = "appUser", cascade = CascadeType.ALL)
@@ -87,13 +87,6 @@ public class AppUser implements UserDetails {
 
     public String getRole(){
         return this.role.getName();
-    }
-
-    public AppUser(AppUserDTO appUserDTO){
-        this.firstName = appUserDTO.getFirstName();
-        this.secondName = appUserDTO.getSecondName();
-        this.email = appUserDTO.getEmail();
-        this.role = appUserDTO.getAppUserRole();
     }
 
     @Override
