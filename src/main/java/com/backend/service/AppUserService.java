@@ -14,36 +14,26 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AppUserService implements com.backend.service.Service<AppUserDTO> {
-    private final AppUserCredentialsDAO appUserCredentialsDAO;
+public class AppUserService implements com.backend.service.Service<AppUser> {
     private final Logger AppUserServiceLogger = LoggerFactory.getLogger(AppUserService.class);
     private final AppUserRepository appUserRepository;
     private final BucketRepository bucketRepository;
 
-    public AppUserService(AppUserCredentialsDAO appUserCredentialsDAO,
+    public AppUserService(
                           AppUserRepository appUserRepository, BucketRepository bucketRepository){
-        this.appUserCredentialsDAO = appUserCredentialsDAO;
         this.appUserRepository = appUserRepository;
         this.bucketRepository = bucketRepository;
     }
 
     @Override
-    public void create(AppUserDTO appUserDTO) {
-        AppUser appUser = new AppUser(appUserDTO);
-        //Bucket bucket = new Bucket(appUser, new ArrayList<Product>(0));
-        Bucket bucket = new Bucket();
-        bucket.setAppUser(appUser);
-        appUser.setBucket(bucket);
+    public void create(AppUser appUser) {
         AppUserServiceLogger.info("Create user with Id: {}", appUser.getId());
         appUserRepository.save(appUser);
-        appUserCredentialsDAO.insert(appUserDTO);
     }
 
     @Override
-    public AppUserDTO get(final String value) {
-        long id = appUserRepository.getIdByEmail(value);
-        Optional<AppUserDTO> pass = Optional.ofNullable(appUserCredentialsDAO.getByIdOrNull(id));
-        return pass.orElse(null);
+    public AppUser get(final String value) {
+        return null;
     }
 
     @Override

@@ -1,17 +1,24 @@
 package com.backend.appuser;
 
 import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import org.springframework.security.core.GrantedAuthority;
 
+@Entity
+@Table(name = "app_users_roles")
 public class Role implements GrantedAuthority {
 
     @Id
     private Long id;
+    @Column(name = "role")
     private String name;
 
     @Transient
