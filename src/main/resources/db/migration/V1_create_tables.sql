@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS users_cred(
     user_id  BIGINT NOT NULL PRIMARY KEY,
-    password VARCHAR(20) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    authorities VARCHAR(20)
 );
 
 CREATE TABLE IF NOT EXISTS users(
@@ -8,7 +9,6 @@ CREATE TABLE IF NOT EXISTS users(
     first_name VARCHAR(20) NOT NULL,
     second_name VARCHAR(20) NOT NULL,
     email VARCHAR(20) NOT NULL,
-    app_user_role VARCHAR(255),
     UNIQUE (email)
 );
 
