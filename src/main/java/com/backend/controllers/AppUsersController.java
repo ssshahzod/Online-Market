@@ -1,9 +1,9 @@
 package com.backend.controllers;
 
-import com.backend.appuser.AppUserRole;
+
+import com.backend.appuser.Role;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.service.AppUserService;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -39,7 +39,7 @@ public class AppUsersController {
         }
         else if(appUserService.get(loginCredentials.getEmail()).getPassword().equals(appUserDTO.getPassword())) {
             logger.info("User with email: {} successfully logged in ", loginCredentials.getEmail());
-            model.addAttribute("Role", appUserDTO.getAppUserRole().name());
+            model.addAttribute("Role", appUserDTO.getRole());
             model.addAttribute("userName", appUserDTO.getFirstName() + " "
                                                                         + appUserDTO.getSecondName());
             
@@ -53,7 +53,7 @@ public class AppUsersController {
     public String signPage(Model model){
         logger.info("New sign request from the user.\n");
         AppUserDTO appUserDTO = new AppUserDTO();
-        appUserDTO.setAppUserRole(AppUserRole.USER);
+        appUserDTO.setRole(new Role());
         appUserDTO.setArchived(false);
         model.addAttribute("appuserdto", appUserDTO);
         return "users/signUp";

@@ -1,6 +1,7 @@
 package com.backend.dao;
 
 import com.backend.dto.AppUserDTO.AppUserDTO;
+import com.backend.service.AppUserService;
 import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -9,15 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class AppUserCredentialsDAO implements DAO<AppUserDTO>{
+public class AppUserCredentialsDAO extends DaoAuthenticationProvider implements DAO<AppUserDTO> {
     final Logger AppUserDAOLogger = LoggerFactory.getLogger(AppUserCredentialsDAO.class);
 
     private final JdbcTemplate jdbcTemplate;
     private static long lastId;
-
     @Autowired
     public AppUserCredentialsDAO(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;

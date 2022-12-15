@@ -3,6 +3,7 @@ package com.backend.dto.AppUserDTO;
 
 import com.backend.appuser.AppUser;
 import com.backend.appuser.AppUserRole;
+import com.backend.appuser.Role;
 import com.backend.dto.DTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,14 +20,13 @@ public class AppUserDTO implements DTO {
     private String secondName;
     private String email;
     private String password;
-    private AppUserRole appUserRole = AppUserRole.USER;
+    private Role role;
     private boolean isArchived = false;
-    //TODO: add default values, to be able to create new usersessions for guests
 
     public AppUserDTO(AppUser appUser){
         this.firstName = appUser.getFirstName();
         this.secondName = appUser.getSecondName();
         this.email = appUser.getEmail();
-        this.appUserRole = appUser.getAppUserRole();
+        this.role = appUser.getRole();
     }
 }

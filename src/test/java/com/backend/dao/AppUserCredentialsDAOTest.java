@@ -3,6 +3,7 @@ package com.backend.dao;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.backend.appuser.AppUserRole;
+import com.backend.appuser.Role;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeAll;
@@ -22,7 +23,7 @@ class AppUserCredentialsDAOTest {
 
     private final String mail = "mail@mail.com";
     private final AppUserDTO underTest = new AppUserDTO("Alise", "Lise", mail,
-            "asd", AppUserRole.USER, false);
+            "asd", new Role(), false);
 
     @Test
     void getByIdNull() {
