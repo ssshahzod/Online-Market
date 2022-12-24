@@ -2,6 +2,7 @@ package com.backend.dao;
 
 import com.backend.dto.DTO;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface DAO <T extends DTO> {
 

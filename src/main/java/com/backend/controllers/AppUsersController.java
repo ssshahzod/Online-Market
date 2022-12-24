@@ -6,6 +6,8 @@ import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.service.AppUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +34,9 @@ public class AppUsersController {
     @PostMapping("/in")
     public String loginUser(@ModelAttribute("appUser") AppUserDTO loginCredentials,
                             Model model){
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(loginCredentials.getEmail(), loginCredentials.getPassword());
+
         AppUserDTO appUserDTO = appUserService.get(loginCredentials.getEmail());
         if(appUserDTO == null){
             model.addAttribute("error", "No user found with provided email.");
