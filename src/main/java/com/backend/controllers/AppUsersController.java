@@ -6,6 +6,7 @@ import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.service.AppUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/users")
 public class AppUsersController {
     final Logger logger = LoggerFactory.getLogger(AppUsersController.class);
-    private final AppUserService appUserService;
+    private AppUserService appUserService;
 
-    public AppUsersController(AppUserService appUserService) {
+    public void setAppUsersController(AppUserService appUserService) {
         this.appUserService = appUserService;
     }
 
@@ -61,6 +62,7 @@ public class AppUsersController {
 
     @PostMapping("/new")
     public String createUser(@ModelAttribute("appuserdto") AppUserDTO appUserDTO, Model model){
+            appUserDTO.setRole(new Role(USER));
             appUserService.create(appUserDTO);
             logger.info("New user is signed!");
             //TODO: add username setting for registered users

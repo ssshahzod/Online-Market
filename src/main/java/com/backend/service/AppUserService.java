@@ -2,7 +2,7 @@ package com.backend.service;
 
 import com.backend.appuser.AppUser;
 import com.backend.bucket.Bucket;
-import com.backend.dao.AppUserCredentialsDAO;
+import com.backend.repository.AppUserCredentialsDAO;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.repository.AppUserRepository;
 import com.backend.repository.BucketRepository;

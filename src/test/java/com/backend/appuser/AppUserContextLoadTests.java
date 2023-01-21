@@ -3,7 +3,7 @@ package com.backend.appuser;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.backend.controllers.AppUsersController;
-import com.backend.dao.AppUserCredentialsDAO;
+import com.backend.repository.AppUserCredentialsDAO;
 import com.backend.service.AppUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
