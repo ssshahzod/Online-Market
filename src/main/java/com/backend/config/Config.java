@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties
 @ConfigurationProperties("spring.mvc.view")
 public class Config {
+    private String prefix;
+    private String suffix;
 
     Logger logger = LoggerFactory.getLogger(Config.class);
 

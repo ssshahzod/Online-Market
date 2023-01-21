@@ -11,9 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -70,5 +68,4 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO> {
         jdbcTemplate.execute(sql);
         AppUserDAOLogger.info("Deleting user with id: {}", id);
     }
-
 }
