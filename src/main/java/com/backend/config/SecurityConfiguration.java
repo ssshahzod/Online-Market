@@ -42,8 +42,7 @@ public class SecurityConfiguration {
                 .antMatchers("/").permitAll()
                 .antMatchers("*/products").hasRole("ROLE_SELLER")
                 .and()
-                .formLogin()
-                .loginPage("/login").permitAll();
+                .formLogin();
         return http.build();
     }
 
