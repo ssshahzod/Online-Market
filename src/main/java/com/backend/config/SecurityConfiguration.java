@@ -1,4 +1,4 @@
-/* package com.backend.config;
+package com.backend.config;
 
 import com.backend.dao.AppUserCredentialsDAO;
 import com.backend.service.AppUserDetailsService;
@@ -13,15 +13,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+@Configuration
+@EnableWebSecurity
 public class SecurityConfiguration {
 
-    private final AppUserDetailsService appUserDetailsService;
-    private final JdbcTemplate jdbcTemplate;
-
-    public SecurityConfiguration(AppUserDetailsService appUserDetailsService, JdbcTemplate jdbcTemplate ){
-        this.jdbcTemplate = jdbcTemplate;
-        this.appUserDetailsService = appUserDetailsService;
-    }
+    @Autowired
+    private AppUserDetailsService appUserDetailsService;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -32,9 +31,12 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests()
-                .antMatchers("/admin").hasRole("ROLE_ADMIN")
-                .antMatchers("/").permitAll()
-                .antMatchers("products").hasRole("ROLE_SELLER")
+                .antMatchers("/admin")
+                .hasRole("ROLE_ADMIN")
+                .and()
+                .authorizeHttpRequests()
+                .antMatchers("*/products")
+                .hasRole("ROLE_SELLER")
                 .and()
                 .formLogin();
         return http.build();
@@ -48,4 +50,3 @@ public class SecurityConfiguration {
         return daoAuthenticationProvider;
     }
 }
-*/
