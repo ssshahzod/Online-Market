@@ -17,14 +17,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    private UserDetailsService appUserDetailsService;
-    private JdbcTemplate jdbcTemplate;
-
-    public SecurityConfiguration(AppUserDetailsService appUserDetailsService, JdbcTemplate jdbcTemplate) {
-        this.appUserDetailsService = appUserDetailsService;
-        this.jdbcTemplate = jdbcTemplate;
-    }
-
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
