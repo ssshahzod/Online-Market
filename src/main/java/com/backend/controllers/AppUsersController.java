@@ -47,8 +47,8 @@ public class AppUsersController {
             model.addAttribute("Role", appUserDTO.getRole());
             model.addAttribute("userName", appUserDTO.getFirstName() + " "
                                                                         + appUserDTO.getSecondName());
-            
-            return "/";
+
+            return "redirect:/home";
         }
         model.addAttribute("error", "Incorrect password!");
         return "users/login";

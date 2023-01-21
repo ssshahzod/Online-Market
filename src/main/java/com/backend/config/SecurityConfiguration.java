@@ -17,10 +17,13 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    @Autowired
-    private AppUserDetailsService appUserDetailsService;
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final AppUserDetailsService appUserDetailsService;
+    private final JdbcTemplate jdbcTemplate;
+
+    public SecurityConfiguration(AppUserDetailsService appUserDetailsService, JdbcTemplate jdbcTemplate ){
+        this.jdbcTemplate = jdbcTemplate;
+        this.appUserDetailsService = appUserDetailsService;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -29,15 +32,11 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-
         http
                 .authorizeHttpRequests()
-                .antMatchers("/admin")
-                .hasRole("ROLE_ADMIN")
-                .and()
-                .authorizeHttpRequests()
-                .antMatchers("*/products")
-                .hasRole("ROLE_SELLER")
+                .antMatchers("/admin").hasRole("ROLE_ADMIN")
+                .antMatchers("/").permitAll()
+                .antMatchers("*/products").hasRole("ROLE_SELLER")
                 .and()
                 .formLogin();
         return http.build();

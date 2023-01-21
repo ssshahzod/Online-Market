@@ -22,10 +22,11 @@ public class AppUserCredentialsDAO extends DaoAuthenticationProvider implements 
 
     private final JdbcTemplate jdbcTemplate;
     private static long lastId;
-    @Autowired
+
     public AppUserCredentialsDAO(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
+
 
     public AppUserDTO getByIdOrNull(Long Id){
         AppUserDTO appUserDTO;
