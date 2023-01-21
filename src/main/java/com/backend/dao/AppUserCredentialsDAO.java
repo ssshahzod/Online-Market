@@ -17,7 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class AppUserCredentialsDAO extends DaoAuthenticationProvider implements DAO<AppUserDTO> {
+public class AppUserCredentialsDAO implements DAO<AppUserDTO> {
     final Logger AppUserDAOLogger = LoggerFactory.getLogger(AppUserCredentialsDAO.class);
 
     private final JdbcTemplate jdbcTemplate;

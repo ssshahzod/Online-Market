@@ -24,8 +24,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
 @NoArgsConstructor
@@ -33,7 +31,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Builder
 @Entity
 @Table(name = "users")
-public class AppUser implements UserDetails {
+public class AppUser{
     private static final String SEQ_NAME = "user_seq";
 
     @Id
@@ -63,14 +61,9 @@ public class AppUser implements UserDetails {
         return firstName;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<Role> roles = new HashSet<>();
-        roles.add(this.role);
-        return roles;
-    }
 
-    @Override
+
+
     public String getPassword() {
         return password;
     }
@@ -79,22 +72,22 @@ public class AppUser implements UserDetails {
         return email;
     }
 
-    @Override
+
     public boolean isAccountNonExpired() {
         return false;
     }
 
-    @Override
+
     public boolean isAccountNonLocked() {
         return false;
     }
 
-    @Override
+
     public boolean isCredentialsNonExpired() {
         return false;
     }
 
-    @Override
+
     public boolean isEnabled() {
         return true;
     }

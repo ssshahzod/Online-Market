@@ -4,10 +4,9 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import org.springframework.security.core.GrantedAuthority;
 
 @Entity
-public class Role implements GrantedAuthority {
+public class Role {
 
     @Id
     private long id;
@@ -16,7 +15,6 @@ public class Role implements GrantedAuthority {
     @OneToMany
     private Set<AppUser> appUsers;
 
-    @Override
     public String getAuthority() {
         return role;
     }

@@ -1,4 +1,4 @@
-package com.backend.config;
+/* package com.backend.config;
 
 import com.backend.dao.AppUserCredentialsDAO;
 import com.backend.service.AppUserDetailsService;
@@ -13,8 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration
-@EnableWebSecurity
 public class SecurityConfiguration {
 
     private final AppUserDetailsService appUserDetailsService;
@@ -36,7 +34,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .antMatchers("/admin").hasRole("ROLE_ADMIN")
                 .antMatchers("/").permitAll()
-                .antMatchers("*/products").hasRole("ROLE_SELLER")
+                .antMatchers("products").hasRole("ROLE_SELLER")
                 .and()
                 .formLogin();
         return http.build();
@@ -50,3 +48,4 @@ public class SecurityConfiguration {
         return daoAuthenticationProvider;
     }
 }
+*/
