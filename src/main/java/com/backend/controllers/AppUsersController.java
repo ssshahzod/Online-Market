@@ -18,6 +18,7 @@ public class AppUsersController {
     final Logger logger = LoggerFactory.getLogger(AppUsersController.class);
     private AppUserService appUserService;
 
+    @Autowired
     public void setAppUsersController(AppUserService appUserService) {
         this.appUserService = appUserService;
     }
@@ -43,7 +44,7 @@ public class AppUsersController {
             model.addAttribute("Role", appUserDTO.getRole());
             model.addAttribute("userName", appUserDTO.getFirstName() + " "
                                                                         + appUserDTO.getSecondName());
-            return "redirect:/home";
+            return "redirect:/";
 
         }
         model.addAttribute("error", "Incorrect password!");
