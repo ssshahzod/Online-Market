@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Demo MarketPlace</title>
@@ -12,7 +12,9 @@
 </head>
 <body>
 
-<div class="hamburger-menu">
+<p th:text="${userName}"></p>
+
+<div  class="hamburger-menu">
     <input id="menu__toggle" type="checkbox" />
     <label class="menu__btn" for="menu__toggle">
         <span></span>
@@ -20,11 +22,26 @@
 
     <ul class="menu__box">
         <!--<li><a class="menu__item" href="#">Home</a></li>-->
-        <li><a class="menu__item" href="#">About (Empty page)</a></li>
-        <li><a class="menu__item" href="#">Contacts (Empty page)</a></li>
+        <li id="item1"><a class="menu__item" href="#">About (Empty page)</a></li>
+        <li id="item2"><a class="menu__item" href="#">Contacts (Empty page)</a></li>
+        <li id="item3"><a class="menu__item" href="users/sign">Sign Up</a></li>
+        <li id="item4"><a class="menu__item" href="users/login">Log In</a></li>
+        <li id="item5"><a class="menu__item" href="#">Log Out</a></li>
 
-        <li><a class="menu__item"  href="users/sign">Sign Up</a></li>
-        <li><a class="menu__item" href="users/login">Login</a></li>
+        <script th:inline="javascript"> /*hide Log In, Sign Up buttons if user authenticated*/
+            var data = "[[${Signed}]]";
+            console.log("Value:" + data);
+            let logout = document.getElementById("item5");
+            let login = document.getElementById("item4");
+            let signup = document.getElementById("item3");
+            if(data === true){
+                logout.style.display = '';
+                login.style.display = 'none';
+                signup.style.display = 'none';
+            } else{
+                logout.style.display = 'none';
+            }
+        </script>
     </ul>
 </div>
 

@@ -44,6 +44,7 @@ public class AppUsersController {
             model.addAttribute("Role", appUserDTO.getRole());
             model.addAttribute("userName", appUserDTO.getFirstName() + " "
                                                                         + appUserDTO.getSecondName());
+            model.addAttribute("Signed", true);
             return "redirect:/";
 
         }
