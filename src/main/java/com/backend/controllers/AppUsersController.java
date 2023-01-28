@@ -49,6 +49,7 @@ public class AppUsersController {
             model.addAttribute("userName", appUserDTO.getFirstName() + " "
                                                                         + appUserDTO.getSecondName());
             model.addAttribute("Signed", true);
+            logger.info("Users role is:" + appUserDTO.getRole());
             return new RedirectView("/", true);
 
         }
@@ -60,7 +61,6 @@ public class AppUsersController {
     public String signPage(Model model){
         logger.info("New sign request from the user.\n");
         AppUserDTO appUserDTO = new AppUserDTO();
-        appUserDTO.setRole(new Role("USER"));
         appUserDTO.setArchived(false);
         model.addAttribute("appuserdto", appUserDTO);
         return "users/signUp";
@@ -68,13 +68,11 @@ public class AppUsersController {
 
     @PostMapping("/new")
     public String createUser(@ModelAttribute("appuserdto") AppUserDTO appUserDTO, Model model){
-            //appUserDTO.setRole(new Role(USER));
-            appUserDTO.setRole(new Role("USER"));
             appUserService.create(appUserDTO);
             logger.info("New user is signed!");
             //TODO: add username setting for registered users
             model.addAttribute("newuser", appUserDTO);
-            return "user";
+            return "index";
     }
 
     @ModelAttribute("welcomeMsg")

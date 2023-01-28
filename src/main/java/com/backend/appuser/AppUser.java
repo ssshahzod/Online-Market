@@ -48,7 +48,6 @@ public class AppUser implements UserDetails {
     private String password;
 
     @JoinColumn(name = "app_user_role")
-    @ManyToOne
     private Role role;
 
     @OneToOne(mappedBy = "appUser", cascade = CascadeType.ALL)

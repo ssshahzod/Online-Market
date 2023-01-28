@@ -1,5 +1,6 @@
 package com.backend.repository;
 
+import com.backend.appuser.Role;
 import com.backend.dao.DAO;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.service.AppUserDetailsService;
@@ -31,7 +32,10 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO> {
         AppUserDTO appUserDTO;
         String str = "SELECT * FROM users_cred WHERE user_id = " + Id;
         try{
-            appUserDTO = jdbcTemplate.queryForObject(str, new BeanPropertyRowMapper<AppUserDTO>(AppUserDTO.class));
+            appUserDTO = jdbcTemplate.queryForObject(str, new BeanPropertyRowMapper<>(AppUserDTO.class));
+            Role tmp = jdbcTemplate.queryForObject("SELECT role FROM users WHERE id = " + Id,
+                                                        new BeanPropertyRowMapper<>(Role.class));
+
             return appUserDTO;
         }
         catch(EmptyResultDataAccessException e){
