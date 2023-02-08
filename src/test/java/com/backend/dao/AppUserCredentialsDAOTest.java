@@ -28,7 +28,7 @@ class AppUserCredentialsDAOTest {
     void getByIdNull() {
         AppUserDTO appUserDTO;
         Long notExistingId = 0L;
-        appUserDTO = appUserCredentialsDAO.getByIdOrNull(notExistingId);
+        appUserDTO = appUserCredentialsDAO.getById(notExistingId);
         assertThat(appUserDTO).isNull();
     }
 
@@ -39,9 +39,9 @@ class AppUserCredentialsDAOTest {
         Optional<Long> val = Optional.ofNullable(jdbcTemplate.queryForObject(getId, Long.class));
         Long id = val.orElse(100L);
 
-        assertThat(appUserCredentialsDAO.getByIdOrNull(id)).isNull();
+        assertThat(appUserCredentialsDAO.getById(id)).isNull();
         appUserCredentialsDAO.insert(underTest);
-        appUserDTO = appUserCredentialsDAO.getByIdOrNull(id);
+        appUserDTO = appUserCredentialsDAO.getById(id);
         assertThat(appUserDTO.getPassword()).isEqualTo(underTest.getPassword());
         appUserCredentialsDAO.delete(id);
     }
@@ -56,13 +56,13 @@ class AppUserCredentialsDAOTest {
         String getId = "SELECT nextval('user_seq');";
         Optional<Long> val = Optional.ofNullable(jdbcTemplate.queryForObject(getId, Long.class));
         Long id = val.orElse(100L);
-        assertThat(appUserCredentialsDAO.getByIdOrNull(id)).isNull();
+        assertThat(appUserCredentialsDAO.getById(id)).isNull();
 
         appUserCredentialsDAO.insert(underTest);
-        assertThat(appUserCredentialsDAO.getByIdOrNull(id).getPassword()).isEqualTo(underTest.getPassword());
+        assertThat(appUserCredentialsDAO.getById(id).getPassword()).isEqualTo(underTest.getPassword());
 
         appUserCredentialsDAO.delete(id);
-        assertThat(appUserCredentialsDAO.getByIdOrNull(id)).isNull();
+        assertThat(appUserCredentialsDAO.getById(id)).isNull();
     }
 
 

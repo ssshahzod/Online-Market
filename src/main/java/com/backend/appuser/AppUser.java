@@ -7,13 +7,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
@@ -47,7 +44,7 @@ public class AppUser implements UserDetails {
     @Transient
     private String password;
 
-    @JoinColumn(name = "app_user_role")
+    @Transien
     private Role role;
 
     @OneToOne(mappedBy = "appUser", cascade = CascadeType.ALL)

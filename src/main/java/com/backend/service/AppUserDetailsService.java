@@ -1,5 +1,6 @@
 package com.backend.service;
 
+import com.backend.appuser.AppUser;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -14,6 +15,7 @@ public class AppUserDetailsService implements UserDetailsService {
 
     private AppUserService appUserService;
 
+    @Autowired
     public void setAppUserService(AppUserService appUserService){
         this.appUserService = appUserService;
     }
@@ -23,9 +25,6 @@ public class AppUserDetailsService implements UserDetailsService {
         if(appUserDTO == null){
             throw new UsernameNotFoundException(username);
         }
-        return User.withUsername(username)
-                .authorities(appUserDTO.getRole())
-                .password(appUserDTO.getPassword())
-                .build();
+        return new AppUser(appUserDTO);
     }
 }

@@ -1,6 +1,8 @@
 package com.backend.service;
 
 import com.backend.appuser.AppUser;
+import com.backend.appuser.AppUserRole;
+import com.backend.appuser.Role;
 import com.backend.bucket.Bucket;
 import com.backend.repository.AppUserCredentialsDAO;
 import com.backend.dto.AppUserDTO.AppUserDTO;
@@ -28,19 +30,24 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
     @Override
     public void create(AppUserDTO appUserDTO) {
         AppUser appUser = new AppUser(appUserDTO);
+        appUser.setRole(new Role(AppUserRole.USER.name()));
         Bucket bucket = new Bucket();
-        bucket.setAppUser(appUser);
-        appUser.setBucket(bucket);
-        AppUserServiceLogger.info("Create user with Id: {}", appUser.getId());
-        appUserRepository.save(appUser);
-        appUserCredentialsDAO.insert(appUserDTO);
+        //bucket.setAppUser(appUser);
+        //appUser.setBucket(bucket);
+        try {
+            appUserRepository.save(appUser);
+            appUserCredentialsDAO.insert(appUserDTO);
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public AppUserDTO get(final String value) {
-        long id = appUserRepository.getIdByEmail(value);
-        Optional<AppUserDTO> pass = Optional.ofNullable(appUserCredentialsDAO.getByIdOrNull(id));
-        return pass.orElse(null);
+        AppUser user = appUserRepository.getAppUserByEmail(value);
+        Optional<AppUserDTO> pass = Optional.of(appUserCredentialsDAO.getById(user.getId()));
+        user.setPassword(pass.get().getPassword());
+        return new AppUserDTO(user);
     }
 
     @Override

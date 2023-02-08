@@ -13,6 +13,4 @@ public class Config {
     private String prefix;
     private String suffix;
     Logger logger = LoggerFactory.getLogger(Config.class);
-
-    //TODO: move application.yml properties here
 }
