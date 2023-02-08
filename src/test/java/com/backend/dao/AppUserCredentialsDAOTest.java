@@ -2,6 +2,7 @@ package com.backend.dao;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import com.backend.appuser.AppUserRole;
 import com.backend.appuser.Role;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.repository.AppUserCredentialsDAO;
@@ -21,8 +22,10 @@ class AppUserCredentialsDAOTest {
     private JdbcTemplate jdbcTemplate;
 
     private final String mail = "mail@mail.com";
+    /*private final AppUserDTO underTest = new AppUserDTO("Alise", "Lise", mail,
+            "asd", new Role(), false);*/
     private final AppUserDTO underTest = new AppUserDTO("Alise", "Lise", mail,
-            "asd", new Role(), false);
+            "asd", AppUserRole.USER.name(), false);
 
     @Test
     void getByIdNull() {

@@ -30,12 +30,12 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests()
-                .antMatchers("/admin").hasRole("ROLE_ADMIN")
+                .antMatchers("/admin").hasRole("USER")
                 .antMatchers("/").permitAll()
                 .antMatchers("*/products").hasRole("ROLE_SELLER")
                 .and()
                 .formLogin()
-                .loginPage("/users/login");//if removed actual login is going in /login
+                ;//if removed actual login is going in /login
         //instead it asks for authentication provider
 
         return http.build();

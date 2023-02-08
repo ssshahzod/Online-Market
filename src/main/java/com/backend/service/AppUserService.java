@@ -30,7 +30,7 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
     @Override
     public void create(AppUserDTO appUserDTO) {
         AppUser appUser = new AppUser(appUserDTO);
-        appUser.setRole(new Role(AppUserRole.USER.name()));
+        appUser.setRole(AppUserRole.USER.name());
         Bucket bucket = new Bucket();
         //bucket.setAppUser(appUser);
         //appUser.setBucket(bucket);
