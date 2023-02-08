@@ -44,7 +44,7 @@ public class AppUser implements UserDetails {
     @Transient
     private String password;
 
-    @Transien
+    @Transient
     private Role role;
 
     @OneToOne(mappedBy = "appUser", cascade = CascadeType.ALL)
