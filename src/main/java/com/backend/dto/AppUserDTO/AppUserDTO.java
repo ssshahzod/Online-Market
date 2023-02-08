@@ -20,7 +20,7 @@ public class AppUserDTO implements DTO {
     private String secondName;
     private String email;
     private String password;
-    private Role role;
+    private String role;
     private boolean isArchived = false;
 
     public AppUserDTO(AppUser appUser){

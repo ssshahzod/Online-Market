@@ -22,6 +22,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
@@ -44,8 +45,8 @@ public class AppUser implements UserDetails {
     @Transient
     private String password;
 
-    @Transient
-    private Role role;
+
+    private String role = AppUserRole.USER.name();
 
     @OneToOne(mappedBy = "appUser", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
@@ -61,9 +62,9 @@ public class AppUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<Role> roles = new HashSet<>();
-        roles.add(this.role);
-        return roles;
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        authorities.add(new SimpleGrantedAuthority(this.role));
+        return authorities;
     }
 
     @Override
@@ -95,7 +96,7 @@ public class AppUser implements UserDetails {
         return true;
     }
 
-    public Role getRole(){
+    public String getRole(){
         return role;
     }
 
