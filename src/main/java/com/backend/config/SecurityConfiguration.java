@@ -5,6 +5,8 @@ import com.backend.service.AppUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -30,26 +32,25 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests()
-                .antMatchers("/admin").hasRole("USER")
+                .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/").permitAll()
                 .antMatchers("*/products").hasRole("ROLE_SELLER")
                 .and()
                 .formLogin()
                 ;//if removed actual login is going in /login
-        //instead it asks for authentication provider
 
         return http.build();
     }
 
-/*  @Autowired
+    @Autowired
     private JdbcTemplate jdbcTemplate;
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider(){
-        DaoAuthenticationProvider daoAuthenticationProvider = new AppUserCredentialsDAO(jdbcTemplate);
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(myUserDetailsService());
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
-    }*/
+    }
 
 
 }

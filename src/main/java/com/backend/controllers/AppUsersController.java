@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-//TODO: build correct roles
+//TODO: build correct roles, configure spring security
 //TODO: pass 5 last added products to model and show it in home page
-//TODO: multiple product class several times, so it fills parent container
+//TODO: multiple product class several times, so it fills parent container, and amount can be changed
 //TODO: add email confirmation
 //TODO: add username setting for registered users
 //TODO: move application.yml properties here
@@ -55,7 +55,7 @@ public class AppUsersController {
 
     @PostMapping("/in")
     public RedirectView loginUser(@ModelAttribute("appUser") AppUserDTO loginCredentials,
-                                  Model model, RedirectAttributes redirectAttributes){
+                   Model model, RedirectAttributes redirectAttributes){
         AppUserDTO appUserDTO = appUserService.get(loginCredentials.getEmail());
         if(appUserDTO == null){
             model.addAttribute("error", "No user found with provided email.");
