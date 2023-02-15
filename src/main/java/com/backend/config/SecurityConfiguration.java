@@ -1,5 +1,6 @@
 package com.backend.config;
 
+import com.backend.appuser.AppUserRole;
 import com.backend.repository.AppUserCredentialsDAO;
 import com.backend.service.AppUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+    private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    public SecurityConfiguration(JdbcTemplate jdbcTemplate){
+        this.jdbcTemplate = jdbcTemplate;
+    }
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -31,19 +37,23 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
+                .csrf().disable()
                 .authorizeHttpRequests()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/").permitAll()
-                .antMatchers("*/products").hasRole("ROLE_SELLER")
+                    .antMatchers("/admin").hasAuthority(AppUserRole.ADMIN.name())
+                    .antMatchers("/sellers/**/new").hasRole(AppUserRole.SELLER.name())
+                    .antMatchers("/test").hasAuthority(AppUserRole.USER.name())
+                    .antMatchers("/").permitAll()
                 .and()
-                .formLogin()
-                ;//if removed actual login is going in /login
+                    .formLogin()
+                    .loginPage("/login")
+                    .permitAll()
+                .and()
+                    .logout().logoutUrl("/logout")
+                    .clearAuthentication(true);
 
         return http.build();
     }
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();

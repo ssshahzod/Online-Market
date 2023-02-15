@@ -1,6 +1,5 @@
 package com.backend.repository;
 
-import com.backend.appuser.Role;
 import com.backend.dao.DAO;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import java.util.Optional;

@@ -1,6 +1,7 @@
 package com.backend.product;
 
 import com.backend.bucket.Bucket;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,13 +28,13 @@ public class Product {
     private String title;
     private String description;
     private float price;
+    private Date upload;
 
     @ManyToMany
     private List<Bucket> bucket;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "categories",
-            joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<ProductCategory> categories;
 }

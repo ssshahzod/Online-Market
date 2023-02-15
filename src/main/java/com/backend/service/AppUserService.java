@@ -2,19 +2,16 @@ package com.backend.service;
 
 import com.backend.appuser.AppUser;
 import com.backend.appuser.AppUserRole;
-import com.backend.appuser.Role;
 import com.backend.bucket.Bucket;
 import com.backend.repository.AppUserCredentialsDAO;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.repository.AppUserRepository;
 import com.backend.repository.BucketRepository;
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 @Service
 public class AppUserService implements com.backend.service.Service<AppUserDTO> {
@@ -56,8 +53,12 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
         return new AppUserDTO(user);
     }
 
+    public AppUserDTO getById(Long id){
+        return new AppUserDTO(appUserRepository.getReferenceById(id));
+    }
+
     @Override
     public Long getId(String value){
-        return null;
+        return appUserRepository.getIdByEmail(value);
     }
 }

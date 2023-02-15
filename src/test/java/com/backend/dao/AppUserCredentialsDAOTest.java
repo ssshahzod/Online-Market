@@ -3,7 +3,6 @@ package com.backend.dao;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.backend.appuser.AppUserRole;
-import com.backend.appuser.Role;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.repository.AppUserCredentialsDAO;
 import java.util.Optional;
