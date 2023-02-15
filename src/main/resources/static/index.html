@@ -11,9 +11,6 @@
     <script src="scripts/ProductCard.js"></script>
 </head>
 <body>
-
-<p th:text="${String}"></p>
-
 <div  class="hamburger-menu">
     <input id="menu__toggle" type="checkbox" />
     <label class="menu__btn" for="menu__toggle">
@@ -22,24 +19,35 @@
 
     <ul class="menu__box">
         <!--<li><a class="menu__item" href="#">Home</a></li>-->
+        <li id="item6"><a class="menu__item" href="/users/bucket">My bucket</a></li>
+        <li id="item3"><a class="menu__item" href="users/sign">Sign Up</a></li>
+        <li id="item4"><a class="menu__item" href="/login">Log In</a></li>
+        <li id="item5"><a class="menu__item" href="/logout">Log Out</a></li>
         <li id="item1"><a class="menu__item" href="#">About (Empty page)</a></li>
         <li id="item2"><a class="menu__item" href="#">Contacts (Empty page)</a></li>
-        <li id="item3"><a class="menu__item" href="users/sign">Sign Up</a></li>
-        <li id="item4"><a class="menu__item" href="users/login">Log In</a></li>
-        <li id="item5"><a class="menu__item" href="#">Log Out</a></li>
 
-        <script th:inline="javascript"> /*hide Log In, Sign Up buttons if user authenticated*/
-            var data = "[[${Signed}]]";
+        <script> /*hide Log In, Sign Up buttons if user authenticated*/
+            var data = "[[${userLogged}]]";
             console.log("Value:" + data);
             let logout = document.getElementById("item5");
             let login = document.getElementById("item4");
             let signup = document.getElementById("item3");
-            if(data === true){
+            let bucket = document.getElementById("item6");
+            if(data === "false"){
+                logout.style.display = 'none';
+                bucket.style.display = 'none';
+            } else if(data === "USER"){
+                console.log("Im User");
+            } else if(data === "SELLER"){
+                console.log("Im Seller");
+            } else if(data === "ADMIN"){
+                console.log("Im admin");
+            }
+            else{
+                bucket.style.display = '';
                 logout.style.display = '';
                 login.style.display = 'none';
                 signup.style.display = 'none';
-            } else{
-                logout.style.display = 'none';
             }
         </script>
     </ul>

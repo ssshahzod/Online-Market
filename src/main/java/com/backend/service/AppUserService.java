@@ -2,7 +2,6 @@ package com.backend.service;
 
 import com.backend.appuser.AppUser;
 import com.backend.appuser.AppUserRole;
-import com.backend.appuser.Role;
 import com.backend.bucket.Bucket;
 import com.backend.repository.AppUserCredentialsDAO;
 import com.backend.dto.AppUserDTO.AppUserDTO;
@@ -11,6 +10,7 @@ import com.backend.repository.BucketRepository;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,7 +30,7 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
     @Override
     public void create(AppUserDTO appUserDTO) {
         AppUser appUser = new AppUser(appUserDTO);
-        appUser.setRole(new Role(AppUserRole.USER.name()));
+        appUser.setRole(AppUserRole.USER.name());
         Bucket bucket = new Bucket();
         //bucket.setAppUser(appUser);
         //appUser.setBucket(bucket);
@@ -45,13 +45,20 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
     @Override
     public AppUserDTO get(final String value) {
         AppUser user = appUserRepository.getAppUserByEmail(value);
+        if(user == null){
+            throw new UsernameNotFoundException("There is no such user");
+        }
         Optional<AppUserDTO> pass = Optional.of(appUserCredentialsDAO.getById(user.getId()));
         user.setPassword(pass.get().getPassword());
         return new AppUserDTO(user);
     }
 
+    public AppUserDTO getById(Long id){
+        return new AppUserDTO(appUserRepository.getReferenceById(id));
+    }
+
     @Override
     public Long getId(String value){
-        return null;
+        return appUserRepository.getIdByEmail(value);
     }
 }

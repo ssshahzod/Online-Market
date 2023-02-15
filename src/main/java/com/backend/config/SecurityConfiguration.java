@@ -1,10 +1,13 @@
 package com.backend.config;
 
+import com.backend.appuser.AppUserRole;
 import com.backend.repository.AppUserCredentialsDAO;
 import com.backend.service.AppUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,7 +19,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+    private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    public SecurityConfiguration(JdbcTemplate jdbcTemplate){
+        this.jdbcTemplate = jdbcTemplate;
+    }
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -29,27 +37,30 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
+                .csrf().disable()
                 .authorizeHttpRequests()
-                .antMatchers("/admin").hasRole("ROLE_ADMIN")
-                .antMatchers("/").permitAll()
-                .antMatchers("*/products").hasRole("ROLE_SELLER")
+                    .antMatchers("/admin").hasAuthority(AppUserRole.ADMIN.name())
+                    .antMatchers("/sellers/**/new").hasRole(AppUserRole.SELLER.name())
+                    .antMatchers("/test").hasAuthority(AppUserRole.USER.name())
+                    .antMatchers("/").permitAll()
                 .and()
-                .formLogin()
-                .loginPage("/users/login");//if removed actual login is going in /login
-        //instead it asks for authentication provider
+                    .formLogin()
+                    .loginPage("/login")
+                    .permitAll()
+                .and()
+                    .logout().logoutUrl("/logout")
+                    .clearAuthentication(true);
 
         return http.build();
     }
 
-/*  @Autowired
-    private JdbcTemplate jdbcTemplate;
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider(){
-        DaoAuthenticationProvider daoAuthenticationProvider = new AppUserCredentialsDAO(jdbcTemplate);
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(myUserDetailsService());
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
-    }*/
+    }
 
 
 }
