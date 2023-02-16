@@ -19,12 +19,13 @@
 
     <ul class="menu__box">
         <!--<li><a class="menu__item" href="#">Home</a></li>-->
+        <li id="item7"><a class="menu__item" href="/admin">Admin page</a></li>
         <li id="item6"><a class="menu__item" href="/users/bucket">My bucket</a></li>
         <li id="item3"><a class="menu__item" href="users/sign">Sign Up</a></li>
         <li id="item4"><a class="menu__item" href="/login">Log In</a></li>
-        <li id="item5"><a class="menu__item" href="/logout">Log Out</a></li>
         <li id="item1"><a class="menu__item" href="#">About (Empty page)</a></li>
         <li id="item2"><a class="menu__item" href="#">Contacts (Empty page)</a></li>
+        <li id="item5"><a class="menu__item" href="/logout">Log Out</a></li>
 
         <script> /*hide Log In, Sign Up buttons if user authenticated*/
             var data = "[[${userLogged}]]";
@@ -33,15 +34,17 @@
             let login = document.getElementById("item4");
             let signup = document.getElementById("item3");
             let bucket = document.getElementById("item6");
+            let admin = document.getElementById("item7");
+            admin.style.display = 'none';
             if(data === "false"){
                 logout.style.display = 'none';
-                bucket.style.display = 'none';
+                bucket.style.display = 'none'
             } else if(data === "USER"){
                 console.log("Im User");
             } else if(data === "SELLER"){
                 console.log("Im Seller");
             } else if(data === "ADMIN"){
-                console.log("Im admin");
+                admin.style.display = '';
             }
             else{
                 bucket.style.display = '';
@@ -52,7 +55,22 @@
         </script>
     </ul>
 </div>
-
+<script >
+    $(document).ready( function(){
+        let logout = document.getElementById("logoutNotif");
+        logout.style.display = 'none';
+        var notif = "[[${param.logout}]]"
+        console.log(notif);
+        if(notif){
+            $('#logoutNotif').fadeIn()
+                .delay(1000).fadeOut();
+            window.history.replaceState({}, document.title, "/");
+        }
+    });
+</script>
+<div class="notification" id="logoutNotif">
+    <p>You successfully logged out!</p>
+</div>
 
 <div class="wrapper">
     <div class="container">

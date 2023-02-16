@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users(
     first_name VARCHAR(20) NOT NULL,
     second_name VARCHAR(20) NOT NULL,
     email VARCHAR(20) NOT NULL,
-    app_user_role VARCHAR(255),
+    role VARCHAR(255),
     UNIQUE (email)
 );
 

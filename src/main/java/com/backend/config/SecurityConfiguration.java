@@ -49,6 +49,7 @@ public class SecurityConfiguration {
                     .permitAll()
                 .and()
                     .logout().logoutUrl("/logout")
+                    .logoutSuccessUrl("/?logout=true")
                     .clearAuthentication(true);
 
         return http.build();
