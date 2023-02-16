@@ -53,13 +53,12 @@ public class AppUsersController {
     }
 
     @PostMapping("/new")
-    public String createUser(@ModelAttribute("appuserdto") AppUserDTO appUserDTO, Model model){
+    public ModelAndView createUser(@ModelAttribute("appuserdto") AppUserDTO appUserDTO, Model model){
             String encode = passwordEncoder.encode(appUserDTO.getPassword());
             appUserDTO.setPassword(encode);
             appUserService.create(appUserDTO);
-            logger.info("New user with email: {} is signed.",
-                                appUserDTO.getEmail());
-            return "index";
+            logger.info("New user with email: {} is signed.", appUserDTO.getEmail());
+            return new ModelAndView("redirect:/");
     }
 
 }

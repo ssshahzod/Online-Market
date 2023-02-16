@@ -32,8 +32,8 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
         AppUser appUser = new AppUser(appUserDTO);
         appUser.setRole(AppUserRole.USER.name());
         Bucket bucket = new Bucket();
-        //bucket.setAppUser(appUser);
-        //appUser.setBucket(bucket);
+        bucket.setAppUser(appUser);
+        appUser.setBucket(bucket);
         try {
             appUserRepository.save(appUser);
             appUserCredentialsDAO.insert(appUserDTO);
