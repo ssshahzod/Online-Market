@@ -1,5 +1,5 @@
 # Online-Market
-Place where you can sell/buy anything you want!
+Web application where you can buy(or sell) anything you want!
 
 # Screenshots
 ### SignUp page
