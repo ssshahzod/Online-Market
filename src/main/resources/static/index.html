@@ -16,25 +16,24 @@
     <label class="menu__btn" for="menu__toggle">
         <span></span>
     </label>
-
     <ul class="menu__box">
         <!--<li><a class="menu__item" href="#">Home</a></li>-->
-        <li id="item7"><a class="menu__item" href="/admin">Admin page</a></li>
-        <li id="item6"><a class="menu__item" href="/users/bucket">My bucket</a></li>
-        <li id="item3"><a class="menu__item" href="users/sign">Sign Up</a></li>
-        <li id="item4"><a class="menu__item" href="/login">Log In</a></li>
+        <li id="adminPage"><a class="menu__item" href="/admin">Admin page</a></li>
+        <li id="bucketPage"><a class="menu__item" href="/users/bucket">My bucket</a></li>
+        <li id="signReq"><a class="menu__item" href="users/sign">Sign Up</a></li>
+        <li id="loginReq"><a class="menu__item" href="/login">Log In</a></li>
         <li id="item1"><a class="menu__item" href="#">About (Empty page)</a></li>
         <li id="item2"><a class="menu__item" href="#">Contacts (Empty page)</a></li>
-        <li id="item5"><a class="menu__item" href="/logout">Log Out</a></li>
+        <li id="logoutReq"><a class="menu__item" href="/logout">Log Out</a></li>
 
         <script> /*hide Log In, Sign Up buttons if user authenticated*/
             var data = "[[${userLogged}]]";
             console.log("Value:" + data);
-            let logout = document.getElementById("item5");
-            let login = document.getElementById("item4");
-            let signup = document.getElementById("item3");
-            let bucket = document.getElementById("item6");
-            let admin = document.getElementById("item7");
+            let logout = document.getElementById("logoutReq");
+            let login = document.getElementById("loginReq");
+            let signup = document.getElementById("signReq");
+            let bucket = document.getElementById("bucketPage");
+            let admin = document.getElementById("adminPage");
             admin.style.display = 'none';
             if(data === "false"){
                 logout.style.display = 'none';
