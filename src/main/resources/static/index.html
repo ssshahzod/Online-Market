@@ -7,6 +7,8 @@
     <!-- https://google.github.io/material-design-icons/ -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/notification.css"/>
+    <link rel="stylesheet" type="text/css" href="css/productcards.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="scripts/ProductCard.js"></script>
 </head>
@@ -18,7 +20,7 @@
     </label>
     <ul class="menu__box">
         <!--<li><a class="menu__item" href="#">Home</a></li>-->
-        <li id="adminPage"><a class="menu__item" href="/admin">Admin page</a></li>
+        <li id="adminPage" ><a class="menu__item" href="/admin">Admin page</a></li>
         <li id="bucketPage"><a class="menu__item" href="/users/bucket">My bucket</a></li>
         <li id="signReq"><a class="menu__item" href="users/sign">Sign Up</a></li>
         <li id="loginReq"><a class="menu__item" href="/login">Log In</a></li>
@@ -26,7 +28,7 @@
         <li id="item2"><a class="menu__item" href="#">Contacts (Empty page)</a></li>
         <li id="logoutReq"><a class="menu__item" href="/logout">Log Out</a></li>
 
-        <script> /*hide Log In, Sign Up buttons if user authenticated*/
+        <script> /*hide some menu buttons if user authenticated*/
             var data = "[[${userLogged}]]";
             console.log("Value:" + data);
             let logout = document.getElementById("logoutReq");
@@ -46,8 +48,6 @@
                 admin.style.display = '';
             }
             else{
-                bucket.style.display = '';
-                logout.style.display = '';
                 login.style.display = 'none';
                 signup.style.display = 'none';
             }

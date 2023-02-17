@@ -1,0 +1,11 @@
+.notification{
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    display: flex;
+    width: 20%;
+    justify-content: center;
+    background: #ECEFF1;
+    opacity: 80%;
+    border-radius: 10px 10px 10px 10px;
+}
