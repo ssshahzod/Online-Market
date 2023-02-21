@@ -2,9 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>New Product</title>
+    <title>New product</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/productcards.css">
+    <link rel="stylesheet" type="text/css" href="../css/notification.css">
+    <link rel="stylesheet" type="text/css" href="../css/ProductForm.css">
+    <!--<link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    !-->
 </head>
 <body>
+<div class="productForm">
+    <form class="form-newProduct" method="post" action="/sellers/**/create" >
+        <h1 class="half-heading">Please describe your product</h1>
+        <p style="margin-top: 5.7%">
+            <label for="title" class="sr-only"></label>
+            <input type="text" id="title" name="productTitle" class="form-control"
+                                placeholder=" What's the name of product?" required>
+        </p>
+        <p>
+            <label for="description" class="sr-only"></label>
+            <input type="text" id="description" name="" class="form-control"
+                                placeholder=" Describe your product" required>
+        </p>
+        <p>
+            <label for="imageLink" class="sr-only"></label>
+            <input type="text" id="imageLink" name="" class="form-control"
+                                placeholder=" Insert link to image" required >
+        </p>
+        <p>
+            <span class="currency" style="font-size: 15px">
+                <label for="price" class="sr-only"></label>
+                <input type="number" step="none" id="price" name="price" class="form-control price"
+                                placeholder=" Price of the product" contenteditable="true" required ></span>
+        </p>
 
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+        <p></p>
+    </form>
+    <form class="productPreview" style="display: inline-block;">
+        <h1 class="half-heading">Preview</h1>
+    <div class="wrapper">
+        <div class="container">
+            <div class="top"></div>
+            <div class="bottom">
+                <div class="left">
+                    <div class="details">
+                        <h1>Chair</h1>
+                        <p>£250</p>
+                    </div>
+                    <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+                </div>
+                <div class="right">
+                    <div class="done"><i class="material-icons">done</i></div>
+                    <div class="details">
+                        <h1>Chair</h1>
+                        <p>Added to your cart</p>
+                    </div>
+                    <div class="remove"><i class="material-icons">clear</i></div>
+                </div>
+            </div>
+        </div>
+        <div class="inside">
+            <div class="icon"><i class="material-icons">info_outline</i></div>
+            <div class="contents">
+
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
 </body>
 </html>

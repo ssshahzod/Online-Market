@@ -1,12 +1,16 @@
 package com.backend.controllers;
 
 import com.backend.dto.AppUserDTO.AppUserDTO;
+import com.backend.product.Product;
 import com.backend.service.AppUserService;
+import com.backend.service.ProductService;
+import java.util.Date;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SellerController {
 
     final private AppUserService appUserService;
-
+    final private ProductService productService;
     @Autowired
-    public SellerController(AppUserService appUserService){
+    public SellerController(AppUserService appUserService,
+                            ProductService productService){
         this.appUserService = appUserService;
+        this.productService = productService;
     }
 
     @GetMapping("/{id}")
@@ -53,8 +59,11 @@ public class SellerController {
         return "sellers/NewProduct";
     }
 
-    @PostMapping("")
-    public void createProduct(){
-
+    @PostMapping("/{id}/create")
+    public void createProduct(@PathVariable String id,
+                              @ModelAttribute("newProduct") Product product){
+        Date creationTime = new Date();
+        product.setUpload(creationTime);
+        productService.create(product);
     }
 }

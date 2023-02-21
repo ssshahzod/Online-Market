@@ -2,6 +2,7 @@ package com.backend.controllers;
 
 import com.backend.appuser.AppUserRole;
 import java.util.Collection;
+import java.util.stream.Stream;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -41,7 +42,7 @@ public class MainController {
 
     @RequestMapping("/admin")
     public String adminPage(){
-        return "/main/resources/static/admin/admin.html";
+        return "/admin/admin";
     }
 
     @GetMapping("/test")

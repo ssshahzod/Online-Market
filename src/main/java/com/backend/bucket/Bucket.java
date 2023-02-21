@@ -29,13 +29,13 @@ public class Bucket {
     @MapsId
     private AppUser appUser;
 
-/*    @ManyToMany
+    @ManyToMany
     private List<Product> product;
 
     public Bucket(AppUser appUser, List<Product> products){
         this.appUser = appUser;
         this.product = products;
-    }*/
+    }
 
 
 }

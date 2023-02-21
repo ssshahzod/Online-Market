@@ -1,6 +1,8 @@
 package com.backend.service;
 
+import com.backend.product.Product;
 import com.backend.repository.ProductRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.stereotype.Service;
@@ -17,5 +19,14 @@ public class ProductService {
 
     public JSONArray getLastUploads(){
         return new JSONArray(productRepository.getNewest(5));
+    }
+
+    public void create(@NotNull Product product){
+        productRepository.save(product);
+    }
+
+    public void update(String oldProductDesc, Product newProduct){
+        newProduct.setId(productRepository.getProductByDescription(oldProductDesc).getId());
+        productRepository.update(newProduct);
     }
 }

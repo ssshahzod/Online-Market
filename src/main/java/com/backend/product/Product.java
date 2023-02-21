@@ -30,6 +30,8 @@ public class Product {
     private float price;
     private Date upload;
 
+    private String imageLink;
+
     @ManyToMany
     private List<Bucket> bucket;
 

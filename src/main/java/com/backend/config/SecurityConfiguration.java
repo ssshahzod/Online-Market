@@ -39,7 +39,7 @@ public class SecurityConfiguration {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                    .antMatchers("/admin").hasAuthority(AppUserRole.ADMIN.name())
+                    .antMatchers("/admin/**").hasAuthority(AppUserRole.ADMIN.name())
                     .antMatchers("/sellers/**/new").hasRole(AppUserRole.SELLER.name())
                     .antMatchers("/test").hasAuthority(AppUserRole.USER.name())
                     .antMatchers("/").permitAll()

@@ -15,5 +15,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "SELECT * FROM products ORDER BY product_id DESC LIMIT :limit", nativeQuery = true)
     List<Product> getNewest(@Param("limit") int limit);
 
+    Product getProductByDescription(@Param("description") String description);
+
+    void update(@Param("newProduct") Product newProduct);
     List<Product> getAllByUploadOrderByUploadDesc(Date date);
 }

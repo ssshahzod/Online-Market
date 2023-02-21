@@ -31,7 +31,8 @@ CREATE SEQUENCE IF NOT EXISTS order_seq
 CREATE TABLE IF NOT EXISTS products(
     product_id  BIGINT NOT NULL PRIMARY KEY,
     title VARCHAR(20) NOT NULL,
-    description VARCHAR(200) NOT NULL,
+    description TEXT NOT NULL UNIQUE,
+    image_link TEXT,
     price FLOAT
 );
 
