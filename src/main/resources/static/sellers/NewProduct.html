@@ -8,12 +8,35 @@
     <link rel="stylesheet" type="text/css" href="../css/productcards.css">
     <link rel="stylesheet" type="text/css" href="../css/notification.css">
     <link rel="stylesheet" type="text/css" href="../css/ProductForm.css">
+    <link rel="script" href="../scripts/NewProductField.js">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#title').on('input', function(){
+                var value = $(this).val();
+                $('#prod-name').text(value);
+            });
+            $('#description').on('input', function(){
+                var value = $(this).val();
+                $('#item_desc').text(value);
+            });
+            $('#imageLink').on('input', function(){
+                var value = $(this).val();
+                $('#top').css('background-image', 'url(' + value + ')');
+            });
+            $('#price').on('input', function(){
+                var value = $(this).val();
+                $('#price-value').text(value + '₽');
+            });
+        });
+    </script>
     <!--<link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     !-->
 </head>
 <body>
 <div class="productForm">
+
     <form class="form-newProduct" method="post" action="/sellers/**/create" >
         <h1 class="half-heading">Please describe your product</h1>
         <p style="margin-top: 5.7%">
@@ -29,7 +52,7 @@
         <p>
             <label for="imageLink" class="sr-only"></label>
             <input type="text" id="imageLink" name="" class="form-control"
-                                placeholder=" Insert link to image" required >
+                                placeholder=" Insert link to image" required>
         </p>
         <p>
             <span class="currency" style="font-size: 15px">
@@ -45,19 +68,19 @@
         <h1 class="half-heading">Preview</h1>
     <div class="wrapper">
         <div class="container">
-            <div class="top"></div>
+            <div class="top" id="top"></div>
             <div class="bottom">
                 <div class="left">
                     <div class="details">
-                        <h1>Chair</h1>
-                        <p>£250</p>
+                        <h1 id="prod-name">Example</h1>
+                        <p id="price-value">250₽</p>
                     </div>
                     <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
                 </div>
                 <div class="right">
                     <div class="done"><i class="material-icons">done</i></div>
                     <div class="details">
-                        <h1>Chair</h1>
+                        <h1 class="prod-name">Chair</h1>
                         <p>Added to your cart</p>
                     </div>
                     <div class="remove"><i class="material-icons">clear</i></div>
@@ -67,7 +90,7 @@
         <div class="inside">
             <div class="icon"><i class="material-icons">info_outline</i></div>
             <div class="contents">
-
+                <p id="item_desc"></p>
             </div>
         </div>
     </div>
