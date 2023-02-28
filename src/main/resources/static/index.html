@@ -19,38 +19,34 @@
     <label class="menu__btn" for="menu__toggle">
         <span></span>
     </label>
-    <ul class="menu__box">
+    <ul id="menu" class="menu__box">
         <!--<li><a class="menu__item" href="#">Home</a></li>-->
         <li id="adminPage" ><a class="menu__item" href="/admin">Admin page</a></li>
-        <li id="bucketPage"><a class="menu__item" href="/users/bucket">My bucket</a></li>
+        <li id="prodPage"><a class="menu__item" href="/bucket">My products</a></li>
         <li id="signReq"><a class="menu__item" href="users/sign">Sign Up</a></li>
-        <li id="loginReq"><a class="menu__item" href="/login">Log In</a></li>
+        <li id="loginReq"><a class="menu__item" href="/login">Login</a></li>
         <li id="item1"><a class="menu__item" href="#">About (Empty page)</a></li>
         <li id="item2"><a class="menu__item" href="#">Contacts (Empty page)</a></li>
-        <li id="logoutReq"><a class="menu__item" href="/logout">Log Out</a></li>
 
         <script> /*hide some menu buttons if user authenticated*/
             var data = "[[${userLogged}]]";
             console.log("Value:" + data);
-            let logout = document.getElementById("logoutReq");
-            let login = document.getElementById("loginReq");
-            let signup = document.getElementById("signReq");
-            let bucket = document.getElementById("bucketPage");
+            let login = document.querySelector('#menu li:nth-child(4) a');
+            let signup = document.querySelector('#menu li:nth-child(3) a');
+            if(data !== "false"){
+                login.textContent = "Logout"
+                login.href = "/logout";
+                signup.textContent = "My bucket";
+                signup.href = "/bucket";
+            }
             let admin = document.getElementById("adminPage");
+            let seller = document.getElementById("prodPage");
             admin.style.display = 'none';
-            if(data === "false"){
-                logout.style.display = 'none';
-                bucket.style.display = 'none'
-            } else if(data === "USER"){
-                console.log("Im User");
-            } else if(data === "SELLER"){
-                console.log("Im Seller");
+            seller.style.display = 'none';
+            if(data === "SELLER"){
+                seller.style.display = '';
             } else if(data === "ADMIN"){
                 admin.style.display = '';
-            }
-            else{
-                login.style.display = 'none';
-                signup.style.display = 'none';
             }
         </script>
     </ul>

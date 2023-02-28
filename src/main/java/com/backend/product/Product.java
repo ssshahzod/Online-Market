@@ -32,6 +32,14 @@ public class Product {
 
     private String imageLink;
 
+    public void copy(Product product){
+        this.categories = product.categories;
+        this.title = product.title;
+        this.price = product.price;
+        //this.upload
+        this.imageLink = product.imageLink;
+        this.description = product.description;
+    }
     @ManyToMany
     private List<Bucket> bucket;
 

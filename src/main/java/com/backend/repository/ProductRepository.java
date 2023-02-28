@@ -17,6 +17,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Product getProductByDescription(@Param("description") String description);
 
-    void update(@Param("newProduct") Product newProduct);
+    Product getProductsByTitleAndDescription(@Param("title") String title, @Param("desc") String desc);
     List<Product> getAllByUploadOrderByUploadDesc(Date date);
 }

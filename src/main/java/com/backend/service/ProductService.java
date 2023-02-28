@@ -26,7 +26,9 @@ public class ProductService {
     }
 
     public void update(String oldProductDesc, Product newProduct){
-        newProduct.setId(productRepository.getProductByDescription(oldProductDesc).getId());
-        productRepository.update(newProduct);
+        Product tmp = productRepository.getProductByDescription(oldProductDesc);
+        tmp.copy(newProduct);
+        productRepository.save(tmp);
+
     }
 }
