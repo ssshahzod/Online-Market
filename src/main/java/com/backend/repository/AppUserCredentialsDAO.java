@@ -48,7 +48,7 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO> {
                 "users_cred (id, password)" +
                 "VALUES (?, ?);",
             lastId, dto.getPassword());
-        AppUserDAOLogger.info("New Id: {}", lastId);
+
     }
 
     @Override

@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AppUserDTO implements DTO {
     //private AppUser appUser;
+    private Long id;
     private String firstName;
     private String secondName;
     private String email;
@@ -22,6 +23,7 @@ public class AppUserDTO implements DTO {
     private boolean isArchived = false;
 
     public AppUserDTO(AppUser appUser){
+        this.id = appUser.getId();
         this.firstName = appUser.getFirstName();
         this.secondName = appUser.getSecondName();
         this.email = appUser.getEmail();

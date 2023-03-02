@@ -1,5 +1,6 @@
 package com.backend.product;
 
+import com.backend.appuser.AppUser;
 import com.backend.bucket.Bucket;
 import java.util.Date;
 import lombok.AllArgsConstructor;
@@ -30,13 +31,16 @@ public class Product {
     private float price;
     private Date upload;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private AppUser seller;
+
     private String imageLink;
 
     public void copy(Product product){
         this.categories = product.categories;
         this.title = product.title;
         this.price = product.price;
-        //this.upload
+        this.upload = product.upload;
         this.imageLink = product.imageLink;
         this.description = product.description;
     }

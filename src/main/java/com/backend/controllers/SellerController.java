@@ -31,7 +31,7 @@ public class SellerController {
     @GetMapping("/{id}")
     public String getProfile(@PathVariable String id,
                              Model model){
-        Long userId = Long.decode("0x" + id);
+        Long userId = Long.decode(id);
         try {
             AppUserDTO appUserDTO = appUserService.getById(userId);
             if(appUserDTO.getRole().equals("SELLER"))
@@ -40,7 +40,7 @@ public class SellerController {
                 return "CustomError";
         }
         catch(EntityNotFoundException e){
-            System.out.println("Couldnt find user for id: " + userId);
+            System.out.println("Couldn't find user for id: " + userId);
             return "CustomError";
         }
         return "sellers/profile";

@@ -2,8 +2,10 @@ package com.backend.appuser;
 
 import com.backend.bucket.Bucket;
 import com.backend.dto.AppUserDTO.AppUserDTO;
+import com.backend.product.Product;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -11,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
@@ -45,7 +49,10 @@ public class AppUser implements UserDetails {
     @Transient
     private String password;
 
-
+/*    @OneToMany(
+            mappedBy = "seller"
+    )
+    private List<Product> products;*/
     private String role = AppUserRole.USER.name();
 
     @OneToOne(mappedBy = "appUser", cascade = CascadeType.ALL)
@@ -101,6 +108,7 @@ public class AppUser implements UserDetails {
     }
 
     public AppUser(AppUserDTO appUserDTO){
+        this.id = appUserDTO.getId();
         this.firstName = appUserDTO.getFirstName();
         this.secondName = appUserDTO.getSecondName();
         this.email = appUserDTO.getEmail();

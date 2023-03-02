@@ -22,7 +22,7 @@
     <ul id="menu" class="menu__box">
         <!--<li><a class="menu__item" href="#">Home</a></li>-->
         <li id="adminPage" ><a class="menu__item" href="/admin">Admin page</a></li>
-        <li id="prodPage"><a class="menu__item" href="/bucket">My products</a></li>
+        <li id="prodPage" ><a class="menu__item" href="/sellers">My products</a></li>
         <li id="signReq"><a class="menu__item" href="users/sign">Sign Up</a></li>
         <li id="loginReq"><a class="menu__item" href="/login">Login</a></li>
         <li id="item1"><a class="menu__item" href="#">About (Empty page)</a></li>
@@ -33,6 +33,7 @@
             console.log("Value:" + data);
             let login = document.querySelector('#menu li:nth-child(4) a');
             let signup = document.querySelector('#menu li:nth-child(3) a');
+            let products = document.querySelector('#menu li:nth-child(2) a');
             if(data !== "false"){
                 login.textContent = "Logout"
                 login.href = "/logout";
@@ -45,6 +46,11 @@
             seller.style.display = 'none';
             if(data === "SELLER"){
                 seller.style.display = '';
+                $.get("/data/id", function(id){
+                    let link = "/sellers/" + id;
+                    products.href = link;
+                    console.log(products.href);
+                });
             } else if(data === "ADMIN"){
                 admin.style.display = '';
             }
@@ -69,12 +75,20 @@
 </div>
 
 <div class="wrapper">
+    <script>
+        $(function() {
+           $.get("/testing", function(data){
+               console.table(data);
+            });
+        });
+
+    </script>
     <div class="container">
         <div class="top" id="top"></div>
         <div class="bottom">
             <div class="left">
                 <div class="details">
-                    <h1>Chair</h1>
+                    <h1 id="">Chair</h1>
                     <p>£250</p>
                 </div>
                 <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
