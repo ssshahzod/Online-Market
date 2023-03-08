@@ -1,5 +1,6 @@
 package com.backend.appuser;
 
+import com.backend.appuser.seller.Seller;
 import com.backend.bucket.Bucket;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.product.Product;
@@ -10,6 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,14 +51,15 @@ public class AppUser implements UserDetails {
     @Transient
     private String password;
 
-/*    @OneToMany(
-            mappedBy = "seller"
-    )
-    private List<Product> products;*/
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "seller_id")
+    private Seller seller = null;
+
     private String role = AppUserRole.USER.name();
 
-    @OneToOne(mappedBy = "appUser", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     private Bucket bucket;
 
     public String getSecondName() {

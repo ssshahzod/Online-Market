@@ -1,5 +1,6 @@
 package com.backend.product;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "categories")
 public class ProductCategory {
-    private final String SEQ_NAME = "category_seq";
+    private final static String SEQ_NAME = "category_seq";
 
     @Id
     @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1)
@@ -24,5 +25,11 @@ public class ProductCategory {
 
     @Column(name = "category_name")
     private String categoryName;
+
+    @Column(name = "category_desc")
+    private String categoryDescription;
+
+    @ManyToMany
+    private List<Product> products;
 
 }

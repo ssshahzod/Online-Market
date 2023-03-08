@@ -2,6 +2,7 @@ package com.backend.service;
 
 import com.backend.appuser.AppUser;
 import com.backend.appuser.AppUserRole;
+import com.backend.appuser.seller.Seller;
 import com.backend.bucket.Bucket;
 import com.backend.repository.AppUserCredentialsDAO;
 import com.backend.dto.AppUserDTO.AppUserDTO;
@@ -61,5 +62,10 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
     @Override
     public Long getId(String value){
         return appUserRepository.getIdByEmail(value);
+    }
+    public void makeSeller(Long userId, Seller seller){
+        AppUser appUser = appUserRepository.getReferenceById(userId);
+        appUser.setSeller(seller);
+        appUserRepository.save(appUser);
     }
 }

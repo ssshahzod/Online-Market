@@ -33,15 +33,18 @@ public class Order {
     @UpdateTimestamp
     private LocalDateTime updated;
 
-    @ManyToOne
-    //@JoinColumn(name = "user_id")
-    @JoinTable(name = "users",
-            joinColumns = @JoinColumn(name = "user_id"))
+    @ManyToOne(
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(name = "user_id")
     private AppUser appUser;
     private int sum;
     private String address;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     private List<OrderDetails> details;
 
     @Enumerated(EnumType.STRING)

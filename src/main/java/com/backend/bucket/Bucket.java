@@ -19,23 +19,25 @@ import java.util.List;
 @Table(name = "buckets")
 public class Bucket {
     private static final String SEQ_NAME = "bucket_seq";
-
-    //using a shared primary key
     @Id
+    @SequenceGenerator(name = SEQ_NAME,
+                    allocationSize = 1,
+                    sequenceName = SEQ_NAME)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = SEQ_NAME
+    )
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    @MapsId
+
+    @OneToOne(mappedBy = "bucket")
     private AppUser appUser;
 
-    @ManyToMany
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "bucket"
+    )
     private List<Product> product;
-
-    public Bucket(AppUser appUser, List<Product> products){
-        this.appUser = appUser;
-        this.product = products;
-    }
 
 
 }

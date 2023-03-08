@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Become seller</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+  <style>
+    body {
+      background-color: wheat;
+    }
+    .container {
+      transform: scale(2);
+      max-width: 50%;
+      padding-top: 100px;
+    }
+
+    textarea{
+      height: ;
+      resize: none;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <form class="form-signin" method="post" action="/users/update">
+    <h1 class="form-signup-heading" align="middle">Welcome!</h1>
+    <p>
+      <label for="desc" class="sr-only">Tell about yourself</label>
+      <textarea id="desc" name="sellerDescription" class="form-control" placeholder="Tell about yourself" required autofocus>
+
+      </textarea>
+    </p>
+    <p>
+      <label for="image" class="sr-only">Choose profile image</label>
+      <input type="url" id="image" name="profileImage" class="form-control" placeholder="Link to image" required>
+    </p>
+    <input name="_csrf" type="hidden" value="bff3f041-3f76-4c8d-9297-077a488c6314" />
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+  </form>
+</div>
+</body>
+</html>

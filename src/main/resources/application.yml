@@ -1,10 +1,4 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/spring_shop
-    #url: jdbc:postgresql://192.168.0.107/spring_shop
-    username: postgres
-    password: pswd
-    #driver-class-name: org.postgresql.Driver
   #datasource2:
   #  url: jdbc:mongodb://localhost:8081/spring_shop
   #  username: mongo
@@ -15,3 +9,6 @@ spring:
   thymeleaf:
     prefix: classpath:/static/
     suffix: .html
+  jpa:
+    hibernate:
+      ddl-auto: update

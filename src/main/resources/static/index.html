@@ -22,7 +22,7 @@
     <ul id="menu" class="menu__box">
         <!--<li><a class="menu__item" href="#">Home</a></li>-->
         <li id="adminPage" ><a class="menu__item" href="/admin">Admin page</a></li>
-        <li id="prodPage" ><a class="menu__item" href="/sellers">My products</a></li>
+        <li id="prodPage" ><a class="menu__item" href="/sellers">My profile</a></li>
         <li id="signReq"><a class="menu__item" href="users/sign">Sign Up</a></li>
         <li id="loginReq"><a class="menu__item" href="/login">Login</a></li>
         <li id="item1"><a class="menu__item" href="#">About (Empty page)</a></li>
@@ -30,7 +30,6 @@
 
         <script> /*hide some menu buttons if user authenticated*/
             var data = "[[${userLogged}]]";
-            console.log("Value:" + data);
             let login = document.querySelector('#menu li:nth-child(4) a');
             let signup = document.querySelector('#menu li:nth-child(3) a');
             let products = document.querySelector('#menu li:nth-child(2) a');
@@ -47,9 +46,8 @@
             if(data === "SELLER"){
                 seller.style.display = '';
                 $.get("/data/id", function(id){
-                    let link = "/sellers/" + id;
+                    let link = "/sellers/" + id + "?state=true";
                     products.href = link;
-                    console.log(products.href);
                 });
             } else if(data === "ADMIN"){
                 admin.style.display = '';
@@ -62,7 +60,6 @@
         let logout = document.getElementById("logoutNotif");
         logout.style.display = 'none';
         var notif = "[[${param.logout}]]"
-        console.log(notif);
         if(notif){
             $('#logoutNotif').fadeIn()
                 .delay(1000).fadeOut();
@@ -77,7 +74,7 @@
 <div class="wrapper">
     <script>
         $(function() {
-           $.get("/testing", function(data){
+           $.get("/products", function(data){
                console.table(data);
             });
         });

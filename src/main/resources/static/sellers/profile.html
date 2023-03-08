@@ -5,6 +5,19 @@
     <title th:text="${userInfo.firstName} + ' ' + ${userInfo.secondName}"></title>
 </head>
 <body>
-
+<div class="container">
+    <a id="createProd" href="/new">New product</a>
+</div>
+<script>
+    var state = "[[${showNewProd}]]";
+    var id = "[[${userInfo.id}]]";
+    let create = document.getElementById("createProd");
+    if(state === "true") {
+        create.href = "/sellers/" + id + "/new";
+        create.style.display = '';
+    }
+    else
+        create.style.display = 'none';
+</script>
 </body>
 </html>
