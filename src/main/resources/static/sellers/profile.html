@@ -9,8 +9,12 @@
     <a id="createProd" href="/new">New product</a>
 </div>
 <script>
-    var id = "[[${userInfo.id}]]";
-    var state = "[[${showNewProd}]]";
+    let id = "[[${userInfo.id}]]";
+    let state = "[[${showNewProd}]]";
+    let image = "[[${sellerInfo.profileImage}]]";
+    let desc = "[[${{sellerInfo.sellerDescription}}]]";
+    let products = "[[${{sellerInfo.products}}]]";
+    console.table(products);
     let create = document.getElementById("createProd");
     if(state === "true") {
         create.href = "/sellers/" + id + "/new";
@@ -19,5 +23,9 @@
     else
         create.style.display = 'none';
 </script>
+
+<div class="container">
+
+</div>
 </body>
 </html>

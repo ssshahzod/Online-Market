@@ -15,6 +15,7 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 
     public AppUser getAppUserByEmail(String email);
 
+
     //2List<AppUser> findFirst10OrderById(Pageable pageable);
 
 }

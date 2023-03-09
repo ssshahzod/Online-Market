@@ -67,15 +67,11 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
         return appUserRepository.getReferenceById(id);
     }
 
-    public Seller getSellerByUserId(Long id){
-        AppUser appUser = appUserRepository.getReferenceById(id);
-        return sellerRepository.getReferenceById(appUser.getSeller().getId());
-    }
-
     @Override
     public Long getId(String value){
         return appUserRepository.getIdByEmail(value);
     }
+
     public void makeSeller(Long userId, Seller seller){
         AppUser appUser = appUserRepository.getReferenceById(userId);
         appUser.setSeller(seller);

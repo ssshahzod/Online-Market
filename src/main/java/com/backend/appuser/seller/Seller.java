@@ -1,6 +1,7 @@
 package com.backend.appuser.seller;
 
 import com.backend.appuser.AppUser;
+import com.backend.dto.SellerDTO.SellerDTO;
 import com.backend.product.Product;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -16,9 +18,12 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -56,5 +61,12 @@ public class Seller {
         this.products = products;
         this.profileImage = profileImage;
         this.sellerDescription = sellerDescription;
+    }
+
+    public Seller(SellerDTO sellerDTO){
+        this.id = sellerDTO.getId();
+        this.sellerDescription = sellerDTO.getSellerDescription();
+        this.profileImage = sellerDTO.getProfileImage();
+        this.products = sellerDTO.getProducts();
     }
 }

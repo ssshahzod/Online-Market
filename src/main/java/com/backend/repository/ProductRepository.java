@@ -1,5 +1,6 @@
 package com.backend.repository;
 
+import com.backend.appuser.seller.Seller;
 import com.backend.product.Product;
 import java.awt.print.Pageable;
 import java.util.Date;
@@ -17,6 +18,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Product getProductByDescription(@Param("description") String description);
 
+    List<Product> getProductsBySeller(@Param("seller") Seller seller);
     Product getProductsByTitleAndDescription(@Param("title") String title, @Param("desc") String desc);
     List<Product> getAllByUploadOrderByUploadDesc(Date date);
 }

@@ -5,6 +5,7 @@ import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.dto.SellerDTO.SellerDTO;
 import com.backend.product.Product;
 import com.backend.repository.AppUserRepository;
+import com.backend.repository.ProductRepository;
 import com.backend.service.AppUserService;
 import com.backend.service.ProductService;
 import java.util.Date;
@@ -28,12 +29,15 @@ public class SellerController {
     final private AppUserService appUserService;
     final private ProductService productService;
     final private Logger logger = LoggerFactory.getLogger(SellerController.class);
+    private final ProductRepository productRepository;
 
     @Autowired
     public SellerController(AppUserService appUserService,
-                            ProductService productService){
+                            ProductService productService,
+                            final ProductRepository productRepository){
         this.appUserService = appUserService;
         this.productService = productService;
+        this.productRepository = productRepository;
     }
 
     @GetMapping("/{id}")
@@ -43,14 +47,11 @@ public class SellerController {
         Long userId = Long.decode(id);
         try {
             AppUser appUser = appUserService.getUserById(userId);
+            SellerDTO seller = new SellerDTO(appUser.getSeller());
+            seller.setProducts(productRepository.getProductsBySeller(appUser.getSeller()));
             model.addAttribute("userInfo", new AppUserDTO(appUser));
-            if(state.equals("true")) {
-                model.addAttribute("showNewProd", true);
-                model.addAttribute("sellerInfo", new SellerDTO(appUser.getSeller()));
-            }
-            else{
-                model.addAttribute("showNewProd", false);
-            }
+            model.addAttribute("sellerInfo", new SellerDTO(appUser.getSeller()));
+            model.addAttribute("showNewProd", !(state == null));
         }
         catch(EntityNotFoundException e){
             logger.info("Couldn't find user for id: " + userId);
