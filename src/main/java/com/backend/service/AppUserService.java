@@ -8,6 +8,7 @@ import com.backend.repository.AppUserCredentialsDAO;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.repository.AppUserRepository;
 import com.backend.repository.BucketRepository;
+import com.backend.repository.SellerRepository;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,12 +21,15 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
     private final Logger AppUserServiceLogger = LoggerFactory.getLogger(AppUserService.class);
     private final AppUserRepository appUserRepository;
     private final BucketRepository bucketRepository;
+    private final SellerRepository sellerRepository;
 
     public AppUserService(AppUserCredentialsDAO appUserCredentialsDAO,
-                          AppUserRepository appUserRepository, BucketRepository bucketRepository){
+                          AppUserRepository appUserRepository, BucketRepository bucketRepository,
+                          final SellerRepository sellerRepository){
         this.appUserCredentialsDAO = appUserCredentialsDAO;
         this.appUserRepository = appUserRepository;
         this.bucketRepository = bucketRepository;
+        this.sellerRepository = sellerRepository;
     }
 
     @Override
@@ -55,8 +59,17 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
         return new AppUserDTO(user);
     }
 
-    public AppUserDTO getById(Long id){
+    public AppUserDTO getUserDTOById(Long id){
         return new AppUserDTO(appUserRepository.getReferenceById(id));
+    }
+
+    public AppUser getUserById(Long id){
+        return appUserRepository.getReferenceById(id);
+    }
+
+    public Seller getSellerByUserId(Long id){
+        AppUser appUser = appUserRepository.getReferenceById(id);
+        return sellerRepository.getReferenceById(appUser.getSeller().getId());
     }
 
     @Override

@@ -9,8 +9,8 @@
     <a id="createProd" href="/new">New product</a>
 </div>
 <script>
-    var state = "[[${showNewProd}]]";
     var id = "[[${userInfo.id}]]";
+    var state = "[[${showNewProd}]]";
     let create = document.getElementById("createProd");
     if(state === "true") {
         create.href = "/sellers/" + id + "/new";

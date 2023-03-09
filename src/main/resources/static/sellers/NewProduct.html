@@ -37,6 +37,11 @@
 <div class="productForm">
 
     <form class="form-newProduct" id="form" method="post" action="/sellers/create" >
+        <script>
+            var id = "[[${id}]]";
+            let create = document.getElementById("form");
+            create.action = "/sellers/" + id + "/create";
+        </script>
         <h1 class="half-heading">Please describe your product</h1>
         <p style="margin-top: 5.7%">
             <label for="title" class="sr-only"></label>

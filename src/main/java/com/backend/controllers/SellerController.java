@@ -1,7 +1,10 @@
 package com.backend.controllers;
 
+import com.backend.appuser.AppUser;
 import com.backend.dto.AppUserDTO.AppUserDTO;
+import com.backend.dto.SellerDTO.SellerDTO;
 import com.backend.product.Product;
+import com.backend.repository.AppUserRepository;
 import com.backend.service.AppUserService;
 import com.backend.service.ProductService;
 import java.util.Date;
@@ -24,8 +27,8 @@ public class SellerController {
 
     final private AppUserService appUserService;
     final private ProductService productService;
-
     final private Logger logger = LoggerFactory.getLogger(SellerController.class);
+
     @Autowired
     public SellerController(AppUserService appUserService,
                             ProductService productService){
@@ -34,31 +37,35 @@ public class SellerController {
     }
 
     @GetMapping("/{id}")
-    public String getProfile(@PathVariable String id,
-                             @RequestParam(required = false) String state,
-                             Model model){
-
+    public String getFullProfile(@PathVariable String id,
+                                 @RequestParam(required = false) String state,
+                                 Model model){
         Long userId = Long.decode(id);
         try {
-            AppUserDTO appUserDTO = appUserService.getById(userId);
-            model.addAttribute("userInfo", appUserDTO);
-            if(state.equals("true"))
+            AppUser appUser = appUserService.getUserById(userId);
+            model.addAttribute("userInfo", new AppUserDTO(appUser));
+            if(state.equals("true")) {
                 model.addAttribute("showNewProd", true);
+                model.addAttribute("sellerInfo", new SellerDTO(appUser.getSeller()));
+            }
+            else{
+                model.addAttribute("showNewProd", false);
+            }
         }
         catch(EntityNotFoundException e){
             logger.info("Couldn't find user for id: " + userId);
             return "CustomError";
         }
         return "sellers/profile";
-    }
 
+    }
 
     @GetMapping("/{id}/new")
     public String uploadForm(@PathVariable String id,
                              Model model){
         Long userId = Long.decode(id);
         try {
-            AppUserDTO appUserDTO = appUserService.getById(userId);
+            AppUserDTO appUserDTO = appUserService.getUserDTOById(userId);
         }
         catch(EntityNotFoundException e){
             return "CustomError";
@@ -67,11 +74,14 @@ public class SellerController {
         return "sellers/NewProduct";
     }
 
-    @PostMapping("/create")
-    public void createProduct(@ModelAttribute("newProduct") Product product){
+    @PostMapping("/{id}/create")
+    public String createProduct(@ModelAttribute("newProduct") Product product,
+                              @PathVariable String id){
+        Long sellerId = Long.decode(id);
         Date creationTime = new Date();
         product.setUpload(creationTime);
-
+        product.setSeller(appUserService.getUserById(sellerId).getSeller());
         productService.create(product);
+        return "sellers/profile";
     }
 }
