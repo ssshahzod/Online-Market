@@ -1,14 +1,18 @@
 package com.backend.product;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -23,13 +27,20 @@ public class ProductCategory {
     @Column(name = "category_id")
     private Long id;
 
-    @Column(name = "category_name")
+    @Column(name = "category_name",
+            unique = true)
     private String categoryName;
 
-    @Column(name = "category_desc")
+    @Column(name = "category_desc",
+            unique = true)
     private String categoryDescription;
 
-    @ManyToMany
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            mappedBy = "categories"
+    )
+    @JsonManagedReference
     private List<Product> products;
 
 }

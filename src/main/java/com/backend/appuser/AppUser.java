@@ -4,6 +4,9 @@ import com.backend.appuser.seller.Seller;
 import com.backend.bucket.Bucket;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.product.Product;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -57,12 +60,15 @@ public class AppUser implements UserDetails {
     @OneToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     @JoinColumn(name = "seller_id")
+    @JsonBackReference
     private Seller seller = null;
 
     private String role = AppUserRole.USER.name();
 
     @OneToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
+    @JoinColumn(name = "bucket_id")
+    @JsonBackReference
     private Bucket bucket;
 
     public String getSecondName() {

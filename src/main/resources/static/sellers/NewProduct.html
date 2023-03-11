@@ -64,6 +64,25 @@
                 <input type="number" step="none" id="price" name="price" class="form-control price"
                                 placeholder=" Price of the product" contenteditable="true" required ></span>
         </p>
+        <p>
+            <label for="categories">Choose a product category:</label>
+            <select name="categories" id="categories">
+            </select>
+
+            <script>
+                $(function create_options(){
+                    $('#categories option').remove(); //remove all options
+                    $.get("/data/categories", function(data){
+                       for(let name in data){
+                           $('#categories')
+                               .append($("<option></option>")
+                               .attr("value", data[name].id)
+                               .text(data[name].categoryName));
+                        }
+                    });
+                });
+            </script>
+        </p>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
         <p></p>

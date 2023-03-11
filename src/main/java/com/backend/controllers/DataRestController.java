@@ -3,6 +3,7 @@ package com.backend.controllers;
 import com.backend.appuser.AppUser;
 import com.backend.dto.ProductDTO.ProductDTO;
 import com.backend.product.Product;
+import com.backend.product.ProductCategory;
 import com.backend.repository.ProductRepository;
 import com.backend.service.AppUserService;
 import com.backend.service.ProductService;
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/data")
 public class DataRestController {
     private final ProductService productService;
-    private final ProductRepository productRepository;
     private final AppUserService appUserService;
     @GetMapping("/id")
     public ResponseEntity<?> getUserId(@AuthenticationPrincipal UserDetails userDetails){
@@ -32,9 +32,14 @@ public class DataRestController {
     @GetMapping("/products")
     @ResponseBody
     public ResponseEntity<List<ProductDTO>> getLastProducts(){
-        List<Product> products = productRepository.getNewest(5);
-        List<ProductDTO> productDTOS = new ArrayList<>();
-        products.forEach(product -> productDTOS.add(new ProductDTO(product)));
+        List<ProductDTO> productDTOS = productService.getLastProducts(5);
         return ResponseEntity.ok(productDTOS);
+    }
+
+    @GetMapping("/categories")
+    @ResponseBody
+    public ResponseEntity<List<ProductCategory>> getCategories(){
+        List<ProductCategory> categories = productService.getCategories();
+        return ResponseEntity.ok(categories);
     }
 }

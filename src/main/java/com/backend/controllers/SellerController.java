@@ -5,9 +5,13 @@ import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.dto.SellerDTO.SellerDTO;
 import com.backend.product.Product;
 import com.backend.repository.AppUserRepository;
+import com.backend.repository.CategoryRepository;
 import com.backend.repository.ProductRepository;
 import com.backend.service.AppUserService;
 import com.backend.service.ProductService;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import javax.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
@@ -30,14 +34,17 @@ public class SellerController {
     final private ProductService productService;
     final private Logger logger = LoggerFactory.getLogger(SellerController.class);
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
     @Autowired
     public SellerController(AppUserService appUserService,
                             ProductService productService,
-                            final ProductRepository productRepository){
+                            final ProductRepository productRepository,
+                            final CategoryRepository categoryRepository){
         this.appUserService = appUserService;
         this.productService = productService;
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @GetMapping("/{id}")

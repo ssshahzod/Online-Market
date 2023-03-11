@@ -4,6 +4,8 @@ import com.backend.appuser.AppUser;
 //import com.backend.appuser.seller.Seller;
 import com.backend.appuser.seller.Seller;
 import com.backend.bucket.Bucket;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -50,6 +52,7 @@ public class Product {
     @ManyToOne(
             fetch = FetchType.LAZY
     )
+    @JsonBackReference
     private Seller seller;
 
     private String imageLink;
@@ -66,8 +69,9 @@ public class Product {
     private List<Bucket> bucket;
 
     @ManyToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            mappedBy = "products")/*
+            cascade = CascadeType.ALL)
+    @JsonBackReference
+    /*
     @JoinTable(name = "categories",
             inverseJoinColumns = @JoinColumn(name = "category_id"))*/
 

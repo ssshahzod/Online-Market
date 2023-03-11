@@ -3,6 +3,8 @@ package com.backend.appuser.seller;
 import com.backend.appuser.AppUser;
 import com.backend.dto.SellerDTO.SellerDTO;
 import com.backend.product.Product;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -41,13 +43,14 @@ public class Seller {
     private Long id;
 
     @OneToOne(
-            mappedBy = "seller",
-            cascade = CascadeType.ALL
+            mappedBy = "seller"
     )
+    @JsonManagedReference
     private AppUser appUser;
 
     @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Product> products;
 
     private String profileImage;
