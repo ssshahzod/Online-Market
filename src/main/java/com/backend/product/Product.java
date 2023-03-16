@@ -19,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -47,6 +48,7 @@ public class Product {
     private String title;
     private String description;
     private float price;
+    private Long amount;
     private Date upload;
 
     @ManyToOne(
@@ -65,8 +67,25 @@ public class Product {
         this.imageLink = product.imageLink;
         this.description = product.description;
     }
+
+    public Product(String title, String description, float price, Long amount,
+                   String imageLink, List<ProductCategory> categories){
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.imageLink = imageLink;
+        this.categories = categories;
+        this.amount = amount;
+    }
     @ManyToMany
     private List<Bucket> bucket;
+
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
+    @JsonManagedReference
+    private List<ProductReview> reviews;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)

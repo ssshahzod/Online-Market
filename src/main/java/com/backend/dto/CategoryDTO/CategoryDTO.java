@@ -2,7 +2,6 @@ package com.backend.dto.CategoryDTO;
 
 import com.backend.dto.DTO;
 import com.backend.product.ProductCategory;
-import com.backend.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

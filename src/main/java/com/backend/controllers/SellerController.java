@@ -1,22 +1,32 @@
 package com.backend.controllers;
 
 import com.backend.appuser.AppUser;
+import com.backend.appuser.seller.Seller;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.dto.SellerDTO.SellerDTO;
 import com.backend.product.Product;
+import com.backend.product.ProductCategory;
 import com.backend.repository.AppUserRepository;
 import com.backend.repository.CategoryRepository;
 import com.backend.repository.ProductRepository;
 import com.backend.service.AppUserService;
 import com.backend.service.ProductService;
+import java.io.IOException;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +35,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequestMapping("/sellers")
 @Controller
@@ -33,18 +44,11 @@ public class SellerController {
     final private AppUserService appUserService;
     final private ProductService productService;
     final private Logger logger = LoggerFactory.getLogger(SellerController.class);
-    private final ProductRepository productRepository;
-    private final CategoryRepository categoryRepository;
-
     @Autowired
     public SellerController(AppUserService appUserService,
-                            ProductService productService,
-                            final ProductRepository productRepository,
-                            final CategoryRepository categoryRepository){
+                            ProductService productService){
         this.appUserService = appUserService;
         this.productService = productService;
-        this.productRepository = productRepository;
-        this.categoryRepository = categoryRepository;
     }
 
     @GetMapping("/{id}")
@@ -55,7 +59,7 @@ public class SellerController {
         try {
             AppUser appUser = appUserService.getUserById(userId);
             SellerDTO seller = new SellerDTO(appUser.getSeller());
-            seller.setProducts(productRepository.getProductsBySeller(appUser.getSeller()));
+            seller.setProducts(productService.getProductsBySeller(appUser.getSeller()));
             model.addAttribute("userInfo", new AppUserDTO(appUser));
             model.addAttribute("sellerInfo", new SellerDTO(appUser.getSeller()));
             model.addAttribute("showNewProd", !(state == null));
@@ -90,6 +94,49 @@ public class SellerController {
         product.setUpload(creationTime);
         product.setSeller(appUserService.getUserById(sellerId).getSeller());
         productService.create(product);
+        return "sellers/profile";
+    }
+
+    @GetMapping("/excelForm")
+    public String getExcelForm(){
+        return "sellers/ExcelForm";
+    }
+
+    @PostMapping("/upload/excel")
+    public String parseExcelFile(@RequestParam("file") MultipartFile file,
+                                 @AuthenticationPrincipal AppUser appUser){
+        Long sellerId = appUser.getId();
+        List<Product> productList = new ArrayList<>();
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            for(int i = 0; i < sheet.getPhysicalNumberOfRows(); i++){
+                XSSFRow row = sheet.getRow(i);
+                productList.add(new Product(
+                        row.getCell(0).getStringCellValue(),
+                        row.getCell(1).getStringCellValue(),
+                        (float) row.getCell(2).getNumericCellValue(),
+                        (long) row.getCell(3).getNumericCellValue(),
+                        row.getCell(4).getStringCellValue(),
+                        productService.getCategoriesByTitle(List.of(row.getCell(5)
+                                .getStringCellValue()
+                                .split(",")))
+                ));
+
+            }
+
+        } catch(IOException e){
+            logger.debug("Couldn't open excel file to parse products "
+                    + "time: {}", Date.from(Instant.now()));
+            return "CustomError";
+        }
+        Seller seller = appUserService.getUserById(sellerId).getSeller();
+        productList.forEach(product -> {
+            product.setSeller(seller);
+            product.setUpload(new Date());
+            productService.create(product);
+        });
+
         return "sellers/profile";
     }
 }

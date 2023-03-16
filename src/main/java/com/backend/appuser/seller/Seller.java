@@ -3,7 +3,6 @@ package com.backend.appuser.seller;
 import com.backend.appuser.AppUser;
 import com.backend.dto.SellerDTO.SellerDTO;
 import com.backend.product.Product;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -12,14 +11,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -52,6 +48,7 @@ public class Seller {
             cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Product> products;
+
 
     private String profileImage;
     private String sellerDescription;

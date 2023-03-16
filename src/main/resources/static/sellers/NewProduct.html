@@ -41,6 +41,8 @@
             var id = "[[${id}]]";
             let create = document.getElementById("form");
             create.action = "/sellers/" + id + "/create";
+            let excel = document.getElementById("excelForm");
+            excel.href = "/sellers/" + id + "/excelForm";
         </script>
         <h1 class="half-heading">Please describe your product</h1>
         <p style="margin-top: 5.7%">
@@ -86,6 +88,7 @@
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
         <p></p>
+        <a id="excelForm" href="/sellers/excelForm" class="btn btn-block btn-primary a-button">Or upload from excel</a>
     </form>
     <form class="productPreview" style="display: inline-block;">
         <h1 class="half-heading">Preview</h1>

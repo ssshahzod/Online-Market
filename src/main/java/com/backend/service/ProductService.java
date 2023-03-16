@@ -1,5 +1,6 @@
 package com.backend.service;
 
+import com.backend.appuser.seller.Seller;
 import com.backend.dto.ProductDTO.ProductDTO;
 import com.backend.product.Product;
 import com.backend.product.ProductCategory;
@@ -44,8 +45,17 @@ public class ProductService {
     public List<ProductCategory> getCategories(){
         return categoryRepository.findAll();
     }
+    public List<ProductCategory> getCategoriesByTitle(List<String> title){
+        return title.stream()
+                .map(categoryRepository::findByCategoryName)
+                .collect(Collectors.toList());
+    }
     public void create(@NotNull Product product){
         productRepository.save(product);
+    }
+
+    public List<Product> getProductsBySeller(Seller seller){
+        return productRepository.getProductsBySeller(seller);
     }
 
     public void update(String oldProductDesc, Product newProduct){

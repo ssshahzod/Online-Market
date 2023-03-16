@@ -4,6 +4,7 @@ import com.backend.appuser.seller.Seller;
 import com.backend.bucket.Bucket;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.product.Product;
+import com.backend.product.ProductReview;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -71,13 +72,13 @@ public class AppUser implements UserDetails {
     @JsonBackReference
     private Bucket bucket;
 
-    public String getSecondName() {
-        return secondName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
+    @OneToMany(
+            mappedBy = "appUser",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JsonManagedReference
+    private List<ProductReview> productReviews;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -113,10 +114,6 @@ public class AppUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public String getRole(){
-        return role;
     }
 
     public AppUser(AppUserDTO appUserDTO){

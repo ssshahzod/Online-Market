@@ -4,6 +4,7 @@ import com.backend.dto.CategoryDTO.CategoryDTO;
 import com.backend.dto.DTO;
 import com.backend.product.Product;
 import com.backend.product.ProductCategory;
+import com.backend.product.ProductReview;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,12 +27,15 @@ public class ProductDTO implements DTO {
     private String imageLink;
     private List<CategoryDTO> categories;
 
+    private List<ProductReview> productReviews;
+
     public ProductDTO(Product product){
         this.title = product.getTitle();
         this.price = product.getPrice();
         this.description = product.getDescription();
         this.upload = product.getUpload();
         this.imageLink = product.getImageLink();
+        this.productReviews = product.getReviews();
         this.categories = product.getCategories().stream().map(CategoryDTO::new).collect(Collectors.toList());
     }
 }
