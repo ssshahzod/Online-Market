@@ -10,12 +10,19 @@
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
     <style>
         body {
-            background-color: wheat;
+            background-color: #E8A87C;
+            font-family: "SF Pro Rounded", sans-serif;
+            padding-top: 10%;
         }
         .container {
             transform: scale(2);
             max-width: 50%;
             padding-top: 100px;
+        }
+        .info {
+            background: #fcd3b4;
+            border-radius: 12px;
+            padding: 8px;
         }
     </style>
 </head>
@@ -37,7 +44,8 @@
         </p>
         <p>
             <label for="password" class="sr-only">Password</label>
-            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+            <input type="password" id="password" name="password" minlength="8" class="form-control" placeholder="Password" required>
+            <p class="info">Note: Password must be 8-15 characters length</p>
         </p>
         <input name="_csrf" type="hidden" value="bff3f041-3f76-4c8d-9297-077a488c6314" />
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>

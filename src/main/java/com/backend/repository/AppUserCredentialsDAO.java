@@ -2,6 +2,7 @@ package com.backend.repository;
 
 import com.backend.dao.DAO;
 import com.backend.dto.AppUserDTO.AppUserDTO;
+import java.util.Date;
 import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -38,7 +39,7 @@ public class AppUserCredentialsDAO implements DAO<AppUserDTO> {
 
     @Override
     public void insert(@NotNull AppUserDTO dto) {
-        AppUserDAOLogger.info("Insert user credentials for (id): {}", lastId);
+        AppUserDAOLogger.info("Insert user credentials for (id): {}, time: {}", lastId, new Date());
         String getLastId = "SELECT nextval('user_seq');";
 
         Optional<Long> val = Optional.ofNullable(jdbcTemplate.queryForObject(getLastId, Long.class));

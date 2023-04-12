@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,6 +27,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +35,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -54,7 +57,9 @@ public class AppUser implements UserDetails {
     private Long id;
     private String firstName;
     private String secondName;
-    private String email;
+
+    @Column(unique = true)
+    private  String email;
     @Transient
     private String password;
 
@@ -66,10 +71,12 @@ public class AppUser implements UserDetails {
 
     private String role = AppUserRole.USER.name();
 
-    @OneToOne(fetch = FetchType.LAZY,
+    @OneToOne(
+            mappedBy = "appUser",
             cascade = CascadeType.ALL)
-    @JoinColumn(name = "bucket_id")
+    //@JoinColumn(name = "bucket_id")
     @JsonBackReference
+    @NotNull
     private Bucket bucket;
 
     @OneToMany(

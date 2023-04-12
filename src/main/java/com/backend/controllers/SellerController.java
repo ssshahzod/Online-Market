@@ -5,20 +5,13 @@ import com.backend.appuser.seller.Seller;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.dto.SellerDTO.SellerDTO;
 import com.backend.product.Product;
-import com.backend.product.ProductCategory;
-import com.backend.repository.AppUserRepository;
-import com.backend.repository.CategoryRepository;
-import com.backend.repository.ProductRepository;
 import com.backend.service.AppUserService;
 import com.backend.service.ProductService;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -127,7 +120,7 @@ public class SellerController {
 
         } catch(IOException e){
             logger.debug("Couldn't open excel file to parse products "
-                    + "time: {}", Date.from(Instant.now()));
+                    + "time: {}, user: {}", Date.from(Instant.now()), appUser.getId());
             return "CustomError";
         }
         Seller seller = appUserService.getUserById(sellerId).getSeller();

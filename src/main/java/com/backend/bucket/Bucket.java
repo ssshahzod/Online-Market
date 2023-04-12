@@ -3,15 +3,27 @@ package com.backend.bucket;
 
 import com.backend.appuser.AppUser;
 import com.backend.product.Product;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.*;
-import java.util.List;
-
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -28,16 +40,31 @@ public class Bucket {
             generator = SEQ_NAME
     )
     private Long id;
+    private Long size = 0L;
 
-
-    @OneToOne(mappedBy = "bucket")
+    @OneToOne(fetch = FetchType.LAZY)
     private AppUser appUser;
 
     @ManyToMany(
-            fetch = FetchType.LAZY,
-            mappedBy = "bucket"
+            fetch = FetchType.LAZY
     )
-    private List<Product> product;
+    @ToString.Exclude
+    private List<Product> products;
 
+    public int addProduct(Product product){
+        if(this.products == null){
+            this.products = new ArrayList<>();
+        }
+        this.products.add(product);
+        this.size++;
+        return this.products.size();
+    }
 
+    public double calculateTotalCost() {
+        double totalCost = 0.0;
+        for (Product product : products) {
+            totalCost += product.getPrice();
+        }
+        return totalCost;
+    }
 }

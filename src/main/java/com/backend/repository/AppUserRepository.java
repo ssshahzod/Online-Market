@@ -15,7 +15,7 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 
     public AppUser getAppUserByEmail(String email);
 
-
-    //2List<AppUser> findFirst10OrderById(Pageable pageable);
+    @Query(value = "SELECT bucket_id FROM users WHERE id=?1", nativeQuery = true)
+    Long getBucketIdByAppUser(Long id);
 
 }

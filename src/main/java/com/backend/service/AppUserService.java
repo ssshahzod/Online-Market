@@ -44,8 +44,7 @@ public class AppUserService implements com.backend.service.Service<AppUserDTO> {
             appUserCredentialsDAO.insert(appUserDTO);
         } catch(Exception e){
             System.out.println(e.getMessage());
-        }/*
-        return 0L;*/
+        }
     }
 
     @Override

@@ -20,6 +20,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDTO implements DTO {
+    private Long id;
     private String title;
     private String description;
     private float price;
@@ -30,12 +31,16 @@ public class ProductDTO implements DTO {
     private List<ProductReview> productReviews;
 
     public ProductDTO(Product product){
+        this.id = product.getId();
         this.title = product.getTitle();
         this.price = product.getPrice();
         this.description = product.getDescription();
         this.upload = product.getUpload();
         this.imageLink = product.getImageLink();
         this.productReviews = product.getReviews();
-        this.categories = product.getCategories().stream().map(CategoryDTO::new).collect(Collectors.toList());
+        this.categories = product.getCategories()
+                .stream()
+                .map(CategoryDTO::new)
+                .collect(Collectors.toList());
     }
 }

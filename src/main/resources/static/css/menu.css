@@ -22,7 +22,7 @@
     width: 26px;
     height: 26px;
     cursor: pointer;
-    z-index: 1;
+    z-index: 1001;
 }
 .menu__btn > span,
 .menu__btn > span::before,
@@ -52,7 +52,8 @@
     margin: 0;
     padding: 80px 0;
     list-style: none;
-    background-color: rgba(236, 239, 241, 0.5);
+    z-index: 1000;
+    background-color: rgba(133, 205, 202, 255);
     box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
     transition-duration: .25s;
 }
@@ -60,7 +61,7 @@
     display: block;
     padding: 12px 24px;
     color: #333;
-    font-family: 'Roboto', sans-serif;
+    /*font-family: 'Roboto', sans-serif;*/
     font-size: 20px;
     font-weight: 600;
     text-decoration: none;

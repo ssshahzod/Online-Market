@@ -1,3 +1,14 @@
+.card-group{
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-bottom: 20px;
+    margin-right: 0;
+    background: #f8d193;
+    border-radius: 18px;
+}
+
+
 .wrapper {
     width: 300px;
     height: 500px;
@@ -136,6 +147,7 @@
     border-radius: 0px 0px 200px 200px;
     transition: all 0.5s, border-radius 2s, top 1s;
     overflow: hidden;
+
 }
 .wrapper .inside .icon {
     position: absolute;
@@ -172,5 +184,5 @@
     color: white;
 }
 .wrapper .inside .contents p {
-    font-size: 13px;
+    font-size: 20px;
 }

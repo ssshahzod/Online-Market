@@ -1,5 +1,6 @@
 package com.backend.controllers;
 
+import com.backend.appuser.AppUser;
 import com.backend.dto.ProductDTO.ProductDTO;
 import com.backend.product.ProductCategory;
 import com.backend.service.AppUserService;
@@ -33,6 +34,13 @@ public class DataRestController {
         return ResponseEntity.ok(productDTOS);
     }
 
+    @GetMapping("/recommendations")
+    @ResponseBody
+    public ResponseEntity<List<ProductDTO>> getUserRecomendations(){
+        //List<ProductDTO> productDTOS = productService.get
+        return null;
+    }
+
     @GetMapping("/categories")
     @ResponseBody
     public ResponseEntity<List<ProductCategory>> getCategories(){
@@ -40,9 +48,10 @@ public class DataRestController {
         return ResponseEntity.ok(categories);
     }
 
-    @GetMapping("/getsellerproducts")
+    /*@GetMapping("/getsellerproducts")
     @ResponseBody
     public ResponseEntity<List<ProductDTO>> getSellersProducts(){
-        return null;
-    }
+        var productDTOS = productService.getProductsDTOSBySeller();
+        return ResponseEntity.ok(productDTOS);
+    }*/
 }

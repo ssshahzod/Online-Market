@@ -54,6 +54,13 @@ public class ProductService {
         productRepository.save(product);
     }
 
+    public List<ProductDTO> getProductsDTOSBySeller(Seller seller){
+        var products = productRepository.getProductsBySeller(seller);
+        List<ProductDTO> productDTOS = new ArrayList<>();
+        products.forEach(product -> productDTOS.add(new ProductDTO(product)));
+        return productDTOS;
+    }
+
     public List<Product> getProductsBySeller(Seller seller){
         return productRepository.getProductsBySeller(seller);
     }
@@ -63,5 +70,9 @@ public class ProductService {
         tmp.copy(newProduct);
         productRepository.save(tmp);
 
+    }
+
+    public Product getProductById(Long id){
+        return productRepository.getProductById(id);
     }
 }

@@ -1,6 +1,5 @@
 package com.backend.product;
 
-import com.backend.appuser.AppUser;
 //import com.backend.appuser.seller.Seller;
 import com.backend.appuser.seller.Seller;
 import com.backend.bucket.Bucket;
@@ -15,17 +14,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+        import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
+        import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -77,7 +73,9 @@ public class Product {
         this.categories = categories;
         this.amount = amount;
     }
-    @ManyToMany
+    @ManyToMany(
+            mappedBy = "products"
+    )
     private List<Bucket> bucket;
 
     @OneToMany(

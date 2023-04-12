@@ -1,76 +1,73 @@
-/*
 package com.backend.dao;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.backend.appuser.AppUserRole;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.repository.AppUserCredentialsDAO;
-import java.util.Optional;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InOrder;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootTest
-//@ComponentScan("com.backend") <- try to run tests without this line
+@ComponentScan("com.backend")
 class AppUserCredentialsDAOTest {
 
-    @Autowired
+    @Mock
     private AppUserCredentialsDAO appUserCredentialsDAO;
-    @Autowired
+    @MockBean
     private JdbcTemplate jdbcTemplate;
 
     private final String mail = "mail@mail.com";
-    */
-/*private final AppUserDTO underTest = new AppUserDTO("Alise", "Lise", mail,
-            "asd", new Role(), false);*//*
-
-    */
-/*private final AppUserDTO underTest = new AppUserDTO("Alise", "Lise", mail,
+    private final AppUserDTO underTest = new AppUserDTO(10L, "Alise", "Lise", mail,
             "asd", AppUserRole.USER.name(), false);
-*//*
+
+
 
     @Test
-    void getByIdNull() {
-        AppUserDTO appUserDTO;
+    void givenNoUsers_getById_returnNull() {
+
+        when(jdbcTemplate.queryForObject(anyString(), Long.class)).thenReturn(null);
         Long notExistingId = 0L;
-        appUserDTO = appUserCredentialsDAO.getById(notExistingId);
+
+        AppUserDTO appUserDTO = appUserCredentialsDAO.getById(notExistingId);
+
+        verify(appUserCredentialsDAO, times(1)).getById(any());
         assertThat(appUserDTO).isNull();
     }
 
     @Test
     void insert(){
+
+        when(jdbcTemplate.update(anyString())).thenReturn(0);
         AppUserDTO appUserDTO;
-        String getId = "SELECT nextval('user_seq');";
-        Optional<Long> val = Optional.ofNullable(jdbcTemplate.queryForObject(getId, Long.class));
-        Long id = val.orElse(100L);
+        InOrder inOrder = inOrder(jdbcTemplate);
 
-        assertThat(appUserCredentialsDAO.getById(id)).isNull();
+
         appUserCredentialsDAO.insert(underTest);
-        appUserDTO = appUserCredentialsDAO.getById(id);
-        assertThat(appUserDTO.getPassword()).isEqualTo(underTest.getPassword());
-        appUserCredentialsDAO.delete(id);
+
+
+        inOrder.verify(jdbcTemplate, times(1)).queryForObject(anyString(), eq(Long.class));
+        inOrder.verify(jdbcTemplate, times(1)).update(anyString());
+        verify(jdbcTemplate, times(1)).update(anyString());
+        verify(jdbcTemplate, times(1)).queryForObject(anyString(), eq(Long.class));
     }
 
     @Test
-    void update(){
-
-    }
-
-    @Test
-    void delete(){
-        String getId = "SELECT nextval('user_seq');";
-        Optional<Long> val = Optional.ofNullable(jdbcTemplate.queryForObject(getId, Long.class));
-        Long id = val.orElse(100L);
-        assertThat(appUserCredentialsDAO.getById(id)).isNull();
-
-        appUserCredentialsDAO.insert(underTest);
-        assertThat(appUserCredentialsDAO.getById(id).getPassword()).isEqualTo(underTest.getPassword());
-
-        appUserCredentialsDAO.delete(id);
-        assertThat(appUserCredentialsDAO.getById(id)).isNull();
-    }
+    void delete() {}
 
 
-}*/
+
+
+}

@@ -1,5 +1,6 @@
 package com.backend.controllers;
 
+import com.backend.appuser.AppUser;
 import com.backend.dto.AppUserDTO.AppUserDTO;
 import com.backend.repository.AppUserRepository;
 import com.backend.service.AppUserService;
@@ -17,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 //TODO: add page for users where they can become sellers
 //TODO: add email confirmation
 
-//TODO: dynamically generate home page (pass 5 last added products to model and show it in home page)
 //TODO: add username setting for registered users
 //TODO: store information about expiration, activation etc from appUser in database
 //TODO: password insertion and userInfo insertion are separated, so if one is getting error other still works
@@ -44,7 +44,7 @@ public class AppUsersController {
     }
 
     @GetMapping("/sign")
-    public ModelAndView signPage(@AuthenticationPrincipal UserDetails userDetails){
+    public ModelAndView signPage(@AuthenticationPrincipal AppUser userDetails){
         System.out.println("New sign request from the user");
         return userDetails != null ? new ModelAndView("redirect:/") :
                 new ModelAndView("users/SignUp");
