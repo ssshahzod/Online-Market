@@ -3,7 +3,7 @@ Web application where you can buy(or sell) anything you want!
 
 # Screenshots
 ### Sign up page
-![image](https://user-images.githubusercontent.com/55853125/232084945-0ba790f6-dae4-4ced-b529-ad2b2da21813.png)
+![image](https://user-images.githubusercontent.com/55853125/232085111-76b17b37-e8b5-4412-9680-620fa392b8f3.png)
 
 ### Log in page
 ![2023-04-14-181431_sway-screenshot](https://user-images.githubusercontent.com/55853125/232084535-59150a42-6c6f-41af-ae1b-b147a5cde7c7.png)
