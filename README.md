@@ -1,6 +1,16 @@
 # Online-Market
 Web application where you can buy(or sell) anything you want!
 
+# Progress
+User can choose products, put it in bucket and make order.
+
+Seller has several ways to create new products.
+  1) One by one, creating new cards
+  2) Uploading one excel file with info about products
+
+# Plans
+Right now I'm working on recomendations for users 
+
 # Screenshots
 ### Sign up page
 ![image](https://user-images.githubusercontent.com/55853125/232085111-76b17b37-e8b5-4412-9680-620fa392b8f3.png)
