@@ -13,7 +13,8 @@ $(function() {
             },
             error: function(xhr, status, error) {
                 console.log(error);
-                window.location.href = '/login';
+                //window.location.href = '/login';
+                $('#myModal').modal('show');
             }
         });
     });
@@ -31,7 +32,7 @@ $(function() {
             },
             error: function(error){
                 console.log(error);
-                window.location.href = '/login';
+                //window.location.href = '/login';
             }
         })
     });

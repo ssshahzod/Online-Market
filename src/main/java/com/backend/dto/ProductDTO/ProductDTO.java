@@ -25,6 +25,7 @@ public class ProductDTO implements DTO {
     private String description;
     private float price;
     private Date upload;
+    private Long maxAmount;
     private String imageLink;
     private List<CategoryDTO> categories;
 
@@ -38,6 +39,7 @@ public class ProductDTO implements DTO {
         this.upload = product.getUpload();
         this.imageLink = product.getImageLink();
         this.productReviews = product.getReviews();
+        this.maxAmount = product.getAmount() / 10;
         this.categories = product.getCategories()
                 .stream()
                 .map(CategoryDTO::new)

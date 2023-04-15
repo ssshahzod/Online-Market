@@ -6,6 +6,7 @@ import com.backend.product.ProductCategory;
 import com.backend.service.AppUserService;
 import com.backend.service.ProductService;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -31,6 +32,13 @@ public class DataRestController {
     @ResponseBody
     public ResponseEntity<List<ProductDTO>> getLastProducts(){
         List<ProductDTO> productDTOS = productService.getLastProducts(5);
+        return ResponseEntity.ok(productDTOS);
+    }
+
+    @GetMapping("/getUsersBucket")
+    public ResponseEntity<List<ProductDTO>> getUsersBucket(@AuthenticationPrincipal AppUser appUser){
+        var productDTOS = appUser.getBucket().getProducts()
+                .stream().map(ProductDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok(productDTOS);
     }
 

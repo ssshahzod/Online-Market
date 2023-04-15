@@ -11,7 +11,10 @@
     <link rel="stylesheet" type="text/css" href="css/productcards.css">
     <link rel="stylesheet" type="text/css" href="css/menu.css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="scripts/ProductCard.js"></script>
+
+
 </head>
 <body>
 <div  class="hamburger-menu">
@@ -45,8 +48,7 @@
             if(data === "SELLER"){
                 seller.style.display = '';
                 $.get("/data/id", function(id){
-                    let link = "/sellers/" + id + "?state=true";
-                    products.href = link;
+                    products.href = "/sellers/" + id + "?state=true";
                 });
             } else if(data === "ADMIN"){
                 admin.style.display = '';
@@ -85,8 +87,48 @@
 
         });
     });
-
-
 </script>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Open Modal
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal header -->
+            <div class="modal-header">
+                <h2 class="modal-title">You have to log in first</h2>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form class="form-signin" method="post" action="/login">
+                    <p>
+                        <label for="username" class="sr-only">Username</label>
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+                    </p>
+                    <p>
+                        <label for="password" class="sr-only">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                    </p>
+
+                    <input name="_csrf" type="hidden" value="bff3f041-3f76-4c8d-9297-077a488c6314" />
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    <p></p>
+                    <div th:if="${param.error}" class="alert alert-danger">
+                        Invalid username and password.
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="no-account" href="/signUp">Don't have account?</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
