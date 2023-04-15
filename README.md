@@ -9,7 +9,9 @@ Seller has several ways to create new products.
   2) Uploading one excel file with info about products
 
 # Plans
-Right now I'm working on recomendations for users 
+- Make admin page
+- Create microservice that will genereate recomendations for users
+
 
 # Screenshots
 ### Sign up page
