@@ -13,6 +13,14 @@ Seller has several ways to create new products.
 - Create microservice that will genereate recomendations for users
 
 
+# Installation
+To run locally you will need to install Docker, Docker-compose, Java 11+, Maven
+```
+  git clone git@github.com:ssshahzod/Online-Market.git #clone repo into Online-Market
+  cd Online-Market
+  docker-compose up
+```
+
 # Screenshots
 ### Sign up page
 ![image](https://user-images.githubusercontent.com/55853125/232085111-76b17b37-e8b5-4412-9680-620fa392b8f3.png)
