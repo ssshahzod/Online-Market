@@ -80,7 +80,6 @@
 <script>
     $(function() {
         $.get("/data/products", function(data){
-            console.table(data);
             createCards(data, 'last_updates_group');
         });
         $.get("/data/recommendations", function(data){
@@ -88,9 +87,9 @@
         });
     });
 </script>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
     Open Modal
-</button>
+</button> -->
 
 <!-- The Modal -->
 <div class="modal" id="myModal">

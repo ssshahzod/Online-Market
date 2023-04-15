@@ -8,7 +8,7 @@ $(function() {
             type: 'POST',
             data: { productId: productId },
             success: function(response) {
-                console.log(response);
+                //console.log(response);
                 clickedButton.closest('.bottom').addClass("clicked");
             },
             error: function(xhr, status, error) {
@@ -27,7 +27,7 @@ $(function() {
             type: 'POST',
             data: {productId: productId},
             success: function(response){
-                console.log(response);
+                //console.log(response);
                 clickedButton.closest('.bottom').removeClass("clicked");
             },
             error: function(error){

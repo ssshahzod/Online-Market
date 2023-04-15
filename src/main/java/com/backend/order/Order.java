@@ -4,7 +4,9 @@ import com.backend.appuser.AppUser;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,12 +15,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
-/*@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "orders")*/
+@Table(name = "orders")
 public class Order {
     private final String SEQ_NAME = "order_seq";
 

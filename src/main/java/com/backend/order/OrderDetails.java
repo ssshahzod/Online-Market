@@ -4,16 +4,19 @@ import com.backend.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import lombok.Setter;
 
-/*@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "order_details")*/
+@Table(name = "order_details")
 public class OrderDetails {
     private final String SEQ_NAME = "order_details_seq";
 

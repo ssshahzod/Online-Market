@@ -35,11 +35,9 @@ public class BucketController {
         this.productService = productService;
     }
 
-    @GetMapping("/")
-    public String showBucket(@AuthenticationPrincipal AppUser appUser){
-        bucketService.getUsersBucket(appUser);
-
-        return "tmp";
+    @GetMapping("")
+    public String showBucket(){
+        return "users/Bucket";
     }
 
     @PostMapping("/add")
